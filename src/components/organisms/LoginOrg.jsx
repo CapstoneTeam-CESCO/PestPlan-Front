@@ -1,12 +1,14 @@
 import React from 'react';
-import LoginInput from './../molecules/LoginInput';
+import LoginForm from '../molecules/LoginForm';
 import LoginTeamLogo from './../molecules/LoginTeamLogo';
 
-function LoginOrg() {
+function LoginOrg(props) {
+    const { className } = props;
+
     return (
-        <div>
+        <div className={className}>
             <LoginTeamLogo />
-            <LoginInput />
+            <LoginForm />
         </div>
     );
 }
