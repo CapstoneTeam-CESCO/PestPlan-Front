@@ -1,9 +1,10 @@
 import React from 'react';
+import MainTmpl from './../../templates/MainTmpl';
 
 function MainPage() {
     return (
-        <div>
-            <h1>Main Page!!!!!!!!!!!!</h1>
+        <div className="mainPage">
+            <MainTmpl />
         </div>
     );
 }
