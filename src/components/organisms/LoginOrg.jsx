@@ -1,13 +1,12 @@
 import React from 'react';
-import LoginForm from '../molecules/LoginForm';
-import LoginTeamLogo from './../molecules/LoginTeamLogo';
+import './LoginOrg.scss';
+import TeamName from './../atoms/TeamName';
+import LoginForm from './../molecules/LoginForm';
 
 function LoginOrg(props) {
-    const { className } = props;
-
     return (
-        <div className={className}>
-            <LoginTeamLogo />
+        <div className={props.className}>
+            <TeamName className="loginTeamName" />
             <LoginForm />
         </div>
     );
