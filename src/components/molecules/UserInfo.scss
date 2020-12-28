@@ -1,0 +1,33 @@
+.userInfo {
+    text-align: left;
+    padding: 15px 30px;
+    margin-top: 20px;
+    border-radius: 25px;
+
+    .profileImg {
+        float: left;
+        height: 50px;
+        margin-right: 10px;
+    }
+
+    .welcomeMsg {
+        display: inline;
+        font-size: 18px;
+
+        p:nth-child(1) {
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        p:nth-child(3) {
+            display: inline-block;
+            margin-right: 20px;
+            font-size: 13px;
+        }
+    }
+
+    .logoutBtn {
+        display: inline;
+        font-size: 13px;
+    }
+}

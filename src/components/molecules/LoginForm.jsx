@@ -1,5 +1,6 @@
 import React from 'react';
 import  { makeStyles } from '@material-ui/core/styles';
+
 import './LoginForm.scss';
 import InputText from '../atoms/InputText';
 import LoginBtn from '../atoms/LoginBtn';
@@ -25,7 +26,8 @@ function LoginForm() {
                 className={classes.input}
                 id="inputPwd"
                 label="password" />
-            <LoginBtn id="loginBtn" />
+            <LoginBtn
+                id="loginBtn" />
         </div>
     );
 }

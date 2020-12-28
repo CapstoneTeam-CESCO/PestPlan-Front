@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import LoginPage from './pages/login';
-import HomePage from './pages/home';
+import MainPage from './pages/main';
 
 function App() {
 	return (
@@ -12,8 +12,8 @@ function App() {
 					<Route exact path="/">
 						<LoginPage />
 					</Route>
-					<Route path="/home">
-						<HomePage />
+					<Route path="/main">
+						<MainPage />
 					</Route>
 				</Switch>
 			</BrowserRouter>
