@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './Header.scss';
 import TeamName from './../atoms/TeamName';
 import UserInfo from './../molecules/UserInfo';

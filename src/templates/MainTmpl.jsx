@@ -1,8 +1,9 @@
 import React from 'react';
+
 import './MainTmpl.scss';
+import DeviceList from './../components/organisms/DeviceList';
 import Header from './../components/organisms/Header'
 import Notice from './../components/organisms/Notice'
-import DeviceList from './../components/organisms/DeviceList';
 
 function MainTmpl() {
     return (

@@ -1,0 +1,30 @@
+.notice {
+    text-align: left;
+    margin-left: 30px;
+
+    .ntcHeader {
+        font-size: 25px;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .ntcBody {
+        text-align: center;
+        width: 550px;
+        border-collapse: collapse;
+        border-top: 2px solid #004e66;
+        border-bottom: 2px solid #004e66;
+        margin-bottom: 15px;
+
+        th {
+            border-bottom: 1px solid #004e66;
+            padding: 7px 0;
+            background-color: beige;
+        }
+
+        td {
+            border-bottom: 1px solid #e3dede;
+            padding: 5px 0;
+        }
+    }
+}

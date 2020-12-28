@@ -1,0 +1,37 @@
+.ntcNav {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 50px;
+
+    .pageBtns {
+        display: inline-block;
+    }
+
+    form {
+        margin-left: 140px;
+
+        .searchInput input {
+            height: 40px;
+            padding: 0;
+        }
+
+        .searchInput label {
+            height: 40px;
+            font-size: 13px;
+            top: -4px;
+        }
+
+        .searchInput label[data-shrink="true"] {
+            top: 0;
+        }
+
+        .locationChk, .deviceChk {
+            display: inline-block;
+            margin-left: 15px;
+        }
+
+        input {
+            margin-right: 5px;
+        }
+    }
+}

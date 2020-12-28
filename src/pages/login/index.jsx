@@ -1,4 +1,5 @@
 import React from 'react';
+
 import LoginTmpl from './../../templates/LoginTmpl';
 
 function LoginPage() {
