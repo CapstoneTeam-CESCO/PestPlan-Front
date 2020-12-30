@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import { useForm } from 'react-hook-form';
 import  { makeStyles } from '@material-ui/core/styles';
 
 import './LoginForm.scss';
@@ -15,19 +17,30 @@ const useStyles = makeStyles((theme) => ({
 
 function LoginForm() {
     const classes = useStyles();
+    const { register, handleSubmit } = useForm();
+
+    const onSubmit = async (data) => {
+        const response = await axios.post('http://localhost:4000/login/signin', data);
+        console.log(response);
+    }
 
     return (
         <div id="loginForm">
             <InputText
                 className={classes.input}
-                id="inputID"
-                label="id" />
+                id="inputUsername"
+                label="username"
+                name="username"
+                inputRef={register} />
             <InputText
                 className={classes.input}
                 id="inputPwd"
-                label="password" />
+                label="password"
+                name="password"
+                inputRef={register} />
             <LoginBtn
-                id="loginBtn" />
+                id="loginBtn"
+                onClick={handleSubmit(onSubmit)} />
         </div>
     );
 }
