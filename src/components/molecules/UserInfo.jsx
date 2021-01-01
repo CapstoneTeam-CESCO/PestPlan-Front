@@ -8,7 +8,7 @@ import imgA from './../../profile.png';
 function UserInfo(props) {
     return (
         <div className={props.className}>
-            <img className="profileImg" src={imgA} />
+            <img className="profileImg" src={imgA} alt="profile"/>
             <WelcomeMsg
                 className="welcomeMsg"
                 user="박현준"
