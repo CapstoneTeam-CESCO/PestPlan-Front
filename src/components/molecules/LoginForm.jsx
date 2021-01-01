@@ -27,7 +27,9 @@ function LoginForm() {
             .post('http://localhost:4000/login/signin', data)
             .then((response) => {
                 console.log(response);
-                
+
+                const { data: { access_token }} = response;
+                window.sessionStorage.setItem('access_token', access_token);
                 history.push('/main');
             })
             .catch((error) => {
@@ -37,7 +39,7 @@ function LoginForm() {
                 setValue("username", "");
                 setValue("password", "");
             });
-    }
+    };
 
     return (
         <div id="loginForm">
