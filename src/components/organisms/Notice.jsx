@@ -2,7 +2,8 @@ import React from 'react';
 
 import './Board.scss';
 import './Notice.scss';
-import BoardBody from './../molecules/BoardBody';
+import BoardHeader from '../atoms/BoardHeader';
+import BoardBody from '../atoms/BoardBody';
 import BoardNav from './../molecules/BoardNav';
 
 function Notice(props) {
@@ -10,7 +11,7 @@ function Notice(props) {
 
     return (
         <div className={`board ${props.className}`}>
-            <p className="bdHeader">Notice</p>
+            <BoardHeader className="bdHeader" header="Notice" />
             <BoardBody className="bdBody" thead={thead}/>
             <BoardNav className="bdNav" isNotice={true} />
         </div>

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 import './LoginForm.scss';
+import FailureSnackbar from '../atoms/FailureSnackbar';
 import InputText from '../atoms/InputText';
 import LoginBtn from '../atoms/LoginBtn';
-import FailureSnackbar from '../atoms/FailureSnackbar';
 
 const useStyles = makeStyles((theme) => ({
     input: {
@@ -26,14 +26,14 @@ function LoginForm() {
         await axios
             .post('http://localhost:4000/login/signin', data)
             .then((response) => {
-                console.log(response);
+                console.log('Login succeed.');
 
                 const { data: { access_token }} = response;
                 window.sessionStorage.setItem('access_token', access_token);
-                history.push('/main');
+                history.push('/home');
             })
             .catch((error) => {
-                console.log(error.toJSON());
+                console.log('There was an exception while login.');
 
                 setOpen(true);
                 setValue("username", "");

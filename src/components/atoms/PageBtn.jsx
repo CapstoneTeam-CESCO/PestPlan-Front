@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
+import { Button } from '@material-ui/core';
 
 function PageBtn(props) {
     const { contents, styles } = props;

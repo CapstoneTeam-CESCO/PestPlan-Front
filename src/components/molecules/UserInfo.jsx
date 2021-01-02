@@ -1,14 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
-
-import './UserInfo.scss';
-import LogoutBtn from './../atoms/LogoutBtn';
-import WelcomeMsg from './../atoms/WelcomMsg';
-import imgA from './../../profile.png';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
+import './UserInfo.scss';
+import imgA from './../../profile.png';
+import LogoutBtn from './../atoms/LogoutBtn';
+import WelcomeMsg from './../atoms/WelcomMsg';
+
 function UserInfo(props) {
     let history = useHistory();
+    const { className } = props;
     const [ userInfo, setUserInfo ] = useState({
         username: "",
         device_cnt: 0,
@@ -19,16 +20,15 @@ function UserInfo(props) {
         const access_token = window.sessionStorage.getItem('access_token');
 
         if(!access_token) {
-            console.log("There has no access_token. Go back to the login page.");
+            console.log('There has no access_token. Go back to the login page.');
 
             history.push('/');
         }
         
-        let response;
         try {
-            response = await axios.get(`http://localhost:4000/main/getUserInfo?access_token=${access_token}`);
+            const response = await axios.get(`http://localhost:4000/home/getUserInfo?access_token=${access_token}`);
 
-            console.log("Get username and device number from the server successfully.");
+            console.log('Get username and device number from the server successfully.');
 
             const { data: { username, device_cnt }} = response;
             setUserInfo({ username, device_cnt });
@@ -44,7 +44,7 @@ function UserInfo(props) {
     }, [getUserInfo]);
 
     return (
-        <div className={props.className}>
+        <div className={className}>
             <img className="profileImg" src={imgA} alt="profile"/>
             <WelcomeMsg
                 className="welcomeMsg"

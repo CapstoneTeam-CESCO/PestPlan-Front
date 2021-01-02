@@ -11,8 +11,7 @@ function InputText(props) {
             label={label}
             name={name}
             inputRef={inputRef}
-            variant="outlined"
-        />
+            variant="outlined" />
     );
 }
 

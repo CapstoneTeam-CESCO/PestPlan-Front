@@ -34,12 +34,26 @@ function BoardNav(props) {
                 <PageBtn className="pageBtn" contents=">" styles={styles} />
             </div>
             <form>
-                <InputText className="searchInput" id="search" label="Search" />
-                <Search className={classes.search} style={{ color: 'white', fontSize: 40 }}/>
+                <InputText
+                    className="searchInput"
+                    id="search"
+                    label="Search" />
+                <Search
+                    className={classes.search}
+                    style={{ color: 'white', fontSize: 40 }} />
+
                 {props.isNotice &&
                     <div className="chks">
-                        <SearchChk className="locationChk" id="location" name="location" label="설치 위치" />
-                        <SearchChk className="deviceChk" id="device" name="device" label="트랩 종류" />
+                        <SearchChk
+                            className="locationChk"
+                            id="location"
+                            name="location"
+                            label="설치 위치" />
+                        <SearchChk
+                            className="deviceChk"
+                            id="device"
+                            name="device"
+                            label="트랩 종류" />
                     </div>
                 }
             </form>

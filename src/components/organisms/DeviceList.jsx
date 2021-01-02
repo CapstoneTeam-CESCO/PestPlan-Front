@@ -2,7 +2,8 @@ import React from 'react';
 
 import './Board.scss';
 import './DeviceList.scss';
-import BoardBody from './../molecules/BoardBody';
+import BoardHeader from '../atoms/BoardHeader';
+import BoardBody from '../atoms/BoardBody';
 import BoardNav from './../molecules/BoardNav';
 
 function DeviceList(props) {
@@ -10,7 +11,7 @@ function DeviceList(props) {
 
     return (
         <div className={`board ${props.className}`}>
-            <p className="bdHeader">Device List</p>
+            <BoardHeader className="bdHeader" header="Device List" />
             <BoardBody className="bdBody" thead={thead} />
             <BoardNav className="bdNav" isNotice={false} />
         </div>
