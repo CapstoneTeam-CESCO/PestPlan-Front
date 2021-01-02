@@ -16,13 +16,18 @@ function UserInfo(props) {
     });
     const { username, device_cnt } = userInfo;
 
+    const handleClick = () => {
+        window.sessionStorage.removeItem('access_token');
+        history.push('/login')
+    };
+
     const getUserInfo = useCallback(async () => {
         const access_token = window.sessionStorage.getItem('access_token');
 
         if(!access_token) {
             console.log('There has no access_token. Go back to the login page.');
 
-            history.push('/');
+            history.push('/login');
         }
         
         try {
@@ -35,7 +40,7 @@ function UserInfo(props) {
         } catch(exception) {
             console.log('Token has an exception. Re-login please.');
 
-            history.push('/');
+            history.push('/login');
         }
     }, [history]);
 
@@ -51,7 +56,8 @@ function UserInfo(props) {
                 user={username}
                 device={device_cnt} />
             <LogoutBtn
-                className="logoutBtn" />
+                className="logoutBtn"
+                onClick={handleClick} />
         </div>
     );
 }

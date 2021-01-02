@@ -1,10 +1,12 @@
 import React from 'react';
 
 function LogoutBtn(props) {
+    const { className, onClick } = props;
+
     return (
-        <p className={props.className}>
+        <button className={className} onClick={onClick}>
             로그아웃
-        </p>
+        </button>
     );
 }
 
