@@ -6,7 +6,7 @@ function SearchChk(props) {
     return (
         <div className={className}>
             <input type="checkbox" id={id} name={name}/>
-            <label for={id}>{label}</label>
+            <label htmlFor={id}>{label}</label>
         </div>
     );
 }
