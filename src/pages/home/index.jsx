@@ -30,7 +30,7 @@ function HomePage() {
                 const response = await axios.get(`http://localhost:4000/home/getInfo?access_token=${access_token}`);
     
                 console.log('Get username and device number from the server successfully.');
-    
+
                 const { data: { username, device_cnt, devices, notices }} = response;
                 setInfo({
                     userInfo: {

@@ -37,10 +37,10 @@ function DeviceBoardBody(props) {
             <tbody>
                 {devices && devices.map((device, index) => {
                     const { id, model_name, region, location } = device;
-                    const no = index + 1;
+                    const key = index + 1;
                     return (
-                        <tr key={no}>
-                            <td>{no}</td>
+                        <tr key={key}>
+                            <td>{key}</td>
                             <td>{id}</td>
                             <td>{model_name}</td>
                             <td>{region}</td>

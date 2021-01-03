@@ -7,7 +7,7 @@ import NoticeBoardBody from '../atoms/NoticeBoardBody';
 import BoardNav from './../molecules/BoardNav';
 
 function Notice(props) {
-    const { className } = props;
+    const { className, notices } = props;
 
     return (
         <div className={`board ${className}`}>
@@ -15,7 +15,8 @@ function Notice(props) {
                 className="bdHeader"
                 header="Notice" />
             <NoticeBoardBody
-                className="bdBody" />
+                className="bdBody"
+                notices={notices} />
             <BoardNav
                 className="bdNav"
                 isNotice={true} />
