@@ -5,10 +5,15 @@ import TeamName from './../atoms/TeamName';
 import UserInfo from './../molecules/UserInfo';
 
 function Header(props) {
+    const { className, userInfo } = props;
+
     return (
-        <div className={props.className}>
-            <TeamName className="teamName" />
-            <UserInfo className="userInfo" />
+        <div className={className}>
+            <TeamName
+                className="teamName" />
+            <UserInfo
+                className="userInfo"
+                userInfo={userInfo} />
         </div>
     );
 }

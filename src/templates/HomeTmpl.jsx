@@ -5,12 +5,14 @@ import Header from '../components/organisms/Header';
 import Notice from '../components/organisms/Notice';
 import DeviceList from '../components/organisms/DeviceList';
 
-function HomeTmpl() {
+function HomeTmpl(props) {
+    const { info: { userInfo, devices, notices }} = props;
+
     return (
         <div className="homeTmpl">
-            <Header className="header" />
-            <Notice className="notice" />
-            <DeviceList className="deviceList" />
+            <Header className="header" userInfo={userInfo} />
+            <Notice className="notice" notices={notices} />
+            <DeviceList className="deviceList" devices={devices} />
         </div>
     );
 }
