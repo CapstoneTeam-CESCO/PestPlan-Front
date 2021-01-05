@@ -3,21 +3,19 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import HomeTmpl from './../../templates/HomeTmpl';
+import * as Constants from './../../constants/Constants';
 
 function HomePage() {
     let history = useHistory();
     const [ isLoading, setLoading ] = useState(true);
     const [ info, setInfo ] = useState({
-        userInfo: {
-            username: "",
-            device_cnt: 0,
-        },
-        devices: [],
-        notices: [],
+        username: "",
+        device_cnt: 0,
+        notice_cnt: 0,
     });
 
     useEffect(() => {
-        async function getInfo() {
+        async function getUserInfo() {
             const access_token = window.sessionStorage.getItem('access_token');
     
             if(!access_token) {
@@ -27,18 +25,16 @@ function HomePage() {
             }
             
             try {
-                const response = await axios.get(`http://localhost:4000/home/getInfo?access_token=${access_token}`);
+                const response = await axios.get(`${Constants.HOME_URL}/user?access_token=${access_token}`);
     
                 console.log('Get username and device number from the server successfully.');
+                console.log(response);
 
-                const { data: { username, device_cnt, devices, notices }} = response;
+                const { data: { username, device_cnt, notice_cnt }} = response;
                 setInfo({
-                    userInfo: {
-                        username,
-                        device_cnt,
-                    },
-                    devices,
-                    notices,
+                    username,
+                    device_cnt,
+                    notice_cnt,
                 });
             } catch(exception) {
                 console.log('Token has an exception while get informations. Re-login please.');
@@ -49,7 +45,7 @@ function HomePage() {
             setLoading(false);
         }
 
-        getInfo();
+        getUserInfo();
     }, []);
 
     if(isLoading) {

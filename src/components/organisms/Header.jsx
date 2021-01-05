@@ -5,7 +5,7 @@ import TeamName from './../atoms/TeamName';
 import UserInfo from './../molecules/UserInfo';
 
 function Header(props) {
-    const { className, userInfo } = props;
+    const { className, username, device_cnt } = props;
 
     return (
         <div className={className}>
@@ -13,7 +13,8 @@ function Header(props) {
                 className="teamName" />
             <UserInfo
                 className="userInfo"
-                userInfo={userInfo} />
+                username={username}
+                device_cnt={device_cnt} />
         </div>
     );
 }

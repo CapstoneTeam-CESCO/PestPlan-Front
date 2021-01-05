@@ -8,7 +8,7 @@ import WelcomeMsg from './../atoms/WelcomMsg';
 
 function UserInfo(props) {
     let history = useHistory();
-    const { className, userInfo: { username, device_cnt }} = props;
+    const { className, username, device_cnt } = props;
 
     const handleClick = () => {
         window.sessionStorage.removeItem('access_token');

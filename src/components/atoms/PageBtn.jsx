@@ -1,15 +1,13 @@
 import React from 'react';
-import { withStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
 
 function PageBtn(props) {
-    const { contents, styles } = props;
-    const CssButton = withStyles(styles)(Button);
+    const { className, contents, onClick } = props;
 
     return (
-        <CssButton>
+        <Button className={className} onClick={onClick}>
             {contents}
-        </CssButton>
+        </Button>
     );
 }
 

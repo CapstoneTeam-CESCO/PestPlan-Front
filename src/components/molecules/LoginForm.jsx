@@ -8,6 +8,7 @@ import './LoginForm.scss';
 import FailureSnackbar from '../atoms/FailureSnackbar';
 import InputText from '../atoms/InputText';
 import LoginBtn from '../atoms/LoginBtn';
+import * as Constants from './../../constants/Constants';
 
 const useStyles = makeStyles((theme) => ({
     input: {
@@ -24,7 +25,7 @@ function LoginForm() {
 
     const onSubmit = async (data) => {
         await axios
-            .post('http://localhost:4000/login/signin', data)
+            .post(`${Constants.LOGIN_URL}/signin`, data)
             .then((response) => {
                 console.log('Login succeed.');
 
