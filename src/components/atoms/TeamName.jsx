@@ -1,8 +1,12 @@
 import React from 'react';
 
-function TeamName() {
+function TeamName(props) {
+    const { className } = props;
+
     return (
-        <h1>Pest Plan</h1>
+        <h1 className={className}>
+            Pest Plan
+        </h1>
     );
 }
 

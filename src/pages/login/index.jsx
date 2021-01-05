@@ -1,10 +1,11 @@
 import React from 'react';
-import LoginOrg from './../../components/organisms/LoginOrg';
+
+import LoginTmpl from './../../templates/LoginTmpl';
 
 function LoginPage() {
     return (
         <div className="LoginPage">
-            <LoginOrg />
+            <LoginTmpl />
         </div>
     );
 }
