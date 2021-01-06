@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles'
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { Search } from '@material-ui/icons';
+import { Modal } from '@material-ui/core';
 
 import * as Constants from './../../constants/Constants';
 
@@ -22,13 +25,44 @@ const createEmtyRows = (row_cnt, blank_cnt) => {
     return emptyRows;
 }
 
+const useStyles = makeStyles((theme) => ({
+    modal: {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        width: 400,
+        backgroundColor: 'white',
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    }
+}));
+
 function NoticeBoardBody(props) {
     const { className, model, page, thead } = props;
     const [ rows, setRows ] = useState([]);
+    const [ body, setBody ] = useState(<div/>);
+    const [ open, setOpen ] = useState(false);
+    const classes = useStyles();
     let history = useHistory();
 
     const blank_cnt = Constants.ROW_CNT - rows.length;
     const emptyRows = createEmtyRows(Constants.ROW_CNT, blank_cnt);
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleClick = (event) => {
+        setBody(
+            <div className={classes.modal}>
+                <h1 id="detail-modal-title">modal title</h1>
+                <p id="detail-modal-description">modal description</p>
+            </div>
+        );
+
+        setOpen(true);
+    };
 
     useEffect(() => {
         async function getInfo() {
@@ -55,50 +89,67 @@ function NoticeBoardBody(props) {
     }, [page]);
 
     return (
-        <table className={className}>
-            <thead>
-                <tr>
-                    {thead.map((theadItem, index) =>
-                        <th key={index}>{theadItem}</th>
-                    )}
-                </tr>
-            </thead>
-            <tbody>
-                {model==='notices' && rows && rows.map((row, index) => {
-                    const { created_at, region, location, model_name, type } = row;
-                    const key = index + 1;
+        <div>
+            <table className={className}>
+                <thead>
+                    <tr>
+                        {thead.map((theadItem, index) =>
+                            <th key={index}>{theadItem}</th>
+                        )}
+                    </tr>
+                </thead>
+                <tbody>
+                    {model==='notices' && rows && rows.map((row, index) => {
+                        const { created_at, region, location, model_name, type } = row;
+                        const key = index + 1;
 
-                    return (
-                        <tr key={key}>
-                            <td>{key}</td>
-                            <td>{created_at}</td>
-                            <td>{region}</td>
-                            <td>{location}</td>
-                            <td>{model_name}</td>
-                            <td>{convertType(type)}</td>
-                        </tr>
-                    );
-                })}
+                        return (
+                            <tr key={key}>
+                                <td>{key}</td>
+                                <td>{created_at}</td>
+                                <td>{region}</td>
+                                <td>{location}</td>
+                                <td>{model_name}</td>
+                                <td>{convertType(type)}</td>
+                            </tr>
+                        );
+                    })}
 
-                {model==='devices' && rows && rows.map((row, index) => {
-                    const { id, model_name, region, location } = row;
-                    const key = index + 1;
+                    {model==='devices' && rows && rows.map((row, index) => {
+                        const { id, model_name, region, location } = row;
+                        const key = index + 1;
 
-                    return (
-                        <tr key={key}>
-                            <td>{key}</td>
-                            <td>{id}</td>
-                            <td>{model_name}</td>
-                            <td>{region}</td>
-                            <td>{location}</td>
-                            <td>돋보기</td>
-                        </tr>
-                    );
-                })}
+                        return (
+                            <tr key={key}>
+                                <td>{key}</td>
+                                <td>{id}</td>
+                                <td>{model_name}</td>
+                                <td>{region}</td>
+                                <td>{location}</td>
+                                <td><Search 
+                                        style={{
+                                            fontSize: 20,
+                                            verticalAlign: 'middle',
+                                            cursor: 'pointer'
+                                        }}
+                                        onClick={handleClick} /></td>
+                            </tr>
+                        );
+                    })}
 
-                {emptyRows}
-            </tbody>
-        </table>
+                    {emptyRows}
+                </tbody>
+            </table>
+
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="detail-modal-title"
+                aria-describedby="detail-modal-description"
+            >
+                {body}
+            </Modal>
+        </div>
     );
 }
 
