@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Search } from '@material-ui/icons';
@@ -53,15 +53,60 @@ function NoticeBoardBody(props) {
         setOpen(false);
     };
 
-    const handleClick = (event) => {
-        setBody(
-            <div className={classes.modal}>
-                <h1 id="detail-modal-title">modal title</h1>
-                <p id="detail-modal-description">modal description</p>
-            </div>
-        );
+    const handleClick = async (event) => {
+        const device_id = event.currentTarget.parentNode.parentNode.childNodes[1].innerText;
 
-        setOpen(true);
+        try {
+            const response = await axios.get(`${Constants.HOME_URL}/detail?device_id=${device_id}`);
+    
+            console.log(response);
+    
+            const { data: { id, is_error, is_replacement, location, model_name, region }} = response;
+
+            setBody(
+                <div className={classes.modal}>
+                    <h1 id="detail-modal-title">기기 상세 정보</h1>
+                    <table id="detail-modal-description">
+                        <thead>
+                            <tr>
+                                <th>상세 정보</th>
+                                <th>내용</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>트랩 ID</td>
+                                <td>{id}</td>
+                            </tr>
+                            <tr>
+                                <td>지역</td>
+                                <td>{region}</td>
+                            </tr>
+                            <tr>
+                                <td>설치 위치</td>
+                                <td>{location}</td>
+                            </tr>
+                            <tr>
+                                <td>트랩 종류</td>
+                                <td>{model_name}</td>
+                            </tr>
+                            <tr>
+                                <td>교체 필요 여부</td>
+                                <td>{is_replacement}</td>
+                            </tr>
+                            <tr>
+                                <td>에러 여부</td>
+                                <td>{is_error}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            );
+
+            setOpen(true);
+        } catch(exception) {
+            console.log(exception);
+        }
     };
 
     useEffect(() => {
