@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Search } from '@material-ui/icons';
+import { Close, Search } from '@material-ui/icons';
 import { Modal } from '@material-ui/core';
 
+import './BoardBody.scss';
 import * as Constants from './../../constants/Constants';
 
 const convertType = (type) => {
@@ -28,13 +29,14 @@ const createEmtyRows = (row_cnt, blank_cnt) => {
 const useStyles = makeStyles((theme) => ({
     modal: {
         position: 'absolute',
-        top: '50%',
-        left: '50%',
-        width: 400,
-        backgroundColor: 'white',
-        border: '2px solid #000',
+        top: '25%',
+        left: '35%',
+        width: 550,
+        height: 380,
+        backgroundColor: '#f8f9fa',
+        border: '2px solid #000000',
         boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
+        padding: '30px 0',
     }
 }));
 
@@ -64,8 +66,13 @@ function NoticeBoardBody(props) {
             const { data: { id, is_error, is_replacement, location, model_name, region }} = response;
 
             setBody(
-                <div className={classes.modal}>
-                    <h1 id="detail-modal-title">기기 상세 정보</h1>
+                <div className={`detail-modal ${classes.modal}`}>
+                    <Close
+                        className="detail-modal-close"
+                        onClick={handleClose} />
+                    <h1 id="detail-modal-title">
+                        기기 상세 정보
+                    </h1>
                     <table id="detail-modal-description">
                         <thead>
                             <tr>
@@ -92,11 +99,11 @@ function NoticeBoardBody(props) {
                             </tr>
                             <tr>
                                 <td>교체 필요 여부</td>
-                                <td>{is_replacement}</td>
+                                <td>{is_replacement ? "기기의 교체가 필요합니다." : "-"}</td>
                             </tr>
                             <tr>
                                 <td>에러 여부</td>
-                                <td>{is_error}</td>
+                                <td>{is_error ? "기기에 에러가 발생했습니다." : "-"}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -191,6 +198,7 @@ function NoticeBoardBody(props) {
                 onClose={handleClose}
                 aria-labelledby="detail-modal-title"
                 aria-describedby="detail-modal-description"
+                disableBackdropClick={true}
             >
                 {body}
             </Modal>
