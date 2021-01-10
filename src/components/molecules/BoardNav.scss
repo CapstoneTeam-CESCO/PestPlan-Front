@@ -2,56 +2,51 @@
     display: flex;
     justify-content: space-between;
 
-    .pageBtns {
+    .pagination {
         display: inline-block;
     }
 
-    .search-form {
+    .form-search {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
 
-        .searchInput input {
+        // toggle buttons
+        .MuiToggleButton-root.Mui-selected {
+            font-weight: bolder;
+    
+            .MuiChip-root {
+                background-color: #a0a0a0;
+            }
+        }
+    
+        // prevent material-ui default background-color
+        .MuiToggleButton-root:hover,
+        .MuiIconButton-root:hover,
+        .MuiToggleButton-root.Mui-selected,
+        .MuiToggleButton-root.Mui-selected:hover {
+            background-color: #ffffff;   
+        }
+
+        // outlined input
+        .MuiOutlinedInput-adornedEnd {
+            padding-right: 0;
+        }
+
+        .outlinedInput-search input {
             width: 150px;
             height: 40px;
-            padding: 0 10px;
+            padding: 0 0 0 10px;
         }
 
-        .searchInput label {
-            width: 150px;
+        // inputadornment
+        .MuiInputAdornment-positionEnd {
+            margin-left: 0;
+        }
+
+        .MuiIconButton-root {
+            width: 40px;
             height: 40px;
-            font-size: 13px;
-            top: -5px;
-        }
-
-        .searchInput label[data-shrink="true"] {
-            top: 0;
-        }
-
-        .locationChk, .deviceChk {
-            display: inline-block;
-            margin-left: 15px;
-        }
-
-        input {
-            margin-right: 5px;
-        }
-    }
-
-    .MuiToggleButton-root:hover {
-        background-color: #ffffff;
-    }
-
-    .MuiToggleButton-root.Mui-selected {
-        background-color: #ffffff;
-        font-weight: bolder;
-
-        .MuiChip-root {
-            background-color: #a0a0a0;
-        }
-
-        &:hover {
-            background-color: #ffffff;
         }
     }
 }
