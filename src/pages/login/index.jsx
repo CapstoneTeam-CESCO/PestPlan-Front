@@ -4,7 +4,7 @@ import LoginTmpl from './../../templates/LoginTmpl';
 
 function LoginPage() {
     return (
-        <div className="LoginPage">
+        <div className="page-login">
             <LoginTmpl />
         </div>
     );

@@ -1,0 +1,16 @@
+// toggle buttons
+.MuiToggleButton-root.Mui-selected {
+    font-weight: bolder;
+
+    .MuiChip-root {
+        background-color: #a0a0a0;
+    }
+}
+
+// prevent material-ui default background-color
+.MuiToggleButton-root:hover,
+.MuiIconButton-root:hover,
+.MuiToggleButton-root.Mui-selected,
+.MuiToggleButton-root.Mui-selected:hover {
+    background-color: #ffffff;   
+}

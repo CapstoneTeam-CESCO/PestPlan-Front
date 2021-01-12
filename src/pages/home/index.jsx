@@ -6,13 +6,13 @@ import HomeTmpl from './../../templates/HomeTmpl';
 import * as Constants from './../../constants/Constants';
 
 function HomePage() {
-    let history = useHistory();
     const [ isLoading, setLoading ] = useState(true);
     const [ info, setInfo ] = useState({
         username: "",
         device_cnt: 0,
         notice_cnt: 0,
     });
+    let history = useHistory();
 
     useEffect(() => {
         async function getUserInfo() {
