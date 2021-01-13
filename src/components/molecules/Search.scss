@@ -1,16 +1,45 @@
-// toggle buttons
-.MuiToggleButton-root.Mui-selected {
-    font-weight: bolder;
+.search {
+    // toggle buttons
+    .MuiToggleButton-root.Mui-selected {
+        font-weight: bolder;
 
-    .MuiChip-root {
-        background-color: #a0a0a0;
+        .MuiChip-root {
+            background-color: #a0a0a0;
+        }
+    }
+
+    // prevent material-ui default background-color
+    .MuiToggleButton-root:hover,
+    .MuiIconButton-root:hover,
+    .MuiToggleButton-root.Mui-selected,
+    .MuiToggleButton-root.Mui-selected:hover {
+        background-color: #ffffff;   
     }
 }
 
-// prevent material-ui default background-color
-.MuiToggleButton-root:hover,
-.MuiIconButton-root:hover,
-.MuiToggleButton-root.Mui-selected,
-.MuiToggleButton-root.Mui-selected:hover {
-    background-color: #ffffff;   
+.ul-search-location {
+    width: 330px;
+    padding: 20px;
+
+    .li-search-location {
+        display: inline-block;
+        width: 110px;
+        margin: 4px 0;
+        list-style: none;
+
+        .span-search-location {
+            color: #b2b2b2;
+            cursor: pointer;
+        
+            &:hover {
+                color: #000000;
+                text-decoration: underline;
+            }
+        }
+
+        .selected {
+            color: #000000;
+            font-weight: bold;
+        }
+    }
 }

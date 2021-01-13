@@ -30,60 +30,64 @@ const useStyles = makeStyles(() => ({
 function Search() {
     const [ categories, setCategories ] = useState([]);
     const [ anchorEl, setAnchorEl ] = useState(null);
-    const [ dateState, setDateState ] = useState([
-        {
-            startDate: new Date(),
-            endDate: null,
-            key: 'selection',
-        }
-    ]);
+    const [ show, setShow ] = useState(null);
+    const [ filter, setFilter ] = useState({
+        date: [
+            {
+                startDate: new Date(),
+                endDate: null,
+                key: 'selection',
+            }
+        ],
+        location: [
+            { value: '공장내부-1', selected: false },
+            { value: '공장내부-2', selected: false },
+            { value: '공장내부-3', selected: false },
+            { value: '공장내부-4', selected: false },
+            { value: '공장외부-1', selected: false },
+            { value: '공장외부-2', selected: false },
+            { value: '공장외부-3', selected: false },
+            { value: '공장외부-4', selected: false },
+            { value: '공장외부-5', selected: false },
+            { value: '잔디-1', selected: false },
+        ],
+    });
     const classes = useStyles();
     const searchCategories = ['날짜', '지역', '설치 위치', '트랩 종류', '교체/에러'];
-
-
-    const handleClickButtonDate = (event) => {
+    
+    const handleClickChip = (event) => {
+        setShow(event.currentTarget.children[0].innerText);
         setAnchorEl(event.currentTarget);
     }
 
-    const handleClosePopoverDate = (event) => {
-        console.log(dateState);
-        
+    const handleClickSpanLocation = (event) => {
+        const newLocation = filter.location.map(loc => (
+            loc.value === event.currentTarget.innerText ? {...loc, selected: !loc.selected} : loc
+        ));
+
+        setFilter({
+            ...filter,
+            location: newLocation,
+        });
+        console.log(filter);
+    }
+
+    const handleClosePopover = (event) => {
         setAnchorEl(null);
+        setCategories(null);
     }
 
     const handleChange = (event, newCategories) => {
         setCategories(newCategories);
     }
 
-    const openDate = Boolean(anchorEl);
+    const open = Boolean(anchorEl);
 
     return (
-        <div>
-            <Button onClick={handleClickButtonDate}>
-                날짜
-            </Button>
-            <Popover
-                open={openDate}
-                anchorEl={anchorEl}
-                onClose={handleClosePopoverDate}
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center',
-                }}
-                transformOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                }}
-            >
-                <DateRange
-                    editableDateInputs={true}
-                    onChange={item => setDateState([item.selection])}
-                    moveRangeOnFirstSelection={false}
-                    ranges={dateState} />
-            </Popover>
-
+        <div className="search">
             <ToggleButtonGroup
                 value={categories}
+                exclusive
                 onChange={handleChange}
                 aria-label="search categories"
                 className={classes.buttonGroup_toggle}
@@ -96,10 +100,54 @@ function Search() {
                         className={classes.button_toggle}
                         disableRipple={true}
                     >
-                        <Chip label={category} className={classes.chip_toggle} />
+                        <Chip
+                            label={category}
+                            className={classes.chip_toggle}
+                            onClick={handleClickChip} />
                     </ToggleButton>
                 ))}
-            </ToggleButtonGroup>    
+            </ToggleButtonGroup>
+
+            <Popover
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClosePopover}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                }}
+                transformOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+            >
+                {show === '날짜' &&
+                    <DateRange
+                        editableDateInputs={true}
+                        onChange={item => setFilter({
+                            ...filter,
+                            date: [item.selection],
+                        })}
+                        moveRangeOnFirstSelection={false}
+                        ranges={filter.date} />
+                }
+
+                {show === '설치 위치' &&
+                    <ul className="ul-search-location">
+                        {filter.location.map((loc) => {
+                            let spanClass = "span-search-location";
+                            if(loc.selected) spanClass += " selected";
+
+                            return (
+                                <li key={loc.value} className="li-search-location">
+                                    <span className={spanClass} onClick={handleClickSpanLocation}>{loc.value}</span>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                }
+            </Popover>
+
         </div>
     );
 }
