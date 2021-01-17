@@ -17,29 +17,33 @@
     }
 }
 
-.ul-search-location {
-    width: 330px;
+.search-filter {
     padding: 20px;
 
-    .li-search-location {
-        display: inline-block;
-        width: 110px;
-        margin: 4px 0;
-        list-style: none;
+    .search-filter-dl {
+        display: table;
+        border-bottom: 2px solid #dddddd;
 
-        .span-search-location {
-            color: #b2b2b2;
-            cursor: pointer;
-        
-            &:hover {
-                color: #000000;
-                text-decoration: underline;
-            }
+        dt {
+            display: table-cell;
+            width: 100px;
         }
 
-        .selected {
-            color: #000000;
-            font-weight: bold;
+        dd {
+            display: table-cell;
+            width: 800px;
         }
+    }
+
+    .last {
+        border-bottom: none;
+    }
+
+    // 날짜
+    .daterange-search-date {
+        width: 310px;
+    }
+    .rdrCalendarWrapper {
+        font-size: 11px;
     }
 }

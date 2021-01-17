@@ -1,0 +1,25 @@
+.ul-search-filters {
+    padding: 10px;
+
+    .li-search-filter {
+        display: inline-block;
+        width: 150px;
+        margin: 4px 0;
+        list-style: none;
+    
+        .span-search-filter-contents {
+            color: #828282;
+            cursor: pointer;
+        
+            &:hover {
+                color: #000000;
+                text-decoration: underline;
+            }
+        }
+    
+        .selected {
+            color: #000000;
+            font-weight: bold;
+        }
+    }
+}
