@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, IconButton, InputAdornment, OutlinedInput, FormControl } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
+import { makeStyles } from '@material-ui/core';
 
 import './BoardNav.scss';
-import PageBtn from './../atoms/PageBtn';
+import PageBtn from '../atoms/PageBtn';
 import Search from './Search';
 
 const useStyles = makeStyles(() => ({
@@ -18,10 +17,8 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-function BoardNav(props) {
-    const { className, page_total, page, setPage } = props;
+function BoardNav({ className, isNotice, page_total, page, setPage, filters, setFilters }) {
     const [ pageBtns, setPageBtns ] = useState([]);
-    const [ query, setQuery ] = useState("");
     const classes = useStyles();
 
     console.log("page in BoardNav");
@@ -29,10 +26,6 @@ function BoardNav(props) {
     const handleClick = (event) => { setPage(parseInt(event.target.innerText)); }
     const handleFirstClick = () => { setPage(1); }
     const handleLastClick = () => { setPage(page_total); }
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-    }
 
     useEffect(() => {
         let pageBtns = [];
@@ -64,24 +57,7 @@ function BoardNav(props) {
                     onClick={handleLastClick} />
             </div>
 
-            <form className="form-search" onSubmit={handleSubmit}>
-                {props.isNotice && <Search /> }
-
-                <FormControl variant="outlined">
-                    <OutlinedInput
-                        className="outlinedInput-search"
-                        id="search"
-                        value={query}
-                        onChange={ event => setQuery(event.target.value) }
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton type="submit" aria-label="search">
-                                    <SearchIcon />
-                                </IconButton>
-                            </InputAdornment>
-                        } />
-                </FormControl>
-            </form>
+            {isNotice && <Search filters={filters} setFilters={setFilters} /> }
         </div>
     );
 }

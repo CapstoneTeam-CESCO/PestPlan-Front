@@ -40,8 +40,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function NoticeBoardBody(props) {
-    const { className, model, page, thead } = props;
+function getItemValues(items) {
+    return items
+            .filter(item => item.selected)
+            .map(item => item.value);
+}
+
+function NoticeBoardBody({ className, model, page, thead, filters }) {
     const [ rows, setRows ] = useState([]);
     const [ body, setBody ] = useState(<div/>);
     const [ open, setOpen ] = useState(false);
@@ -127,7 +132,25 @@ function NoticeBoardBody(props) {
             }
             
             try {
-                const response = await axios.get(`${Constants.HOME_URL}/${model}?access_token=${access_token}&page=${page}`);
+                console.log(filters);
+                const { dates, regions, locations, models, types } = filters;
+                const regionValues = getItemValues(regions);
+                const locationValues = getItemValues(locations);
+                const modelValues = getItemValues(models);
+                const typeValues = getItemValues(types);
+                
+                const response = await axios.get(`${Constants.HOME_URL}/${model}`, {
+                    params: {
+                        access_token,
+                        page,
+                        start: dates[0].startDate,
+                        end: dates[0].endDate,
+                        regions: regionValues,
+                        locations: locationValues,
+                        models: modelValues,
+                        types: typeValues,
+                    },
+                });
 
                 setRows(response.data);
             } catch(exception) {
@@ -138,7 +161,7 @@ function NoticeBoardBody(props) {
         }
 
         getInfo();
-    }, [page]);
+    }, [page, filters]);
 
     return (
         <div>

@@ -4,12 +4,14 @@ import './Board.scss';
 import './DeviceList.scss';
 import BoardHeader from '../atoms/BoardHeader';
 import BoardBody from '../atoms/BoardBody';
-import BoardNav from './../molecules/BoardNav';
-import * as Constants from './../../constants/Constants';
+import BoardNav from '../molecules/BoardNav';
+import * as Constants from '../../constants/Constants';
+import { initializeFilters } from '../../utilities/FilterUtility';
 
 function DeviceList(props) {
     const { className, device_cnt } = props;
     const [ page, setPage ] = useState(1);
+    const [ filters, setFilters ] = useState(initializeFilters());
     const thead = Constants.DEVICE_THEAD;
     const page_total = Math.ceil(device_cnt / Constants.ROW_CNT);
 
@@ -22,7 +24,8 @@ function DeviceList(props) {
                 className="bdBody"
                 model="devices"
                 page={page}
-                thead={thead} />
+                thead={thead}
+                filters={filters} />
             <BoardNav
                 className="bdNav"
                 isNotice={false}

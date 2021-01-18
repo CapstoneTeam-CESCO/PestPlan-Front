@@ -1,69 +1,87 @@
 import React, { useState } from 'react';
 import { DateRange } from 'react-date-range';
-import { Button, Popover } from '@material-ui/core';
+import { SVGMap } from 'react-svg-map';
+import southKorea from '@svg-maps/south-korea';
+import { Popover } from '@material-ui/core';
 
 import './Search.scss';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import FilterList from '../atoms/FilterList';
 
-function Search() {
+function Search({ filters, setFilters }) {
     const [ anchorEl, setAnchorEl ] = useState(null);
-    const [ dates, setDates ] = useState([
-        {
-            startDate: new Date(),
+    const [ dates, setDates ] = useState(filters.dates);
+    const [ regions, setRegions ] = useState(filters.regions);
+    const [ locations, setLocations ] = useState(filters.locations);
+    const [ models, setModels ] = useState(filters.models);
+    const [ types, setTypes ] = useState(filters.types);
+
+    const handleLocationClassName = (location, index) => {
+        return regions[index].selected
+            ? "location-filter-region selected"
+            : "location-filter-region";
+    };
+
+    const handleLocationClick =(event) => {
+        const selectedRegion = event.currentTarget.attributes.name.value;
+
+        const newRegions = regions.map(region => {
+            return region.label === selectedRegion
+                ? { ...region, selected: !region.selected }
+                : region
+        });
+        setRegions(newRegions);
+        console.log(regions);
+    };
+
+    const initializeItems = (items) => {
+        return items.map(item => ({
+            ...item,
+            selected: false,
+        }));
+    };
+
+    const handleClickButtonReset = () => {
+        setDates([{
+            startDate: null,
             endDate: null,
             key: 'selection',
-        }
-    ]);
-    const [ locations, setLocations ] = useState([
-        { value: '공장내부-1', selected: false },
-        { value: '공장내부-2', selected: false },
-        { value: '공장내부-3', selected: false },
-        { value: '공장내부-4', selected: false },
-        { value: '공장외부-1', selected: false },
-        { value: '공장외부-2', selected: false },
-        { value: '공장외부-3', selected: false },
-        { value: '공장외부-4', selected: false },
-        { value: '공장외부-5', selected: false },
-        { value: '잔디-1', selected: false }
-    ]);
-    const [ models, setModels ] = useState([
-        { value: 'DAM', selected: false },
-        { value: 'AG DAM', selected: false },
-        { value: 'FG DAM', selected: false },
-        { value: 'SM', selected: false },
-        { value: '환경 모니터링 SM', selected: false },
-        { value: '피닉스', selected: false },
-        { value: '썬더블루', selected: false },
-        { value: '블루스톰(전극)', selected: false },
-        { value: '블루스톰(흡입)', selected: false },
-        { value: '바이퍼', selected: false },
-        { value: '블루치즈', selected: false },
-        { value: '쥐모니터링', selected: false },
-        { value: '큐브', selected: false }
-    ]);
-    const [ states, setStates ] = useState([
-        { value: '정상', selected: false },
-        { value: '에러', selected: false },
-        { value: '교체 필요', selected: false },
-    ]);
+        }]);
+        setRegions([]);
+        setLocations(initializeItems(locations));
+        setModels(initializeItems(models));
+        setTypes(initializeItems(types));
+    };
+
+    const handleClickButtonSearch = () => {
+        setFilters({
+            dates,
+            regions,
+            locations,
+            models,
+            types,
+        });
+        setAnchorEl(null);
+    };
 
     const handleClickButtonFilter = (event) => {
         setAnchorEl(event.currentTarget);
-    }
+    };
 
     const handleClosePopover = () => {
         setAnchorEl(null);
-    }
+    };
 
     const open = Boolean(anchorEl);
 
+    if(!filters) return null;
+
     return (
-        <div className="search">
-            <Button onClick={handleClickButtonFilter}>
+        <div className="filter">
+            <button className="button-filter" onClick={handleClickButtonFilter}>
                 필터
-            </Button>
+            </button>
 
             <Popover
                 open={open}
@@ -78,12 +96,12 @@ function Search() {
                     horizontal: 'center',
                 }}
             >
-                <div className="search-filter">
-                    <dl className="search-filter-dl">
+                <div className="popover-filter">
+                    <dl className="popover-filter-dl dl-date">
                         <dt>날짜</dt>
                         <dd>
                             <DateRange
-                                className="search-filter-cell daterange-search-date"
+                                className="popover-filter-cell daterange-search-date"
                                 editableDateInputs={true}
                                 onChange={item => setDates([item.selection])}
                                 moveRangeOnFirstSelection={false}
@@ -91,26 +109,48 @@ function Search() {
                         </dd>
                     </dl>
 
-                    <dl className="search-filter-dl">
+                    <dl className="popover-filter-dl dl-region">
+                        <dt>지역</dt>
+                        <dd>
+                            <SVGMap
+                                map={southKorea}
+                                className="map-filter-region"
+                                locationClassName={handleLocationClassName}
+                                locationRole="checkbox"
+                                onLocationClick={handleLocationClick} />
+                        </dd>
+                    </dl>
+
+                    <dl className="popover-filter-dl dl-location">
                         <dt>설치 위치</dt>
                         <dd>
                             <FilterList filters={locations} setFilters={setLocations} />
                         </dd>
                     </dl>
 
-                    <dl className="search-filter-dl">
+                    <dl className="popover-filter-dl dl-model">
                         <dt>트랩 종류</dt>
                         <dd>
                             <FilterList filters={models} setFilters={setModels} />
                         </dd>
                     </dl>
 
-                    <dl className="search-filter-dl last">
-                        <dt>상태</dt>
+                    <dl className="popover-filter-dl dl-type last">
+                        <dt>메시지 타입</dt>
                         <dd>
-                            <FilterList filters={states} setFilters={setStates} />
+                            <FilterList filters={types} setFilters={setTypes} />
                         </dd>
                     </dl>
+
+                    <div className="filter-buttons">
+                        <button className="button-filter-action button-reset" onClick={handleClickButtonReset}>
+                            초기화
+                        </button>
+
+                        <button className="button-filter-action" onClick={handleClickButtonSearch}>
+                            검색
+                        </button>
+                    </div>
                 </div>
             </Popover>
         </div>
