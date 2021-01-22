@@ -1,0 +1,13 @@
+.detail-modal {
+    text-align: center;
+
+    .detail-modal__close {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        font-size: 30px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+}
