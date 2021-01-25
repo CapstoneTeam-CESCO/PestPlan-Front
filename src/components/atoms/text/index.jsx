@@ -2,9 +2,9 @@ import React from 'react';
 
 import './styles.scss';
 
-function Text({ className, children }) {
+function Text({ className, onClick, children }) {
     return (
-        <p className={className}>
+        <p className={className} onClick={onClick}>
             {children}
         </p>
     );

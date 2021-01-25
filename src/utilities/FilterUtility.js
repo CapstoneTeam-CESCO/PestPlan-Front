@@ -14,7 +14,7 @@ function createFilterItems(items) {
     }));
 }
 
-export function initializeNoticeFilters() {
+export function initializeFilters() {
     return {
         dates: [{
             startDate: null,

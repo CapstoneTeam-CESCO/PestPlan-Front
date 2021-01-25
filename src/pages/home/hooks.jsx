@@ -86,8 +86,11 @@ export const useDeviceList = (page, filters, handleClickDetail) => {
                 
                 const newDeviceList = response.data.map((data, index) => ({
                     no: index + 1,
-                    ...data,
-                    details: (<Search 
+                    deviceId: data.id,
+                    modelName: data.model_name,
+                    region: data.region,
+                    location: data.location,
+                    detail: (<Search 
                                 style={{
                                     fontSize: 20,
                                     verticalAlign: 'middle',

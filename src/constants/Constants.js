@@ -1,8 +1,14 @@
-// login page
+// url
 export const LOGIN_URL = 'http://localhost:4000/login';
 
-// home page
 export const HOME_URL = 'http://localhost:4000/home';
+
+// header
+export const TEAM_NAME = "Pest Plan";
+
+export const NOTICE = "Notice";
+
+export const DEVICE = "Device";
 
 // notice-list
 export const NOTICE_THEAD = ['알림No.', '날짜', '지역', '설치 위치', '트랩 종류', '메시지 타입'];

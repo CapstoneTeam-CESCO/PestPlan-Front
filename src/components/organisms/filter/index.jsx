@@ -4,10 +4,12 @@ import { SVGMap } from 'react-svg-map';
 import southKorea from '@svg-maps/south-korea';
 
 import './styles.scss';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 import Button from '../../atoms/button';
 import FilterList from '../../molecules/list';
 
-function NoticeFilter({ filters, setFilters, setAnchorEl }) {
+function Filter({ filters, setFilters, setAnchorEl }) {
     const [ dates, setDates ] = useState(filters.dates);
     const [ regions, setRegions ] = useState(filters.regions);
     const [ locations, setLocations ] = useState(filters.locations);
@@ -126,4 +128,4 @@ function NoticeFilter({ filters, setFilters, setAnchorEl }) {
     );
 }
 
-export default NoticeFilter;
+export default Filter;

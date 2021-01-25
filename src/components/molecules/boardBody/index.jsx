@@ -17,7 +17,7 @@ function BoardBody({ className, id, theads, tbodies, emptyRows }) {
             <tbody>
                 {tbodies.map(tbody => {
                     return (
-                        <tr key={tbody.id}>
+                        <tr key={tbody.no}>
                             {Object.values(tbody).map(body =>
                                 <td key={body}>{body}</td>
                             )}

@@ -5,9 +5,9 @@ import './styles.scss';
 import Title from '../../atoms/title';
 import BoardBody from '../../molecules/boardBody';
 
-function DetailModal({ detailModalProps: { className, close, title, boardBody } }) {
+const DetailModal = React.forwardRef(({ detailModalProps: { className, close, title, boardBody } }, ref) => {
     return (
-        <div className={className}>
+        <div className={className} ref={ref}>
             <Close
                 className={close.className}
                 onClick={close.onClick} />
@@ -21,6 +21,6 @@ function DetailModal({ detailModalProps: { className, close, title, boardBody } 
                 emptyRows={boardBody.emptyRows} />
         </div>
     );
-}
+});
 
 export default DetailModal;
