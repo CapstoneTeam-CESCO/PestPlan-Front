@@ -11,7 +11,7 @@ export const useUserInfo = () => {
         notice_cnt: 0,
         messages: "",
     });
-    let history = useHistory();
+    const history = useHistory();
 
     useEffect(() => {
         async function getUserInfo() {
@@ -56,7 +56,7 @@ function getItemValues(items) {
 
 export const useDeviceList = (page, filters, handleClickDetail) => {
     const [ deviceList, setDeviceList ] = useState([]);
-    let history = useHistory();
+    const history = useHistory();
 
     useEffect(() => {
         async function getDeviceList() {
@@ -115,7 +115,7 @@ export const useDeviceList = (page, filters, handleClickDetail) => {
 
 export const useNoticeList = (page, filters) => {
     const [ noticeList, setNoticeList ] = useState([]);
-    let history = useHistory();
+    const history = useHistory();
 
     useEffect(() => {
         async function getNoticeList() {

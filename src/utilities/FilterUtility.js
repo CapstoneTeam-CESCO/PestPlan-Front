@@ -1,29 +1,33 @@
 import * as Constants from './../constants/Constants';
 
-function createRegions(regions) {
-    return regions.map(region => ({
-        ...region,
-        selected: false,
-    }));
-}
-
-function createFilterItems(items) {
+export function createFilterItems(items) {
     return items.map(item => ({
-        value: item,
+        ...item,
         selected: false,
     }));
 }
 
 export function initializeFilters() {
     return {
-        dates: [{
+        ranges: [{
             startDate: null,
-            endDate: null,
+            endDate: new Date(),
             key: 'selection',
         }],
-        regions: createRegions(Constants.REGIONS),
+        dates: [{
+            startDate: null,
+            endDate: new Date(),
+            key: 'selection',
+        }],
+        regions: createFilterItems(Constants.REGIONS),
         locations: createFilterItems(Constants.LOCATIONS),
         models: createFilterItems(Constants.MODELS),
         types: createFilterItems(Constants.TYPES),
     };
 };
+
+export function getItemValues(items) {
+    return items
+            .filter(item => item.selected)
+            .map(item => item.value);
+}

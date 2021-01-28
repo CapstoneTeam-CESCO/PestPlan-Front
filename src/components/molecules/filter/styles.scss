@@ -1,0 +1,94 @@
+.filter {
+    .filter__header {
+        padding-top: 10px;
+        margin-bottom: 10px;
+        border-top: 1px solid grey;
+    }
+    
+    .filter__header a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+        color: #000000;
+        font-weight: bold;
+        text-decoration: none;
+
+        &:hover {
+            fill: blue;
+            color: blue;
+        }
+    }
+
+    .filter__header a.collapsed svg {
+        transform: rotate(180deg);
+    }
+
+    .filter__header a svg {
+        transition-duration: 500ms;
+    }
+
+    .ReactCollapse--collapse {
+        transition: height 500ms ease;
+    }
+
+    // 날짜
+    .daterange-filter-date {
+        width: 350px;
+    }
+
+    .rdrCalendarWrapper {
+        font-size: 11px;
+    }
+
+    .rdrMonths {
+        align-items: center;
+    }
+
+    // 지역
+    .SVGMap-filter-region {
+        width: 350px;
+    }
+
+    .SVGMap-filter-region--location {
+        stroke: #444444;
+        fill: #adadad;
+        outline: none;
+        cursor: pointer;
+        
+        &:hover {
+            fill: #666666;
+        }
+    }
+
+    .selected {
+        fill: #777777;
+    }
+
+    // FilterList.jsx
+    .filter__list {
+        padding: 0 10px;
+    
+        .filter__list-element {
+            display: inline-block;
+            width: 165px;
+            margin: 4px 0;
+            list-style: none;
+        
+            .list-element--label {
+                color: #828282;
+                cursor: pointer;
+            
+                &:hover {
+                    color: #000000;
+                    text-decoration: underline;
+                }
+            }
+        
+            .selected {
+                color: #000000;
+                font-weight: bold;
+            }
+        }
+    }
+}

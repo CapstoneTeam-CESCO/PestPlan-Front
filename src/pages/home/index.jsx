@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function HomePage() {
-    let history = useHistory();
+    const history = useHistory();
     const ref = createRef();
     const classes = useStyles();
     const [ filters, setFilters ] = useState(initializeFilters());

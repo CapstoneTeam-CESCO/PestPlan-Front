@@ -1,4 +1,4 @@
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 
 import './App.css';
 import Header from './components/organisms/header';
@@ -11,16 +11,18 @@ function App() {
 	return (
 		<div className="App">
 			<BrowserRouter>
-				<Header />
-				<Switch>
-					<Route exact path="/">
-						<Redirect to="/login" />
-					</Route>
-					<Route path="/login" component={LoginPage} />
-					<Route path="/home" component={HomePage} />
-					<Route path="/display/notice" component={DisplayNoticePage} />
-					<Route path="/display/device" component={DisplayDevicePage} />
-				</Switch>
+				<Route render={({ location }) => (
+					location.pathname !== '/login'
+						? <Header />
+						: null
+				)} />
+				<Route exact path="/">
+					<Redirect to="/login" />
+				</Route>
+				<Route path="/login" component={LoginPage} />
+				<Route path="/home" component={HomePage} />
+				<Route path="/display/notice" component={DisplayNoticePage} />
+				<Route path="/display/device" component={DisplayDevicePage} />
 			</BrowserRouter>
 		</div>
 	);
