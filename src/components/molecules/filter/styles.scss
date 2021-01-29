@@ -2,7 +2,7 @@
     .filter__header {
         padding-top: 10px;
         margin-bottom: 10px;
-        border-top: 1px solid grey;
+        border-top: 1.5px solid #dddddd;
     }
     
     .filter__header a {
@@ -66,28 +66,51 @@
     }
 
     // FilterList.jsx
+    // total width 350px
     .filter__list {
         padding: 0 10px;
-    
+        
+        // total width 330px
         .filter__list-element {
             display: inline-block;
             width: 165px;
             margin: 4px 0;
             list-style: none;
-        
+
             .list-element--label {
+                display: inline-block;
+                width: 155px;
                 color: #828282;
+                text-decoration: none;
                 cursor: pointer;
             
                 &:hover {
                     color: #000000;
                     text-decoration: underline;
                 }
+
+                &::before {
+                    display: inline-block;
+                    content: '';
+                    width: 12px;
+                    height: 12px;
+                    margin-right: 4px;
+                    border: 2.5px solid #c2c2c2;
+                    border-radius: 4px;
+                }
             }
         
             .selected {
                 color: #000000;
                 font-weight: bold;
+
+                &::before {
+                    background: url('../../../images/checked.png') no-repeat;
+                    background-size: cover;
+                    width: 19px;
+                    height: 17px;
+                    border: none;
+                }
             }
         }
     }

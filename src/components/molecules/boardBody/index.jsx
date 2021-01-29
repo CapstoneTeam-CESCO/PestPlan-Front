@@ -1,9 +1,8 @@
 import React from 'react';
 
 import './styles.scss';
-import EmptyRows from '../../atoms/emptyRows';
 
-function BoardBody({ className, id, theads, tbodies, emptyRows }) {
+function BoardBody({ className, id, theads, tbodies }) {
     if(theads && tbodies) return (
         <table className={className} id={id}>
             <thead>
@@ -24,11 +23,6 @@ function BoardBody({ className, id, theads, tbodies, emptyRows }) {
                         </tr>
                     );
                 })}
-
-                <EmptyRows
-                    colSpan={emptyRows.colSpan}
-                    count={emptyRows.count}
-                    startKey={tbodies.length+1} />
             </tbody>
         </table>
     );

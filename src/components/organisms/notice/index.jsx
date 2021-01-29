@@ -13,8 +13,7 @@ function Notice({ noticeProps: { className, title, boardBody, apagination } }) {
             <BoardBody
                 className={boardBody.className}
                 theads={boardBody.theads}
-                tbodies={boardBody.tbodies}
-                emptyRows={boardBody.emptyRows} />
+                tbodies={boardBody.tbodies} />
             <APagination
                 className={apagination.className}
                 count={apagination.count}

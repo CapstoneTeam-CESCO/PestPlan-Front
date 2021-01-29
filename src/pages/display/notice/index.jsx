@@ -122,10 +122,6 @@ function DisplayNoticePage() {
             className: "board-body notice__board-body",
             theads: Constants.NOTICE_THEAD,
             tbodies: noticeList,
-            emptyRows: {
-                colSpan: 6,
-                count: Constants.ROW_CNT - noticeList.length,
-            },
         },
         apagination: {
             className: "notice__pagination",

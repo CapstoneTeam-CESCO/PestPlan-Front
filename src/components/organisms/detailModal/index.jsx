@@ -17,8 +17,7 @@ const DetailModal = React.forwardRef(({ detailModalProps: { className, close, ti
             <BoardBody
                 id={boardBody.id}
                 theads={boardBody.theads}
-                tbodies={boardBody.tbodies}
-                emptyRows={boardBody.emptyRows} />
+                tbodies={boardBody.tbodies} />
         </div>
     );
 });

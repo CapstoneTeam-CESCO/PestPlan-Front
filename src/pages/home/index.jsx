@@ -61,10 +61,6 @@ function HomePage() {
             className: "board-body notice__board-body",
             theads: Constants.NOTICE_THEAD,
             tbodies: noticeTbodies,
-            emptyRows: {
-                colSpan: 6,
-                count: Constants.ROW_CNT - noticeTbodies.length,
-            },
         },
         apagination: {
             className: "notice__pagination",
@@ -86,10 +82,6 @@ function HomePage() {
             className: "board-body device-list__board-body",
             theads: Constants.DEVICE_THEAD,
             tbodies: deviceListTbodies,
-            emptyRows: {
-                colSpan: 6,
-                count: Constants.ROW_CNT - deviceListTbodies.length,
-            },
         },
         apagination: {
             className: "device-list__pagination",
@@ -115,10 +107,6 @@ function HomePage() {
             id: "detail-modal-description",
             theads: ["상세 정보", "내용"],
             tbodies: useDeviceDetail(deviceDetailId),
-            emptyRows: {
-                colSpan: 0,
-                count: 0,
-            },
         },
     };
 
