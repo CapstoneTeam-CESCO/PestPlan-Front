@@ -6,7 +6,7 @@ import southKorea from '@svg-maps/south-korea';
 import '../../../templates/display/styles.scss';
 import FilterList from '../../../components/organisms/filter/FilterList';
 import FilterGroup from '../../../components/organisms/filterGroup';
-import Notice from '../../../components/organisms/notice';
+import Board from '../../../components/organisms/board';
 import * as Constants from '../../../constants/Constants';
 import { filtersReducer, useNoticeCount, useNoticeList, useSelectedFilters } from '../../../hooks/NoticeHook';
 import { initializeFilters } from '../../../utilities/FilterUtility';
@@ -41,103 +41,105 @@ function DisplayNoticePage() {
     }
 
     const filterGroupProps = {
-        filterDate: {
-            tagProps: {
-                aProps: {
-                    href: "#collapseFilterDate",
+        filterProps: [
+            {
+                tagProps: {
+                    aProps: {
+                        href: "#collapseFilterDate",
+                    },
+                    textProps: {
+                        children: "날짜",
+                    },
                 },
-                textProps: {
-                    children: "날짜",
-                },
-            },
-            filterList: {
-                children: (
-                    <DateRange
-                        className="filter__list daterange-filter-date"
-                        editableDateInputs={false}
-                        onChange={item => handleChangeDateRange(item)}
-                        moveRangeOnFirstSelection={false}
-                        ranges={filters.ranges} />
-                ),
-            },
-        },
-        filterRegion: {
-            tagProps: {
-                aProps: {
-                    href: "#collapseFilterRegion",
-                },
-                textProps: {
-                    children: "지역",
+                filterList: {
+                    children: (
+                        <DateRange
+                            className="filter__list daterange-filter-date"
+                            editableDateInputs={false}
+                            onChange={item => handleChangeDateRange(item)}
+                            moveRangeOnFirstSelection={false}
+                            ranges={filters.ranges} />
+                    ),
                 },
             },
-            filterList: {
-                children: (
-                    <SVGMap
-                        map={southKorea}
-                        className="filter__list SVGMap-filter-region"
-                        locationClassName={handleLocationClassName}
-                        locationRole="checkbox"
-                        onLocationClick={handleLocationClick} />
-                ),
-            },
-        },
-        filterLocation: {
-            tagProps: {
-                aProps: {
-                    href: "#collapseFilterLocation",
+            {
+                tagProps: {
+                    aProps: {
+                        href: "#collapseFilterRegion",
+                    },
+                    textProps: {
+                        children: "지역",
+                    },
                 },
-                textProps: {
-                    children: "설치 위치",
-                },
-            },
-            filterList: {
-                children: (
-                    <FilterList
-                        filters={filters.locations}
-                        dispatch={dispatchFilters}
-                        type="locations" />
-                ),
-            },
-        },
-        filterModel: {
-            tagProps: {
-                aProps: {
-                    href: "#collapseFilterModel",
-                },
-                textProps: {
-                    children: "트랩 종류",
+                filterList: {
+                    children: (
+                        <SVGMap
+                            map={southKorea}
+                            className="filter__list SVGMap-filter-region"
+                            locationClassName={handleLocationClassName}
+                            locationRole="checkbox"
+                            onLocationClick={handleLocationClick} />
+                    ),
                 },
             },
-            filterList: {
-                children: (
-                    <FilterList
-                        filters={filters.models}
-                        dispatch={dispatchFilters}
-                        type="models" />
-                ),
-            },
-        },
-        filterType: {
-            tagProps: {
-                aProps: {
-                    href: "#collapseFilterType",
+            {
+                tagProps: {
+                    aProps: {
+                        href: "#collapseFilterLocation",
+                    },
+                    textProps: {
+                        children: "설치 위치",
+                    },
                 },
-                textProps: {
-                    children: "메시지 타입",
+                filterList: {
+                    children: (
+                        <FilterList
+                            filters={filters.locations}
+                            dispatch={dispatchFilters}
+                            type="locations" />
+                    ),
                 },
             },
-            filterList: {
-                children: (
-                    <FilterList
-                        filters={filters.types}
-                        dispatch={dispatchFilters}
-                        type="types" />
-                ),
+            {
+                tagProps: {
+                    aProps: {
+                        href: "#collapseFilterModel",
+                    },
+                    textProps: {
+                        children: "트랩 종류",
+                    },
+                },
+                filterList: {
+                    children: (
+                        <FilterList
+                            filters={filters.models}
+                            dispatch={dispatchFilters}
+                            type="models" />
+                    ),
+                },
             },
-        },
+            {
+                tagProps: {
+                    aProps: {
+                        href: "#collapseFilterType",
+                    },
+                    textProps: {
+                        children: "메시지 타입",
+                    },
+                },
+                filterList: {
+                    children: (
+                        <FilterList
+                            filters={filters.types}
+                            dispatch={dispatchFilters}
+                            type="types" />
+                    ),
+                },
+            },
+        ]
     };
 
-    const noticeProps = {
+    const boardProps = {
         className: "display--list board",
         title: {
             className: "board-title",
@@ -183,8 +185,8 @@ function DisplayNoticePage() {
         <div className="display-page">
             <FilterGroup
                 filterGroupProps={filterGroupProps} />
-            <Notice
-                noticeProps={noticeProps} />
+            <Board
+                boardProps={boardProps} />
         </div>
     );
 }

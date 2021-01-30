@@ -3,13 +3,18 @@ import React from 'react';
 import Title from '../../atoms/title';
 import APagination from '../../atoms/pagination';
 import BoardBody from '../../molecules/boardBody';
+import FilterTagGroup from '../filterTagGroup';
 
-function DeviceList({ deviceListProps: { className, title, boardBody, apagination }}) {
+function Board({ boardProps: { className, title, filterTagGroup, boardBody, apagination } }) {
     return (
         <div className={className}>
             <Title
                 className={title.className}
                 children={title.children} />
+            <FilterTagGroup
+                className={filterTagGroup.className}
+                tagValues={filterTagGroup.tagValues}
+                tagProps={filterTagGroup.tagProps} />
             <BoardBody
                 className={boardBody.className}
                 theads={boardBody.theads}
@@ -25,4 +30,4 @@ function DeviceList({ deviceListProps: { className, title, boardBody, apaginatio
     );
 }
 
-export default DeviceList;
+export default Board;
