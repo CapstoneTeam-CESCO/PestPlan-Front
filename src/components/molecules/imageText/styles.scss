@@ -1,0 +1,10 @@
+.header__user {
+    background-color: beige;
+    display: flex;
+    align-items: center;
+
+    .header__profile-image {
+        height: 30px;
+        margin-right: 5px;
+    }
+}

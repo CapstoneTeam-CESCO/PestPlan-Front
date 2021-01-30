@@ -1,0 +1,18 @@
+.display-page {
+    width: 1200px;
+    margin: auto;
+    margin-top: 50px;
+
+    display: flex;
+
+    .display--filter {
+        // total width 450px
+        width: 350px;
+        padding: 10px 50px;
+    }
+
+    .display--list {
+        // total width 750px
+        width: 750px;
+    }
+}

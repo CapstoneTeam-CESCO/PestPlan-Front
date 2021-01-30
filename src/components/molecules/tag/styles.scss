@@ -1,0 +1,19 @@
+.filter-tag a {
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+    text-decoration: none;
+    background-color: #eeeeee;
+    
+    border-radius: 8px;
+    padding: 3px 10px;
+
+    &:hover {
+        background-color: #cccccc;
+    }
+
+    .filter-tag--label {
+        margin-right: 20px;
+    }
+}

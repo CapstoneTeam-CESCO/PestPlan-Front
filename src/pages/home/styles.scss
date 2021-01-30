@@ -1,0 +1,33 @@
+.home {
+    
+
+    .board {
+        text-align: left;
+    }
+
+    .home__notice {
+        margin-left: 30px;
+    
+        .notice__board-body {
+            width: 550px;
+        }
+    
+        .notice__board-nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 50px;
+        }
+    }
+
+    .home__device-list {
+        padding-left: 20px;
+    
+        .device-list__board-body {
+            width: 850px;
+        }
+    
+        .device-list__pagination {
+            padding: 0 50px 0 70px;
+        }
+    }
+}
