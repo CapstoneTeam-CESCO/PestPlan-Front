@@ -4,11 +4,11 @@ import { SVGMap } from 'react-svg-map';
 import southKorea from '@svg-maps/south-korea';
 
 import '../../../templates/display/styles.scss';
-import FilterList from '../../../components/molecules/filter/FilterList';
+import FilterList from '../../../components/organisms/filter/FilterList';
 import FilterGroup from '../../../components/organisms/filterGroup';
 import Notice from '../../../components/organisms/notice';
 import * as Constants from '../../../constants/Constants';
-import { filtersReducer, useNoticeCount, useNoticeList } from '../../../hooks/NoticeHook';
+import { filtersReducer, useNoticeCount, useNoticeList, useSelectedFilters } from '../../../hooks/NoticeHook';
 import { initializeFilters } from '../../../utilities/FilterUtility';
 
 function DisplayNoticePage() {
@@ -18,6 +18,7 @@ function DisplayNoticePage() {
     const [ filters, dispatchFilters ] = useReducer(filtersReducer, initialFilters);
     const noticeCount = useNoticeCount();
     const noticeList = useNoticeList(noticePage, filters);
+    const selectedFilters = useSelectedFilters(filters);
 
     const handleLocationClassName = (_, index) => {
         return "SVGMap-filter-region--location"
@@ -35,11 +36,19 @@ function DisplayNoticePage() {
         setFocusEndDate(!focusEndDate);
     }
 
+    const handleClickFilterTag = (event) => {
+        dispatchFilters({ type: event.currentTarget.getAttribute('data-type'), value: event.currentTarget.getAttribute('id') });
+    }
+
     const filterGroupProps = {
         filterDate: {
-            filterHeader: {
-                a: { href: "#collapseFilterDate" },
-                text: { children: "날짜" },
+            tagProps: {
+                aProps: {
+                    href: "#collapseFilterDate",
+                },
+                textProps: {
+                    children: "날짜",
+                },
             },
             filterList: {
                 children: (
@@ -53,9 +62,13 @@ function DisplayNoticePage() {
             },
         },
         filterRegion: {
-            filterHeader: {
-                a: { href: "#collapseFilterRegion" },
-                text: { children: "지역" },
+            tagProps: {
+                aProps: {
+                    href: "#collapseFilterRegion",
+                },
+                textProps: {
+                    children: "지역",
+                },
             },
             filterList: {
                 children: (
@@ -69,9 +82,13 @@ function DisplayNoticePage() {
             },
         },
         filterLocation: {
-            filterHeader: {
-                a: { href: "#collapseFilterLocation" },
-                text: { children: "설치 위치" },
+            tagProps: {
+                aProps: {
+                    href: "#collapseFilterLocation",
+                },
+                textProps: {
+                    children: "설치 위치",
+                },
             },
             filterList: {
                 children: (
@@ -83,9 +100,13 @@ function DisplayNoticePage() {
             },
         },
         filterModel: {
-            filterHeader: {
-                a: { href: "#collapseFilterModel" },
-                text: { children: "트랩 종류" },
+            tagProps: {
+                aProps: {
+                    href: "#collapseFilterModel",
+                },
+                textProps: {
+                    children: "트랩 종류",
+                },
             },
             filterList: {
                 children: (
@@ -97,9 +118,13 @@ function DisplayNoticePage() {
             },
         },
         filterType: {
-            filterHeader: {
-                a: { href: "#collapseFilterType" },
-                text: { children: "메시지 타입" },
+            tagProps: {
+                aProps: {
+                    href: "#collapseFilterType",
+                },
+                textProps: {
+                    children: "메시지 타입",
+                },
             },
             filterList: {
                 children: (
@@ -117,6 +142,27 @@ function DisplayNoticePage() {
         title: {
             className: "board-title",
             children: Constants.NOTICE,
+        },
+        filterTagGroup: {
+            className: "notice__filter-tag",
+            tagValues: selectedFilters,
+            tagProps: {
+                className: "filter-tag",
+                aProps: {
+                    href: "#closeTag",
+                    onClick: handleClickFilterTag,
+                },
+                textProps: {
+                    className: "filter-tag--label small-size-text",
+                },
+                svgProps: {
+                    type: "close",
+                    width: "10px",
+                    height: "10px",
+                    viewBox: "0 0 520 520",
+                    className: "filter-tag--svg",
+                },
+            },
         },
         boardBody: {
             className: "board-body notice__board-body",

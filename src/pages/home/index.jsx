@@ -112,10 +112,10 @@ function HomePage() {
 
     return (
         <div className="home">
-            <Notice
+            {/* <Notice
                 noticeProps={noticeProps} />
             <DeviceList
-                deviceListProps={deviceListProps} />
+                deviceListProps={deviceListProps} /> */}
 
             <Modal
                 open={openModal}

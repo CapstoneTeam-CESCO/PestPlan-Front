@@ -3,7 +3,7 @@ import React from 'react';
 import './styles.scss';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-import Filter from '../../molecules/filter';
+import Filter from '../filter';
 
 function FilterGroup({ filterGroupProps: { filterDate, filterRegion, filterLocation, filterModel, filterType } }) {
     return (

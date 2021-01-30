@@ -4,7 +4,7 @@ import './styles.scss';
 
 function FilterList({ filters, dispatch, type }) {
     const handleClick = (event) => {
-        dispatch({ type, value: event.currentTarget.innerText });
+        dispatch({ type, value: event.currentTarget.id });
     };
 
     return (
@@ -14,6 +14,7 @@ function FilterList({ filters, dispatch, type }) {
                     <a
                         href="#"
                         className={"list-element--label".concat(filter.selected ? " selected" : "")}
+                        id={filter.id}
                         onClick={handleClick}
                     >
                         {filter.value}

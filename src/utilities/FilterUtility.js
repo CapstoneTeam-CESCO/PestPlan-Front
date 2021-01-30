@@ -31,3 +31,18 @@ export function getItemValues(items) {
             .filter(item => item.selected)
             .map(item => item.value);
 }
+
+export function getFilterLabel(category) {
+    switch(category) {
+        case 'dates':
+            return '날짜';
+        case 'regions':
+            return '지역';
+        case 'locations':
+            return '설치 위치';
+        case 'models':
+            return '트랩 종류';
+        case 'types':
+            return '메시지 타입';
+    }
+}

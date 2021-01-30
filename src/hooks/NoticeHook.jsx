@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import * as Constants from '../constants/Constants';
-import { getItemValues } from '../utilities/FilterUtility';
+import { getItemValues, getFilterLabel } from '../utilities/FilterUtility';
 
 export const useNoticeCount = () => {
     const [ noticeCount, setNoticeCount ] = useState(0);
@@ -86,6 +86,32 @@ export const useNoticeList = (page, filters) => {
     return noticeList;
 }
 
+export function useSelectedFilters(filters) {
+    const [ selectedFilters, setSelectedFilters ] = useState([]);
+
+    useEffect(() => {
+        const selected = [];
+
+        Object.entries(filters)
+            .filter(entry => entry[0] !== "dates" && entry[0] !== "ranges")
+            .forEach(entry => 
+                entry[1]
+                    .filter(filter => filter.selected)
+                    .forEach(filter => {
+                        if(filter.value) selected.push({
+                            type: entry[0],
+                            id: filter.id,
+                            label: getFilterLabel(entry[0]) + ": " + filter.value
+                        });
+                    })
+            )
+
+        setSelectedFilters(selected);
+    }, [filters]);
+
+    return selectedFilters;
+}
+
 export const filtersReducer = (state, action) => {
     switch(action.type) {
         case 'ranges':
@@ -93,22 +119,15 @@ export const filtersReducer = (state, action) => {
             return { ...state, [action.type]: action.value };
         
         case 'regions':
-            const newRegions = state[action.type].map(iterator => (
+        case 'locations':
+        case 'models':
+        case 'types':
+            const newState = state[action.type].map(iterator => (
                 iterator.id === action.value
                     ? { ...iterator, selected: !iterator.selected }
                     : iterator
             ));
-            return { ...state, regions: newRegions };
-        
-        case 'locations':
-        case 'models':
-        case 'types':
-            const newStates = state[action.type].map(iterator => (
-                iterator.value === action.value
-                    ? { ...iterator, selected: !iterator.selected }
-                    : iterator
-            ));
-            return { ...state, [action.type]: newStates };
+            return { ...state, [action.type]: newState };
         
         default:
             throw new Error(`unexpected action type: ${action.type}`);
