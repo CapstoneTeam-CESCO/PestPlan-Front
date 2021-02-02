@@ -1,30 +1,33 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './styles.scss';
-import InputText from '../../atoms/inputText';
-import Button from '../../atoms/button';
+import "./styles.scss";
+import InputText from "../../atoms/inputText";
+import Button from "../../atoms/button";
 
-function LoginForm({ loginFormProps: { className, firstInputText, secondInputText, button } }) {
+function LoginForm({
+    className,
+    firstInputTextProps,
+    secondInputTextProps,
+    buttonProps,
+}) {
     return (
         <div className={className}>
-            <InputText
-                className={firstInputText.className}
-                label={firstInputText.label}
-                name={firstInputText.name}
-                inputRef={firstInputText.inputRef}
-                variant={firstInputText.variant} />
-            <InputText
-                className={secondInputText.className}
-                label={secondInputText.label}
-                name={secondInputText.name}
-                inputRef={secondInputText.inputRef}
-                variant={secondInputText.variant} />
-            <Button
-                className={button.className}
-                onClick={button.onClick}
-                children={button.children} />
+            <InputText {...firstInputTextProps} />
+            <InputText {...secondInputTextProps} />
+            <Button {...buttonProps} />
         </div>
     );
 }
+
+LoginForm.propTypes = {
+    className: PropTypes.string,
+    firstInputTextProps: PropTypes.object,
+    secondInputTextProps: PropTypes.object,
+    buttonProps: PropTypes.shape({
+        type: PropTypes.string.isRequired,
+        children: PropTypes.any.isRequired,
+    }),
+};
 
 export default LoginForm;

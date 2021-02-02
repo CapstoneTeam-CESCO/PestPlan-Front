@@ -1,41 +1,44 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import { useForm } from 'react-hook-form';
-import axios from 'axios';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 
-import '../../templates/login/styles.scss';
-import Title from '../../components/atoms/title';
-import LoginForm from '../../components/organisms/loginForm';
-import ASnackbar from '../../components/atoms/snackbar';
-import * as Constants from '../../constants/Constants';
+import "../../templates/login/styles.scss";
+import Title from "../../components/atoms/title";
+import LoginForm from "../../components/organisms/loginForm";
+import ASnackbar from "../../components/atoms/snackbar";
+import * as Constants from "../../constants/Constants";
 
 const useStyles = makeStyles(() => ({
     input: {
-        backgroundColor: '#ffffff',
-        marginBottom: '15px'
-    }
+        backgroundColor: "#ffffff",
+        marginBottom: "15px",
+    },
 }));
 
 function LoginPage() {
-    const [ open, setOpen ] = useState(false);
+    const [open, setOpen] = useState(false);
     const { register, handleSubmit, setValue, getValues } = useForm();
     const classes = useStyles();
-    let history = useHistory();
+    const history = useHistory();
 
     const onSubmit = async () => {
         const values = getValues();
         await axios
             .post(`${Constants.LOGIN_URL}/signin`, values)
-            .then((response) => {
-                console.log('Login succeed.');
+            .then(response => {
+                console.log("Login succeed.");
 
-                const { data: { access_token }} = response;
-                window.sessionStorage.setItem('access_token', access_token);
-                history.push('/home');
+                const { data } = response;
+                window.sessionStorage.setItem(
+                    "access_token",
+                    data.access_token
+                );
+                history.push("/home");
             })
-            .catch((exception) => {
-                console.log('There was an exception while login.');
+            .catch(exception => {
+                console.log("There was an exception while login.");
                 console.log(exception);
 
                 setOpen(true);
@@ -44,41 +47,45 @@ function LoginPage() {
             });
     };
 
+    const titleProps = {
+        className: "login__team-name",
+        children: "Pest Plan",
+    };
+
     const loginFormProps = {
         className: "login-form",
-        firstInputText: {
+        firstInputTextProps: {
             className: classes.input,
             label: "username",
             name: "username",
             inputRef: register,
             variant: "outlined",
         },
-        secondInputText: {
+        secondInputTextProps: {
             className: classes.input,
             label: "password",
             name: "password",
             inputRef: register,
             variant: "outlined",
         },
-        button: {
+        buttonProps: {
+            type: "submit",
+            children: "LOGIN",
             className: "button--root login-button",
             onClick: () => handleSubmit(onSubmit()),
-            children: "LOGIN",
         },
     };
 
     return (
         <div className="login">
-            <Title
-                className="login__team-name"
-                children="Pest Plan" />
-            <LoginForm
-                loginFormProps={loginFormProps} />
+            <Title {...titleProps} />
+            <LoginForm {...loginFormProps} />
             <ASnackbar
                 open={open}
                 setOpen={setOpen}
-                autoHideDuration="1000"
-                message="Invalid username or password" />
+                autoHideDuration={1000}
+                message="Invalid username or password"
+            />
         </div>
     );
 }

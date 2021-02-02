@@ -1,13 +1,14 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './styles.scss';
+import "./styles.scss";
 
-function Text({ className, onClick, children }) {
-    return (
-        <p className={className} onClick={onClick}>
-            {children}
-        </p>
-    );
+function Text({ children, ...props }) {
+    return <p {...props}>{children}</p>;
 }
+
+Text.propTypes = {
+    children: PropTypes.string.isRequired,
+};
 
 export default Text;

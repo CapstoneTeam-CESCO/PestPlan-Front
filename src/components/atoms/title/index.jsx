@@ -1,13 +1,15 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './styles.scss';
+import "./styles.scss";
 
-function Title({ className, id, onClick, children }) {
-    return (
-        <h1 className={className} id={id} onClick={onClick}>
-            {children}
-        </h1>
-    );
+function Title({ children, ...props }) {
+    return <h1 {...props}>{children}</h1>;
 }
+
+Title.propTypes = {
+    titleProps: PropTypes.object,
+    children: PropTypes.string.isRequired,
+};
 
 export default Title;

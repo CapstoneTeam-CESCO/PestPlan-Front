@@ -78,11 +78,9 @@
             list-style: none;
 
             .list-element--label {
-                display: inline-block;
                 width: 155px;
                 color: #828282;
-                text-decoration: none;
-                cursor: pointer;
+                text-align: left;
             
                 &:hover {
                     color: #000000;
