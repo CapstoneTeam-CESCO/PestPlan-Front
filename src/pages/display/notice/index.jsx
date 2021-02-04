@@ -180,6 +180,10 @@ function DisplayNoticePage() {
             className: "board-body notice__board-body",
             theads: Constants.NOTICE_THEAD,
             tbodies: noticeList,
+            buttonProps: {
+                type: "button",
+                className: "button--root",
+            },
         },
         apaginationProps: {
             className: "notice__pagination",

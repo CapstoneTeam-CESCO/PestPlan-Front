@@ -2,31 +2,37 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import "./styles.scss";
+import Button from "../../atoms/button";
 
-function BoardBody({ className, id, theads, tbodies }) {
+function BoardBody({ className, id, theads, tbodies, buttonProps }) {
     if (theads && tbodies)
         return (
-            <table className={className} id={id}>
-                <thead>
-                    <tr>
+            <div className={className} id={id}>
+                <div className="board__header">
+                    <ul className="board-row">
                         {theads.map(thead => (
-                            <th key={thead}>{thead}</th>
+                            <li key={thead} className="board-element">
+                                {thead}
+                            </li>
                         ))}
-                    </tr>
-                </thead>
+                    </ul>
+                </div>
 
-                <tbody>
-                    {tbodies.map(tbody => {
-                        return (
-                            <tr key={tbody.no}>
+                {tbodies.map(tbody => (
+                    <div key={tbody.no} className="board__body">
+                        <Button {...buttonProps}>
+                            <ul className="board-row">
                                 {Object.values(tbody).map(body => (
-                                    <td key={body}>{body}</td>
+                                    <li key={body} className="board-element">
+                                        {body}
+                                    </li>
                                 ))}
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
+                            </ul>
+                        </Button>
+                        <div className="notice-detail closed">hidden</div>
+                    </div>
+                ))}
+            </div>
         );
     return null;
 }
@@ -36,6 +42,10 @@ BoardBody.propTypes = {
     id: PropTypes.string,
     theads: PropTypes.array,
     tbodies: PropTypes.array,
+    buttonProps: PropTypes.shape({
+        type: PropTypes.string,
+        className: PropTypes.string,
+    }),
 };
 
 export default BoardBody;
