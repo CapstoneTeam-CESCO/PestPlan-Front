@@ -58,6 +58,7 @@ function DisplayNoticePage() {
     const filterGroupProps = {
         filterProps: [
             {
+                key: "notice-filter--date",
                 tagProps: {
                     aProps: {
                         href: "#collapseFilterDate",
@@ -77,6 +78,7 @@ function DisplayNoticePage() {
                 ),
             },
             {
+                key: "notice-filter--region",
                 tagProps: {
                     aProps: {
                         href: "#collapseFilterRegion",
@@ -96,6 +98,7 @@ function DisplayNoticePage() {
                 ),
             },
             {
+                key: "notice-filter--location",
                 tagProps: {
                     aProps: {
                         href: "#collapseFilterLocation",
@@ -113,6 +116,7 @@ function DisplayNoticePage() {
                 ),
             },
             {
+                key: "notice-filter--model",
                 tagProps: {
                     aProps: {
                         href: "#collapseFilterModel",
@@ -130,6 +134,7 @@ function DisplayNoticePage() {
                 ),
             },
             {
+                key: "notice-filter--type",
                 tagProps: {
                     aProps: {
                         href: "#collapseFilterType",
@@ -178,12 +183,9 @@ function DisplayNoticePage() {
         },
         boardBodyProps: {
             className: "board-body notice__board-body",
-            theads: Constants.NOTICE_THEAD,
-            tbodies: noticeList,
-            buttonProps: {
-                type: "button",
-                className: "button--root",
-            },
+            heads: Constants.NOTICE_THEAD,
+            bodies: noticeList,
+            hasDetail: true,
         },
         apaginationProps: {
             className: "notice__pagination",

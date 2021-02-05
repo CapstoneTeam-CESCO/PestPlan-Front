@@ -59,6 +59,7 @@ function DisplayDevicePage() {
     const filterGroupProps = {
         filterProps: [
             {
+                key: "notice-filter--region",
                 tagProps: {
                     aProps: {
                         href: "#collapseFilterRegion",
@@ -78,6 +79,7 @@ function DisplayDevicePage() {
                 ),
             },
             {
+                key: "notice-filter--location",
                 tagProps: {
                     aProps: {
                         href: "#collapseFilterLocation",
@@ -95,6 +97,7 @@ function DisplayDevicePage() {
                 ),
             },
             {
+                key: "notice-filter--model",
                 tagProps: {
                     aProps: {
                         href: "#collapseFilterModel",
@@ -143,8 +146,8 @@ function DisplayDevicePage() {
         },
         boardBodyProps: {
             className: "board-body notice__board-body",
-            theads: Constants.DEVICE_THEAD,
-            tbodies: deviceList,
+            heads: Constants.DEVICE_THEAD,
+            bodies: deviceList,
         },
         apaginationProps: {
             className: "notice__pagination",
