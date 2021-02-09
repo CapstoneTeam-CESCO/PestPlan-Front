@@ -144,10 +144,21 @@ function DisplayDevicePage() {
                 },
             },
         },
+        boardProps: {
+            className: "board-body device__board-body",
+        },
+        boardHeaderProps: {
+            ulProps: {
+                className: "board__header board-row",
+            },
+            liProps: {
+                className: "board-element",
+            },
+            headItems: Constants.DEVICE_THEAD,
+        },
+        type: "device",
         boardBodyProps: {
-            className: "board-body notice__board-body",
-            heads: Constants.DEVICE_THEAD,
-            bodies: deviceList,
+            deviceList,
         },
         apaginationProps: {
             className: "notice__pagination",

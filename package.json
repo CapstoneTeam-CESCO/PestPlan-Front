@@ -42,15 +42,12 @@
             "prettier"
         ],
         "extends": [
-            "react-app",
-            "react-app/jest",
             "airbnb",
-            "plugin:prettier/recommended"
+            "plugin:prettier/recommended",
+            "prettier/react"
         ],
         "rules": {
             "prettier/prettier": "error",
-            "react/jsx-indent": ["error", 4],
-            "react/jsx-indent-props": ["error", 4],
             "react/jsx-curly-newline": "off",
             "react/jsx-props-no-spreading": "off",
             "react/forbid-prop-types": "off",

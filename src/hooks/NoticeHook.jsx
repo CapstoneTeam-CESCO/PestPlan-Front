@@ -69,6 +69,7 @@ export const useNoticeList = (page, filters) => {
                         params: {
                             access_token: accessToken,
                             page,
+                            row: Constants.ROW_CNT,
                             start: dates[0].startDate,
                             end: dates[0].endDate,
                             regions: getItemValues(regions),
@@ -78,7 +79,7 @@ export const useNoticeList = (page, filters) => {
                         },
                     }
                 );
-
+                console.log(response.data);
                 const newNoticeList = response.data.map((data, index) => ({
                     no: index + 1,
                     createdAt: data.created_at,
@@ -86,6 +87,8 @@ export const useNoticeList = (page, filters) => {
                     location: data.location,
                     modelName: data.model_name,
                     type: data.type,
+                    isRead: data.is_read,
+                    packet: data.packet,
                 }));
 
                 setNoticeList(newNoticeList);

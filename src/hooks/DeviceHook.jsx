@@ -70,6 +70,7 @@ export const useDeviceList = (page, filters, handleClickDetail) => {
                         params: {
                             access_token: accessToken,
                             page,
+                            row: Constants.ROW_CNT,
                             regions: getItemValues(regions),
                             locations: getItemValues(locations),
                             models: getItemValues(models),
@@ -79,7 +80,7 @@ export const useDeviceList = (page, filters, handleClickDetail) => {
 
                 const newDeviceList = response.data.map((data, index) => ({
                     no: index + 1,
-                    deviceId: data.id,
+                    deviceId: data.trap_id,
                     modelName: data.model_name,
                     region: data.region,
                     location: data.location,

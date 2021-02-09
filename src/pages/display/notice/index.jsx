@@ -181,11 +181,21 @@ function DisplayNoticePage() {
                 },
             },
         },
-        boardBodyProps: {
+        boardProps: {
             className: "board-body notice__board-body",
-            heads: Constants.NOTICE_THEAD,
-            bodies: noticeList,
-            hasDetail: true,
+        },
+        boardHeaderProps: {
+            ulProps: {
+                className: "board__header board-row",
+            },
+            liProps: {
+                className: "board-element",
+            },
+            headItems: Constants.NOTICE_THEAD,
+        },
+        type: "notice",
+        boardBodyProps: {
+            noticeList,
         },
         apaginationProps: {
             className: "notice__pagination",
