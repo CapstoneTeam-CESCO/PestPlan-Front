@@ -158,10 +158,10 @@ function DisplayNoticePage() {
         className: "display--list board",
         titleProps: {
             children: Constants.NOTICE,
-            className: "board-title",
+            className: "board__title",
         },
         filterTagGroupProps: {
-            className: "notice__filter-tag",
+            className: "board__filter-tag",
             tagValues: selectedFilters,
             tagProps: {
                 className: "filter-tag",
@@ -182,15 +182,9 @@ function DisplayNoticePage() {
             },
         },
         boardProps: {
-            className: "board-body notice__board-body",
+            className: "board__list board__list--notice",
         },
         boardHeaderProps: {
-            ulProps: {
-                className: "board__header board-row",
-            },
-            liProps: {
-                className: "board-element",
-            },
             headItems: Constants.NOTICE_THEAD,
         },
         type: "notice",
@@ -198,7 +192,7 @@ function DisplayNoticePage() {
             noticeList,
         },
         apaginationProps: {
-            className: "notice__pagination",
+            className: "board__pagination",
             count: Math.ceil(noticeCount / Constants.ROW_CNT),
             siblingCount: 5,
             page,

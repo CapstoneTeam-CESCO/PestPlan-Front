@@ -120,11 +120,11 @@ function DisplayDevicePage() {
     const boardProps = {
         className: "display--list board",
         titleProps: {
-            className: "board-title",
+            className: "board__title",
             children: Constants.DEVICE,
         },
         filterTagGroupProps: {
-            className: "notice__filter-tag",
+            className: "board__filter-tag",
             tagValues: selectedFilters,
             tagProps: {
                 className: "filter-tag",
@@ -145,15 +145,9 @@ function DisplayDevicePage() {
             },
         },
         boardProps: {
-            className: "board-body device__board-body",
+            className: "board__list board__list--device",
         },
         boardHeaderProps: {
-            ulProps: {
-                className: "board__header board-row",
-            },
-            liProps: {
-                className: "board-element",
-            },
             headItems: Constants.DEVICE_THEAD,
         },
         type: "device",
@@ -161,7 +155,7 @@ function DisplayDevicePage() {
             deviceList,
         },
         apaginationProps: {
-            className: "notice__pagination",
+            className: "board__pagination",
             count: Math.ceil(deviceCount / Constants.ROW_CNT),
             siblingCount: 5,
             page,

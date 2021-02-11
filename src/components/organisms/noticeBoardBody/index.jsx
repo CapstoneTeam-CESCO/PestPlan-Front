@@ -39,17 +39,17 @@ function NoticeBoardBody({ noticeList }) {
                 button
                 key={values[0]}
                 id={values[0]}
-                className="board__body button--root"
+                className="list--body button--root"
                 onClick={handleClick}
             >
                 <List
-                    className="board-row"
+                    className="list__row"
                     items={values.slice(0, 6)}
-                    itemProps={{ className: "board-element" }}
+                    itemProps={{ className: "list__row__item" }}
                 />
 
                 <Collapse
-                    className="notice-detail"
+                    className="list__detail"
                     isOpen={extended.includes(values[0])}
                 >
                     <pre>{values.slice(7)}</pre>

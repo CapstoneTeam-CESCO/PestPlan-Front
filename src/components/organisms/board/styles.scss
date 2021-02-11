@@ -1,27 +1,31 @@
-.board-body {
+.board__list {
     text-align: center;
     border-collapse: collapse;
-    border-top: 2px solid #004e66;
-    border-bottom: 2px solid #004e66;
     margin-bottom: 15px;
 
-    .board__header,
-    .board__body,
-    .board-row {
+    .list--header,
+    .list--body,
+    .list__row {
         width: 100%;
     }
 
-    .board__header {
+    .list--header {
         font-weight: 900;
+    }
+
+    .list--body {
+        margin-top: 5px;
+
+        .list__row {
+            background-color: #dddddd;
+        }
+    }
+
+    .list__row {
         padding: 10px 0;
     }
 
-    .board__body .board-row {
-        padding: 5px 0;
-        background-color: #eeeeee;
-    }
-
-    .board-element {
+    .list__row__item {
         display: table-cell;
     }
 }

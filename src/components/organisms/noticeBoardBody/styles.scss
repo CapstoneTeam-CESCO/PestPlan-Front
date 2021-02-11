@@ -1,7 +1,7 @@
-.notice__board-body {
+.board__list--notice {
     width: 750px;
 
-    .board-row {
+    .list__row {
         li:nth-child(1) {
             width: 70px;
         }
@@ -22,12 +22,19 @@
         }
     }
 
-    .notice-detail {
+    .list__detail {
         text-align: left;
+
+        background-color: #eeeeee;
     }
 
     .closed {
         max-height: 0;
         overflow: hidden;
+    }
+
+    .open {
+        margin-top: 2px;
+        padding: 10px;
     }
 }

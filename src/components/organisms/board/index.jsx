@@ -26,11 +26,11 @@ function Board({
             <FilterTagGroup {...filterTagGroupProps} />
 
             <List {...boardProps}>
-                <ListItem className="board__header board-body-list">
+                <ListItem className="list--header">
                     <List
-                        className="board-row"
+                        className="list__row"
                         items={boardHeaderProps.headItems}
-                        itemProps={{ className: "board-element" }}
+                        itemProps={{ className: "list__row__item" }}
                     />
                 </ListItem>
 

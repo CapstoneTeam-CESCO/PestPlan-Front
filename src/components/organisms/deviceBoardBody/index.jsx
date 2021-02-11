@@ -10,11 +10,11 @@ function DeviceBoardBody({ deviceList }) {
         const values = Object.values(device);
 
         return (
-            <ListItem key={values[0]} id={values[0]} className="board__body">
+            <ListItem key={values[0]} id={values[0]} className="list--body">
                 <List
-                    className="board-row"
+                    className="list__row"
                     items={values}
-                    itemProps={{ className: "board-element" }}
+                    itemProps={{ className: "list__row__item" }}
                 />
             </ListItem>
         );
