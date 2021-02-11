@@ -88,7 +88,7 @@ export const useNoticeList = (page, filters) => {
                     modelName: data.model_name,
                     type: data.type,
                     isRead: data.is_read,
-                    packet: data.packet,
+                    packet: JSON.stringify(data.packet, null, 4),
                 }));
 
                 setNoticeList(newNoticeList);

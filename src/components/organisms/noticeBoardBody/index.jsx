@@ -52,7 +52,7 @@ function NoticeBoardBody({ noticeList }) {
                     className="notice-detail"
                     isOpen={extended.includes(values[0])}
                 >
-                    {values.slice(7)}
+                    <pre>{values.slice(7)}</pre>
                 </Collapse>
             </ListItem>
         );
