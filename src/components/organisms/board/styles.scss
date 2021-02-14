@@ -1,3 +1,19 @@
+.board__header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    .header__title {
+        display: inline-block;
+        margin-right: 15px;
+    }
+
+    .header__not-read {
+        font-weight: 600;
+        color: blue;
+    }
+}
+
 .board__list {
     text-align: center;
     border-collapse: collapse;

@@ -79,24 +79,29 @@ export const useNoticeList = (page, filters, dispatchNotRead) => {
                         },
                     }
                 );
-                console.log(response.data);
-                const newNoticeList = response.data.map((data, index) => ({
+
+                const { data } = response;
+                const newNoticeList = data.notice_list.map((notice, index) => ({
                     no: index + 1,
-                    createdAt: data.created_at,
-                    region: data.region,
-                    location: data.location,
-                    modelName: data.model_name,
-                    type: data.type,
-                    noticeId: data.notice_id,
-                    packet: JSON.stringify(data.packet, null, 4),
+                    createdAt: notice.created_at,
+                    region: notice.region,
+                    location: notice.location,
+                    modelName: notice.model_name,
+                    type: notice.type,
+                    noticeId: notice.notice_id,
+                    packet: JSON.stringify(notice.packet, null, 4),
                 }));
 
                 setNoticeList(newNoticeList);
                 dispatchNotRead({
                     type: "initialize",
-                    value: response.data
-                        .filter(data => data.is_read === false)
-                        .map(data => data.notice_id),
+                    value: {
+                        list: data.notice_list
+                            .filter(notice => notice.is_read === false)
+                            .map(notice => notice.notice_id),
+                        total: data.total_filtered_count,
+                        current: data.total_not_read_count,
+                    },
                 });
             } catch (exception) {
                 console.log(
@@ -185,8 +190,13 @@ export const notReadReducer = (state, action) => {
             };
             updateReadStatus();
 
-            const index = state.indexOf(action.value);
-            return [...state.slice(0, index), ...state.slice(index + 1)];
+            const { list, current } = state;
+            const index = list.indexOf(action.value);
+            return {
+                ...state,
+                list: [...list.slice(0, index), ...list.slice(index + 1)],
+                current: current - 1,
+            };
         }
         default:
             throw new Error(`unexpected action type: ${action.type}`);

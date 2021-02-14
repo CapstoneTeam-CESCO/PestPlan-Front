@@ -26,7 +26,9 @@ function DisplayNoticePage() {
         initialFilters
     );
     const noticeCount = useNoticeCount();
-    const [notRead, dispatchNotRead] = useReducer(notReadReducer, []);
+    const [notRead, dispatchNotRead] = useReducer(notReadReducer, {
+        list: [],
+    });
     const noticeList = useNoticeList(page, filters, dispatchNotRead);
     const selectedFilters = useSelectedFilters(filters);
 
@@ -158,10 +160,27 @@ function DisplayNoticePage() {
 
     const boardProps = {
         className: "display--list board",
-        titleProps: {
-            children: Constants.NOTICE,
-            className: "board__title",
+        headerProps: {
+            className: "board__header",
         },
+        titleProps: {
+            className: "header__title",
+            children: Constants.NOTICE,
+        },
+        notReadChildrens: [
+            {
+                className: "header__not-read",
+                children: notRead.current,
+            },
+            {
+                className: "bar",
+                children: "/",
+            },
+            {
+                className: "header__total-count",
+                children: notRead.total,
+            },
+        ],
         filterTagGroupProps: {
             className: "board__filter-tag",
             tagValues: selectedFilters,
@@ -192,7 +211,7 @@ function DisplayNoticePage() {
         type: "notice",
         boardBodyProps: {
             noticeList,
-            notRead,
+            notRead: notRead.list,
             dispatchNotRead,
         },
         apaginationProps: {

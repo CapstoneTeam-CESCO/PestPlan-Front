@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 
 import "./styles.scss";
 import ListItem from "../../atoms/listItem";
-import Title from "../../atoms/title";
 import APagination from "../../atoms/pagination";
+import Span from "../../atoms/span";
+import Title from "../../atoms/title";
 import List from "../../molecules/list";
 import DeviceBoardBody from "../deviceBoardBody";
 import FilterTagGroup from "../filterTagGroup";
@@ -12,7 +13,9 @@ import NoticeBoardBody from "../noticeBoardBody";
 
 function Board({
     className,
+    headerProps,
     titleProps,
+    notReadChildrens,
     filterTagGroupProps,
     boardProps,
     boardHeaderProps,
@@ -22,7 +25,12 @@ function Board({
 }) {
     return (
         <div className={className}>
-            <Title {...titleProps} />
+            <div {...headerProps}>
+                <Title {...titleProps} />
+                {notReadChildrens.map(props => (
+                    <Span {...props} />
+                ))}
+            </div>
             <FilterTagGroup {...filterTagGroupProps} />
 
             <List {...boardProps}>
@@ -45,7 +53,9 @@ function Board({
 
 Board.propTypes = {
     className: PropTypes.string,
+    headerProps: PropTypes.object,
     titleProps: PropTypes.object,
+    notReadChildrens: PropTypes.array,
     filterTagGroupProps: PropTypes.object,
     boardProps: PropTypes.object,
     boardHeaderProps: PropTypes.object,
