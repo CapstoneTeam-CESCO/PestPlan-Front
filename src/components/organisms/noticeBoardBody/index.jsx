@@ -19,40 +19,47 @@ const extendedReducer = (state, action) => {
     }
 };
 
-function NoticeBoardBody({ noticeList }) {
+function NoticeBoardBody({ noticeList, notRead, dispatchNotRead }) {
     const [extended, dispatchExtended] = useReducer(extendedReducer, []);
 
     const handleClick = event => {
-        const clickedId = parseInt(event.currentTarget.id, 10);
+        const clickedId = event.currentTarget.id;
 
         dispatchExtended({
             type: extended.includes(clickedId),
             value: clickedId,
         });
+
+        if (notRead.includes(clickedId)) {
+            dispatchNotRead({ type: "click_notice", value: clickedId });
+        }
     };
 
     return noticeList.map(notice => {
         const values = Object.values(notice);
+        const rowClassName = "list__row".concat(
+            notRead.includes(values[6]) ? " notRead" : ""
+        );
 
         return (
             <ListItem
                 button
-                key={values[0]}
-                id={values[0]}
+                key={values[6]}
+                id={values[6]}
                 className="list--body button--root"
                 onClick={handleClick}
             >
                 <List
-                    className="list__row"
+                    className={rowClassName}
                     items={values.slice(0, 6)}
                     itemProps={{ className: "list__row__item" }}
                 />
 
                 <Collapse
                     className="list__detail"
-                    isOpen={extended.includes(values[0])}
+                    isOpen={extended.includes(values[6])}
                 >
-                    <pre>{values.slice(7)}</pre>
+                    <pre>{values[7]}</pre>
                 </Collapse>
             </ListItem>
         );
@@ -61,6 +68,8 @@ function NoticeBoardBody({ noticeList }) {
 
 NoticeBoardBody.propTypes = {
     noticeList: PropTypes.array,
+    notRead: PropTypes.array,
+    dispatchNotRead: PropTypes.func,
 };
 
 export default NoticeBoardBody;

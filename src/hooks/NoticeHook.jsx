@@ -44,7 +44,7 @@ export const useNoticeCount = () => {
     return noticeCount;
 };
 
-export const useNoticeList = (page, filters) => {
+export const useNoticeList = (page, filters, dispatchNotRead) => {
     const [noticeList, setNoticeList] = useState([]);
     const history = useHistory();
 
@@ -87,11 +87,17 @@ export const useNoticeList = (page, filters) => {
                     location: data.location,
                     modelName: data.model_name,
                     type: data.type,
-                    isRead: data.is_read,
+                    noticeId: data.notice_id,
                     packet: JSON.stringify(data.packet, null, 4),
                 }));
 
                 setNoticeList(newNoticeList);
+                dispatchNotRead({
+                    type: "initialize",
+                    value: response.data
+                        .filter(data => data.is_read === false)
+                        .map(data => data.notice_id),
+                });
             } catch (exception) {
                 console.log(
                     "Token has an exception while get informations. Re-login please."
@@ -152,6 +158,35 @@ export const filtersReducer = (state, action) => {
                     : iterator
             );
             return { ...state, [action.type]: newState };
+        }
+        default:
+            throw new Error(`unexpected action type: ${action.type}`);
+    }
+};
+
+export const notReadReducer = (state, action) => {
+    switch (action.type) {
+        case "initialize":
+            return action.value;
+        case "click_notice": {
+            const updateReadStatus = async () => {
+                try {
+                    await axios.patch(
+                        `${Constants.HOME_URL}/notices/${action.value}`,
+                        {
+                            data: {
+                                is_read: true,
+                            },
+                        }
+                    );
+                } catch (exception) {
+                    throw new Error(exception);
+                }
+            };
+            updateReadStatus();
+
+            const index = state.indexOf(action.value);
+            return [...state.slice(0, index), ...state.slice(index + 1)];
         }
         default:
             throw new Error(`unexpected action type: ${action.type}`);

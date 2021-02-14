@@ -10,6 +10,7 @@ import Board from "../../../components/organisms/board";
 import * as Constants from "../../../constants/Constants";
 import {
     filtersReducer,
+    notReadReducer,
     useNoticeCount,
     useNoticeList,
     useSelectedFilters,
@@ -25,7 +26,8 @@ function DisplayNoticePage() {
         initialFilters
     );
     const noticeCount = useNoticeCount();
-    const noticeList = useNoticeList(page, filters);
+    const [notRead, dispatchNotRead] = useReducer(notReadReducer, []);
+    const noticeList = useNoticeList(page, filters, dispatchNotRead);
     const selectedFilters = useSelectedFilters(filters);
 
     const handleLocationClassName = (_, index) => {
@@ -190,6 +192,8 @@ function DisplayNoticePage() {
         type: "notice",
         boardBodyProps: {
             noticeList,
+            notRead,
+            dispatchNotRead,
         },
         apaginationProps: {
             className: "board__pagination",

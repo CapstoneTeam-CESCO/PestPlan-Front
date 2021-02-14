@@ -22,6 +22,12 @@
         }
     }
 
+    .list--body {
+        .notRead {
+            background-color: #bbbbbb;
+        }
+    }
+
     .list__detail {
         text-align: left;
 
