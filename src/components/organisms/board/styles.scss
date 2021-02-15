@@ -1,0 +1,47 @@
+.board__header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    .header__title {
+        display: inline-block;
+        margin-right: 15px;
+    }
+
+    .header__not-read {
+        font-weight: 600;
+        color: blue;
+    }
+}
+
+.board__list {
+    text-align: center;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+
+    .list--header,
+    .list--body,
+    .list__row {
+        width: 100%;
+    }
+
+    .list--header {
+        font-weight: 900;
+    }
+
+    .list--body {
+        margin-top: 5px;
+
+        .list__row {
+            background-color: #dddddd;
+        }
+    }
+
+    .list__row {
+        padding: 10px 0;
+    }
+
+    .list__row__item {
+        display: table-cell;
+    }
+}

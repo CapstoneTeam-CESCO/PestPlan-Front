@@ -1,22 +1,28 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './styles.scss';
-import Text from '../../atoms/text';
+import "./styles.scss";
+import Button from "../../atoms/button";
 
-function Menu({ menuProps: { className, notice, device } }) {
+function Menu({ className, noticeProps, deviceProps }) {
     return (
         <div className={className}>
-            <Text
-                className={notice.className}
-                onClick={notice.onClick}
-                children={notice.children} />
-
-            <Text
-                className={device.className}
-                onClick={device.onClick}
-                children={device.children} />
+            <Button {...noticeProps} />
+            <Button {...deviceProps} />
         </div>
     );
 }
+
+Menu.propTypes = {
+    className: PropTypes.string,
+    noticeProps: PropTypes.shape({
+        type: PropTypes.string.isRequired,
+        children: PropTypes.string.isRequired,
+    }),
+    deviceProps: PropTypes.shape({
+        type: PropTypes.string.isRequired,
+        children: PropTypes.string.isRequired,
+    }),
+};
 
 export default Menu;

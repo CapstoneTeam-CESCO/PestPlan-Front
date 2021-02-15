@@ -1,14 +1,19 @@
-import React, { useReducer, useState } from 'react';
-import { SVGMap } from 'react-svg-map';
-import southKorea from '@svg-maps/south-korea';
+import React, { useReducer, useState } from "react";
+import { SVGMap } from "react-svg-map";
+import southKorea from "@svg-maps/south-korea";
 
-import '../../../templates/display/styles.scss';
-import FilterList from '../../../components/organisms/filter/FilterList';
-import FilterGroup from '../../../components/organisms/filterGroup';
-import Board from '../../../components/organisms/board';
-import * as Constants from '../../../constants/Constants';
-import { filtersReducer, useDeviceCount, useDeviceList, useSelectedFilters } from '../../../hooks/DeviceHook';
-import { createFilterItems } from '../../../utilities/FilterUtility';
+import "../../../templates/display/styles.scss";
+import FilterList from "../../../components/organisms/filter/FilterList";
+import FilterGroup from "../../../components/organisms/filterGroup";
+import Board from "../../../components/organisms/board";
+import * as Constants from "../../../constants/Constants";
+import {
+    filtersReducer,
+    useDeviceCount,
+    useDeviceList,
+    useSelectedFilters,
+} from "../../../hooks/DeviceHook";
+import { createFilterItems } from "../../../utilities/FilterUtility";
 
 const initialFilters = {
     regions: createFilterItems(Constants.REGIONS),
@@ -18,32 +23,43 @@ const initialFilters = {
 
 const handleClickDetail = () => {
     console.log("good");
-}
+};
 
 function DisplayDevicePage() {
-    const [ page, setPage ] = useState(1);
-    const [ filters, dispatchFilters ] = useReducer(filtersReducer, initialFilters);
+    const [page, setPage] = useState(1);
+    const [filters, dispatchFilters] = useReducer(
+        filtersReducer,
+        initialFilters
+    );
     const deviceCount = useDeviceCount();
     const deviceList = useDeviceList(page, filters, handleClickDetail);
     const selectedFilters = useSelectedFilters(filters);
 
     const handleLocationClassName = (_, index) => {
-        return "SVGMap-filter-region--location"
-            .concat(filters.regions[index].selected ? " selected" : "");
+        return "SVGMap-filter-region--location".concat(
+            filters.regions[index].selected ? " selected" : ""
+        );
     };
 
-    const handleLocationClick =(event) => {
-        dispatchFilters({ type: "regions", value: event.currentTarget.attributes.name.value });
+    const handleLocationClick = event => {
+        dispatchFilters({
+            type: "regions",
+            value: event.currentTarget.attributes.name.value,
+        });
         console.log(filters.regions);
     };
 
-    const handleClickFilterTag = (event) => {
-        dispatchFilters({ type: event.currentTarget.getAttribute('data-type'), value: event.currentTarget.getAttribute('id') });
-    }
+    const handleClickFilterTag = event => {
+        dispatchFilters({
+            type: event.currentTarget.getAttribute("data-type"),
+            value: event.currentTarget.getAttribute("id"),
+        });
+    };
 
     const filterGroupProps = {
         filterProps: [
             {
+                key: "notice-filter--region",
                 tagProps: {
                     aProps: {
                         href: "#collapseFilterRegion",
@@ -52,18 +68,18 @@ function DisplayDevicePage() {
                         children: "지역",
                     },
                 },
-                filterList: {
-                    children: (
-                        <SVGMap
-                            map={southKorea}
-                            className="filter__list SVGMap-filter-region"
-                            locationClassName={handleLocationClassName}
-                            locationRole="checkbox"
-                            onLocationClick={handleLocationClick} />
-                    ),
-                },
+                filterList: (
+                    <SVGMap
+                        map={southKorea}
+                        className="filter__list SVGMap-filter-region"
+                        locationClassName={handleLocationClassName}
+                        locationRole="checkbox"
+                        onLocationClick={handleLocationClick}
+                    />
+                ),
             },
             {
+                key: "notice-filter--location",
                 tagProps: {
                     aProps: {
                         href: "#collapseFilterLocation",
@@ -72,16 +88,16 @@ function DisplayDevicePage() {
                         children: "설치 위치",
                     },
                 },
-                filterList: {
-                    children: (
-                        <FilterList
-                            filters={filters.locations}
-                            dispatch={dispatchFilters}
-                            type="locations" />
-                    ),
-                },
+                filterList: (
+                    <FilterList
+                        filters={filters.locations}
+                        dispatch={dispatchFilters}
+                        type="locations"
+                    />
+                ),
             },
             {
+                key: "notice-filter--model",
                 tagProps: {
                     aProps: {
                         href: "#collapseFilterModel",
@@ -90,26 +106,25 @@ function DisplayDevicePage() {
                         children: "트랩 종류",
                     },
                 },
-                filterList: {
-                    children: (
-                        <FilterList
-                            filters={filters.models}
-                            dispatch={dispatchFilters}
-                            type="models" />
-                    ),
-                },
+                filterList: (
+                    <FilterList
+                        filters={filters.models}
+                        dispatch={dispatchFilters}
+                        type="models"
+                    />
+                ),
             },
-        ]
+        ],
     };
 
     const boardProps = {
         className: "display--list board",
-        title: {
-            className: "board-title",
+        titleProps: {
+            className: "board__title",
             children: Constants.DEVICE,
         },
-        filterTagGroup: {
-            className: "notice__filter-tag",
+        filterTagGroupProps: {
+            className: "board__filter-tag",
             tagValues: selectedFilters,
             tagProps: {
                 className: "filter-tag",
@@ -129,27 +144,30 @@ function DisplayDevicePage() {
                 },
             },
         },
-        boardBody: {
-            className: "board-body notice__board-body",
-            theads: Constants.DEVICE_THEAD,
-            tbodies: deviceList,
+        boardProps: {
+            className: "board__list board__list--device",
         },
-        apagination: {
-            className: "notice__pagination",
+        boardHeaderProps: {
+            headItems: Constants.DEVICE_THEAD,
+        },
+        type: "device",
+        boardBodyProps: {
+            deviceList,
+        },
+        apaginationProps: {
+            className: "board__pagination",
             count: Math.ceil(deviceCount / Constants.ROW_CNT),
             siblingCount: 5,
-            page: page,
-            setPage: setPage,
+            page,
+            setPage,
             shape: "rounded",
         },
     };
 
     return (
         <div className="display-page">
-            <FilterGroup
-                filterGroupProps={filterGroupProps} />
-            <Board
-                boardProps={boardProps} />
+            <FilterGroup {...filterGroupProps} />
+            <Board {...boardProps} />
         </div>
     );
 }

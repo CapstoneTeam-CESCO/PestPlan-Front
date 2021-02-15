@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import { Collapse } from 'react-collapse';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { Collapse } from "react-collapse";
 
-import './styles.scss';
-import Tag from '../../molecules/tag';
+import "./styles.scss";
+import Tag from "../../molecules/tag";
 
-function Filter({ filterProps: { tagProps, filterList } }) {
-    const [ isOpen, setIsOpen ] = useState(true);
+function Filter({ tagProps, filterList }) {
+    const [isOpen, setIsOpen] = useState(true);
 
     const handleClickCollapse = () => {
         setIsOpen(!isOpen);
     };
 
-    tagProps = {
+    const reTagProps = {
         ...tagProps,
         className: "filter__header",
         aProps: {
@@ -26,17 +27,19 @@ function Filter({ filterProps: { tagProps, filterList } }) {
             viewBox: "0 0 451.847 451.847",
             className: "arrow-svg",
         },
-    }
+    };
 
     return (
         <div className="filter">
-            <Tag
-                tagProps={tagProps} />
-            <Collapse isOpened={isOpen}>
-                {filterList.children}
-            </Collapse>
+            <Tag {...reTagProps} />
+            <Collapse isOpened={isOpen}>{filterList}</Collapse>
         </div>
     );
 }
+
+Filter.propTypes = {
+    tagProps: PropTypes.object,
+    filterList: PropTypes.node,
+};
 
 export default Filter;

@@ -1,25 +1,40 @@
-import React from 'react';
-import { Close } from '@material-ui/icons';
+import React from "react";
+import PropTypes from "prop-types";
+import { Close } from "@material-ui/icons";
 
-import './styles.scss';
-import Title from '../../atoms/title';
-import BoardBody from '../../molecules/boardBody';
+import "./styles.scss";
+import Title from "../../atoms/title";
+import BoardBody from "../../molecules/boardBody";
 
-const DetailModal = React.forwardRef(({ detailModalProps: { className, close, title, boardBody } }, ref) => {
-    return (
-        <div className={className} ref={ref}>
-            <Close
-                className={close.className}
-                onClick={close.onClick} />
-            <Title
-                id={title.id}
-                children={title.children} />
-            <BoardBody
-                id={boardBody.id}
-                theads={boardBody.theads}
-                tbodies={boardBody.tbodies} />
-        </div>
-    );
-});
+const DetailModal = React.forwardRef(
+    (
+        {
+            detailModalProps: {
+                className,
+                closeProps,
+                titleProps,
+                boardBodyProps,
+            },
+        },
+        ref
+    ) => {
+        return (
+            <div className={className} ref={ref}>
+                <Close {...closeProps} />
+                <Title {...titleProps} />
+                <BoardBody {...boardBodyProps} />
+            </div>
+        );
+    }
+);
+
+DetailModal.propTypes = {
+    detailModalProps: PropTypes.shape({
+        className: PropTypes.string,
+        closeProps: PropTypes.object,
+        titleProps: PropTypes.object,
+        boardBodyProps: PropTypes.object,
+    }),
+};
 
 export default DetailModal;

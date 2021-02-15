@@ -4,12 +4,12 @@
         margin-bottom: 10px;
         border-top: 1.5px solid #dddddd;
     }
-    
+
     .filter__header a {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        
+
         color: #000000;
         font-weight: bold;
         text-decoration: none;
@@ -55,7 +55,7 @@
         fill: #adadad;
         outline: none;
         cursor: pointer;
-        
+
         &:hover {
             fill: #666666;
         }
@@ -69,21 +69,18 @@
     // total width 350px
     .filter__list {
         padding: 0 10px;
-        
+
         // total width 330px
         .filter__list-element {
             display: inline-block;
             width: 165px;
             margin: 4px 0;
-            list-style: none;
 
             .list-element--label {
-                display: inline-block;
                 width: 155px;
                 color: #828282;
-                text-decoration: none;
-                cursor: pointer;
-            
+                text-align: left;
+
                 &:hover {
                     color: #000000;
                     text-decoration: underline;
@@ -91,7 +88,7 @@
 
                 &::before {
                     display: inline-block;
-                    content: '';
+                    content: "";
                     width: 12px;
                     height: 12px;
                     margin-right: 4px;
@@ -99,13 +96,13 @@
                     border-radius: 4px;
                 }
             }
-        
+
             .selected {
                 color: #000000;
                 font-weight: bold;
 
                 &::before {
-                    background: url('../../../images/checked.png') no-repeat;
+                    background: url("../../../images/checked.png") no-repeat;
                     background-size: cover;
                     width: 19px;
                     height: 17px;

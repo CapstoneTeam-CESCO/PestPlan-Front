@@ -1,21 +1,29 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './styles.scss';
-import Image from '../../atoms/image';
-import Text from '../../atoms/text';
+import "./styles.scss";
+import Image from "../../atoms/image";
+import Text from "../../atoms/text";
 
-function ImageText({ className, image, text }) {
+function ImageText({ className, imageProps, textProps }) {
     return (
         <div className={className}>
-            <Image
-                className={image.className}
-                src={image.src}
-                alt={image.alt} />
-            <Text
-                className={text.className}
-                children={text.children} />
+            <Image {...imageProps} />
+            <Text {...textProps} />
         </div>
     );
 }
+
+ImageText.propTypes = {
+    className: PropTypes.string,
+    imageProps: PropTypes.shape({
+        className: PropTypes.string,
+        src: PropTypes.string.isRequired,
+        alt: PropTypes.string.isRequired,
+    }),
+    textProps: PropTypes.shape({
+        children: PropTypes.string.isRequired,
+    }),
+};
 
 export default ImageText;
