@@ -7,7 +7,7 @@ import LoginPage from "./pages/login";
 import HomePage from "./pages/home";
 import DisplayNoticePage from "./pages/display/notice";
 import DisplayDevicePage from "./pages/display/device";
-import DeviceDetailPage from "./pages/deviceDetail";
+import DeviceDetailsPage from "./pages/deviceDetails";
 
 function App() {
     return (
@@ -26,8 +26,8 @@ function App() {
                 <Route path="/display/notice" component={DisplayNoticePage} />
                 <Route path="/display/device" component={DisplayDevicePage} />
                 <Route
-                    path="devices/details/:id"
-                    component={DeviceDetailPage}
+                    path="/devices/details/:id"
+                    component={DeviceDetailsPage}
                 />
             </BrowserRouter>
         </div>
