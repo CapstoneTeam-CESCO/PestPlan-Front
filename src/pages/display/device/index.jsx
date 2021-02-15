@@ -21,10 +21,6 @@ const initialFilters = {
     models: createFilterItems(Constants.MODELS),
 };
 
-const handleClickDetail = () => {
-    console.log("good");
-};
-
 function DisplayDevicePage() {
     const [page, setPage] = useState(1);
     const [filters, dispatchFilters] = useReducer(
@@ -32,7 +28,7 @@ function DisplayDevicePage() {
         initialFilters
     );
     const deviceCount = useDeviceCount();
-    const deviceList = useDeviceList(page, filters, handleClickDetail);
+    const deviceList = useDeviceList(page, filters);
     const selectedFilters = useSelectedFilters(filters);
 
     const handleLocationClassName = (_, index) => {

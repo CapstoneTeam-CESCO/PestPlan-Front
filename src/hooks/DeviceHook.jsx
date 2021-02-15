@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { Search } from "@material-ui/icons";
 
 import * as Constants from "../constants/Constants";
 import { getItemValues, getFilterLabel } from "../utilities/FilterUtility";
@@ -45,7 +44,7 @@ export const useDeviceCount = () => {
     return deviceCount;
 };
 
-export const useDeviceList = (page, filters, handleClickDetail) => {
+export const useDeviceList = (page, filters) => {
     const [deviceList, setDeviceList] = useState([]);
     const history = useHistory();
 
@@ -84,16 +83,6 @@ export const useDeviceList = (page, filters, handleClickDetail) => {
                     modelName: data.model_name,
                     region: data.region,
                     location: data.location,
-                    detail: (
-                        <Search
-                            style={{
-                                fontSize: 20,
-                                verticalAlign: "middle",
-                                cursor: "pointer",
-                            }}
-                            onClick={handleClickDetail}
-                        />
-                    ),
                 }));
 
                 setDeviceList(newDeviceList);

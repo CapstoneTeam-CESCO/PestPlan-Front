@@ -169,14 +169,17 @@ function DisplayNoticePage() {
         },
         notReadChildrens: [
             {
+                key: "not-read",
                 className: "header__not-read",
                 children: notRead.current,
             },
             {
+                key: "bar",
                 className: "bar",
                 children: "/",
             },
             {
+                key: "total-count",
                 className: "header__total-count",
                 children: notRead.total,
             },
