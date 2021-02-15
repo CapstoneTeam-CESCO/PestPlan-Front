@@ -27,9 +27,8 @@ function Board({
         <div className={className}>
             <div {...headerProps}>
                 <Title {...titleProps} />
-                {notReadChildrens.map(props => (
-                    <Span {...props} />
-                ))}
+                {type === "notice" &&
+                    notReadChildrens.map(props => <Span {...props} />)}
             </div>
             <FilterTagGroup {...filterTagGroupProps} />
 
