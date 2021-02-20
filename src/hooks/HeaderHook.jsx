@@ -17,17 +17,17 @@ const useUserName = () => {
                     "There has no access_token. Go back to the login page."
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_URL);
             }
 
             try {
-                const response = await axios.get(
-                    `${Constants.HOME_URL}/user?access_token=${accessToken}`
-                );
-
                 const {
                     data: { username },
-                } = response;
+                } = await axios.get(Constants.USER_URL, {
+                    params: {
+                        access_token: accessToken,
+                    },
+                });
 
                 setUserName(username);
             } catch (exception) {
@@ -35,7 +35,7 @@ const useUserName = () => {
                     "Token has an exception while get informations. Re-login please."
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_URL);
             }
         }
 

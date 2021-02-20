@@ -18,15 +18,15 @@ export const useNoticeCount = () => {
                     "There has no access_token. Go back to the login page."
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_URL);
             }
 
             try {
-                const response = await axios.get(
-                    `${Constants.HOME_URL}/user?access_token=${accessToken}`
-                );
-
-                const { data } = response;
+                const { data } = await axios.get(Constants.USER_URL, {
+                    params: {
+                        access_token: accessToken,
+                    },
+                });
 
                 setNoticeCount(data.packet_cnt);
             } catch (exception) {
@@ -34,7 +34,7 @@ export const useNoticeCount = () => {
                     "Token has an exception while get informations. Re-login please."
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_URL);
             }
         }
 
@@ -57,30 +57,25 @@ export const useNoticeList = (page, filters, dispatchNotRead) => {
                     "There has no access_token. Go back to the login page."
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_URL);
             }
 
             try {
                 const { dates, regions, locations, models, types } = filters;
 
-                const response = await axios.get(
-                    `${Constants.HOME_URL}/notices`,
-                    {
-                        params: {
-                            access_token: accessToken,
-                            page,
-                            row: Constants.ROW_CNT,
-                            start: dates[0].startDate,
-                            end: dates[0].endDate,
-                            regions: getItemValues(regions),
-                            locations: getItemValues(locations),
-                            models: getItemValues(models),
-                            types: getItemValues(types),
-                        },
-                    }
-                );
-
-                const { data } = response;
+                const { data } = await axios.get(Constants.PACKETS_URL, {
+                    params: {
+                        access_token: accessToken,
+                        page,
+                        row: Constants.ROW_CNT,
+                        start: dates[0].startDate,
+                        end: dates[0].endDate,
+                        regions: getItemValues(regions),
+                        locations: getItemValues(locations),
+                        models: getItemValues(models),
+                        types: getItemValues(types),
+                    },
+                });
 
                 const newNoticeList = data.packet_list.map((packet, index) => ({
                     no: index + 1,
@@ -109,7 +104,7 @@ export const useNoticeList = (page, filters, dispatchNotRead) => {
                     "Token has an exception while get informations. Re-login please."
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_URL);
             }
         }
 
@@ -178,7 +173,7 @@ export const notReadReducer = (state, action) => {
             const updateReadStatus = async () => {
                 try {
                     await axios.patch(
-                        `${Constants.HOME_URL}/notices/read/${action.value}`
+                        `${Constants.PACKETS_URL}/${action.value}`
                     );
                 } catch (exception) {
                     throw new Error(exception);

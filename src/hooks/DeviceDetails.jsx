@@ -9,11 +9,11 @@ const useDeviceDetails = deviceId => {
     useEffect(() => {
         async function getDeviceDetails() {
             try {
-                const response = await axios.get(
-                    `${Constants.HOME_URL}/devices/details/${deviceId}`
+                const { data } = await axios.get(
+                    `${Constants.DEVICES_DETAILS_URL}/${deviceId}`
                 );
 
-                setDetails(response.data);
+                setDetails(data);
             } catch (exception) {
                 throw new Error(exception);
             }

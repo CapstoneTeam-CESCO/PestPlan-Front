@@ -1,7 +1,11 @@
 // url
-export const LOGIN_URL = "http://localhost:4000/login";
-
-export const HOME_URL = "http://localhost:4000/home";
+export const SERVER_URL = "http://localhost:4000";
+export const LOGIN_URL = `${SERVER_URL}/login`;
+export const HOME_URL = `${SERVER_URL}/home`;
+export const USER_URL = `${HOME_URL}/user`;
+export const PACKETS_URL = `${SERVER_URL}/packets`;
+export const DEVICES_URL = `${SERVER_URL}/devices`;
+export const DEVICES_DETAILS_URL = `${DEVICES_URL}/details`;
 
 // header
 export const TEAM_NAME = "Pest Plan";

@@ -18,15 +18,15 @@ export const useDeviceCount = () => {
                     "There has no access_token. Go back to the login page."
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_URL);
             }
 
             try {
-                const response = await axios.get(
-                    `${Constants.HOME_URL}/user?access_token=${accessToken}`
-                );
-
-                const { data } = response;
+                const { data } = await axios.get(Constants.USER_URL, {
+                    params: {
+                        access_token: accessToken,
+                    },
+                });
 
                 setDeviceCount(data.device_cnt);
             } catch (exception) {
@@ -34,7 +34,7 @@ export const useDeviceCount = () => {
                     "Token has an exception while get informations. Re-login please."
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_URL);
             }
         }
 
@@ -57,32 +57,29 @@ export const useDeviceList = (page, filters) => {
                     "There has no access_token. Go back to the login page."
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_URL);
             }
 
             try {
                 const { regions, locations, models } = filters;
 
-                const response = await axios.get(
-                    `${Constants.HOME_URL}/devices`,
-                    {
-                        params: {
-                            access_token: accessToken,
-                            page,
-                            row: Constants.ROW_CNT,
-                            regions: getItemValues(regions),
-                            locations: getItemValues(locations),
-                            models: getItemValues(models),
-                        },
-                    }
-                );
+                const { data } = await axios.get(Constants.DEVICES_URL, {
+                    params: {
+                        access_token: accessToken,
+                        page,
+                        row: Constants.ROW_CNT,
+                        regions: getItemValues(regions),
+                        locations: getItemValues(locations),
+                        models: getItemValues(models),
+                    },
+                });
 
-                const newDeviceList = response.data.map((data, index) => ({
+                const newDeviceList = data.map((device, index) => ({
                     no: index + 1,
-                    deviceId: data.trap_id,
-                    modelName: data.model_name,
-                    region: data.region,
-                    location: data.location,
+                    deviceId: device.trap_id,
+                    modelName: device.model_name,
+                    region: device.region,
+                    location: device.location,
                 }));
 
                 setDeviceList(newDeviceList);
@@ -91,7 +88,7 @@ export const useDeviceList = (page, filters) => {
                     "Token has an exception while get informations. Re-login please."
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_URL);
             }
         }
 
