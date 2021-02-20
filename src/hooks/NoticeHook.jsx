@@ -28,7 +28,7 @@ export const useNoticeCount = () => {
 
                 const { data } = response;
 
-                setNoticeCount(data.notice_cnt);
+                setNoticeCount(data.packet_cnt);
             } catch (exception) {
                 console.log(
                     "Token has an exception while get informations. Re-login please."
@@ -81,24 +81,25 @@ export const useNoticeList = (page, filters, dispatchNotRead) => {
                 );
 
                 const { data } = response;
-                const newNoticeList = data.notice_list.map((notice, index) => ({
+
+                const newNoticeList = data.packet_list.map((packet, index) => ({
                     no: index + 1,
-                    createdAt: notice.created_at,
-                    region: notice.region,
-                    location: notice.location,
-                    modelName: notice.model_name,
-                    type: notice.type,
-                    noticeId: notice.notice_id,
-                    packet: JSON.stringify(notice.packet, null, 4),
+                    createdAt: packet.created_at,
+                    region: packet.region,
+                    location: packet.location,
+                    modelName: packet.model_name,
+                    type: packet.type,
+                    noticeId: packet.packet_id,
+                    packet: JSON.stringify(packet.packet, null, 4),
                 }));
 
                 setNoticeList(newNoticeList);
                 dispatchNotRead({
                     type: "initialize",
                     value: {
-                        list: data.notice_list
-                            .filter(notice => notice.is_read === false)
-                            .map(notice => notice.notice_id),
+                        list: data.packet_list
+                            .filter(packet => !packet.is_read)
+                            .map(packet => packet.packet_id),
                         total: data.total_filtered_count,
                         current: data.total_not_read_count,
                     },
@@ -177,12 +178,7 @@ export const notReadReducer = (state, action) => {
             const updateReadStatus = async () => {
                 try {
                     await axios.patch(
-                        `${Constants.HOME_URL}/notices/${action.value}`,
-                        {
-                            data: {
-                                is_read: true,
-                            },
-                        }
+                        `${Constants.HOME_URL}/notices/read/${action.value}`
                     );
                 } catch (exception) {
                     throw new Error(exception);
