@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 function Collapse({ className, children, isOpen, ...props }) {
-    const name = className.concat(isOpen ? " open" : " closed");
+    const name = className.concat(isOpen ? ' open' : ' closed');
 
     return (
         <div className={name} {...props}>

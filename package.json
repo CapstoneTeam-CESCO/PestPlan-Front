@@ -33,29 +33,6 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
-    "eslintConfig": {
-        "env": {
-            "browser": true,
-            "node": true,
-            "es6": true
-        },
-        "plugins": [
-            "prettier"
-        ],
-        "extends": [
-            "airbnb",
-            "plugin:prettier/recommended",
-            "prettier/react"
-        ],
-        "rules": {
-            "prettier/prettier": "error",
-            "react/jsx-curly-newline": "off",
-            "react/jsx-props-no-spreading": "off",
-            "react/forbid-prop-types": "off",
-            "react/require-default-props": "off",
-            "no-console": "off"
-        }
-    },
     "browserslist": {
         "production": [
             ">0.2%",

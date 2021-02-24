@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Pagination } from "@material-ui/lab";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Pagination } from '@material-ui/lab';
 
 function APagination({ className, count, siblingCount, page, setPage, shape }) {
     const handleChage = (_, value) => {

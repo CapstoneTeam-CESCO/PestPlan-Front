@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import "./styles.scss";
+import './styles.scss';
 
 function Button({ type, children, ...props }) {
     return (
@@ -13,7 +13,7 @@ function Button({ type, children, ...props }) {
 }
 
 Button.propTypes = {
-    type: PropTypes.oneOf(["submit", "reset", "button"]),
+    type: PropTypes.oneOf(['submit', 'reset', 'button']),
     children: PropTypes.any.isRequired,
 };
 

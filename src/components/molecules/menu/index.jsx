@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import "./styles.scss";
-import Button from "../../atoms/button";
+import './styles.scss';
+import Button from 'src/components/atoms/button';
 
-function Menu({ className, noticeProps, deviceProps }) {
+function Menu({ className, packetProps, deviceProps }) {
     return (
         <div className={className}>
-            <Button {...noticeProps} />
+            <Button {...packetProps} />
             <Button {...deviceProps} />
         </div>
     );
@@ -15,7 +15,7 @@ function Menu({ className, noticeProps, deviceProps }) {
 
 Menu.propTypes = {
     className: PropTypes.string,
-    noticeProps: PropTypes.shape({
+    packetProps: PropTypes.shape({
         type: PropTypes.string.isRequired,
         children: PropTypes.string.isRequired,
     }),

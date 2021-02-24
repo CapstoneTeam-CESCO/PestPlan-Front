@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-import * as Constants from "../constants/Constants";
+import * as Constants from 'src/constants/Constants';
 
 const useDeviceDetails = deviceId => {
     const [details, setDetails] = useState();
@@ -10,7 +10,7 @@ const useDeviceDetails = deviceId => {
         async function getDeviceDetails() {
             try {
                 const { data } = await axios.get(
-                    `${Constants.DEVICES_DETAILS_URL}/${deviceId}`
+                    `${Constants.SERVER_URL}${Constants.DEVICES_DETAILS_PATH}/${deviceId}`
                 );
 
                 setDetails(data);

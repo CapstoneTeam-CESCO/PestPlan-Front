@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Snackbar } from "@material-ui/core";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Snackbar } from '@material-ui/core';
 
 function ASnackbar({ open, setOpen, autoHideDuration, message }) {
     const handleClose = (_, reason) => {
-        if (reason === "clickaway") return;
+        if (reason === 'clickaway') return;
 
         setOpen(false);
     };

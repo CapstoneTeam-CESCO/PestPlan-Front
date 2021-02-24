@@ -1,15 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import "./styles.scss";
-import ListItem from "../../atoms/listItem";
-import APagination from "../../atoms/pagination";
-import Span from "../../atoms/span";
-import Title from "../../atoms/title";
-import List from "../../molecules/list";
-import DeviceBoardBody from "../deviceBoardBody";
-import FilterTagGroup from "../filterTagGroup";
-import NoticeBoardBody from "../noticeBoardBody";
+import './styles.scss';
+import ListItem from 'src/components/atoms/listItem';
+import APagination from 'src/components/atoms/pagination';
+import Span from 'src/components/atoms/span';
+import Title from 'src/components/atoms/title';
+import List from 'src/components/molecules/list';
+import DeviceList from '../deviceList';
+import FilterTagGroup from '../filterTagGroup';
+import PacketList from '../packetList';
 
 function Board({
     className,
@@ -27,7 +27,7 @@ function Board({
         <div className={className}>
             <div {...headerProps}>
                 <Title {...titleProps} />
-                {type === "notice" &&
+                {type === 'packet' &&
                     notReadChildrens.map(props => <Span {...props} />)}
             </div>
             <FilterTagGroup {...filterTagGroupProps} />
@@ -37,12 +37,12 @@ function Board({
                     <List
                         className="list__row"
                         items={boardHeaderProps.headItems}
-                        itemProps={{ className: "list__row__item" }}
+                        itemProps={{ className: 'list__row__item' }}
                     />
                 </ListItem>
 
-                {type === "notice" && <NoticeBoardBody {...boardBodyProps} />}
-                {type === "device" && <DeviceBoardBody {...boardBodyProps} />}
+                {type === 'packet' && <PacketList {...boardBodyProps} />}
+                {type === 'device' && <DeviceList {...boardBodyProps} />}
             </List>
 
             <APagination {...apaginationProps} />

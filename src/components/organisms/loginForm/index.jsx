@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import "./styles.scss";
-import InputText from "../../atoms/inputText";
-import Button from "../../atoms/button";
+import './styles.scss';
+import InputText from 'src/components/atoms/inputText';
+import Button from 'src/components/atoms/button';
 
 function LoginForm({
     className,

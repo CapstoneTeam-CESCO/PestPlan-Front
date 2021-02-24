@@ -1,10 +1,10 @@
-import React, { useReducer } from "react";
-import PropTypes from "prop-types";
+import React, { useReducer } from 'react';
+import PropTypes from 'prop-types';
 
-import "./styles.scss";
-import Collapse from "../../atoms/collapse";
-import ListItem from "../../atoms/listItem";
-import List from "../../molecules/list";
+import './styles.scss';
+import Collapse from 'src/components/atoms/collapse';
+import ListItem from 'src/components/atoms/listItem';
+import List from 'src/components/molecules/list';
 
 const extendedReducer = (state, action) => {
     switch (action.type) {
@@ -19,7 +19,7 @@ const extendedReducer = (state, action) => {
     }
 };
 
-function NoticeBoardBody({ noticeList, notRead, dispatchNotRead }) {
+function PacketList({ packetList, notRead, dispatchNotRead }) {
     const [extended, dispatchExtended] = useReducer(extendedReducer, []);
 
     const handleClick = event => {
@@ -31,14 +31,14 @@ function NoticeBoardBody({ noticeList, notRead, dispatchNotRead }) {
         });
 
         if (notRead.includes(clickedId)) {
-            dispatchNotRead({ type: "click_notice", value: clickedId });
+            dispatchNotRead({ type: 'click', value: clickedId });
         }
     };
 
-    return noticeList.map(notice => {
-        const values = Object.values(notice);
-        const rowClassName = "list__row".concat(
-            notRead.includes(values[6]) ? " notRead" : ""
+    return packetList.map(packet => {
+        const values = Object.values(packet);
+        const rowClassName = 'list__row'.concat(
+            notRead.includes(values[6]) ? ' notRead' : ''
         );
 
         return (
@@ -52,7 +52,7 @@ function NoticeBoardBody({ noticeList, notRead, dispatchNotRead }) {
                 <List
                     className={rowClassName}
                     items={values.slice(0, 6)}
-                    itemProps={{ className: "list__row__item" }}
+                    itemProps={{ className: 'list__row__item' }}
                 />
 
                 <Collapse
@@ -66,10 +66,10 @@ function NoticeBoardBody({ noticeList, notRead, dispatchNotRead }) {
     });
 }
 
-NoticeBoardBody.propTypes = {
-    noticeList: PropTypes.array,
+PacketList.propTypes = {
+    packetList: PropTypes.array,
     notRead: PropTypes.array,
     dispatchNotRead: PropTypes.func,
 };
 
-export default NoticeBoardBody;
+export default PacketList;

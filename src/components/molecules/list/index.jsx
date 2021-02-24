@@ -1,6 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import ListItem from "../../atoms/listItem";
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import ListItem from 'src/components/atoms/listItem';
 
 function List({ items, itemProps, children, ...props }) {
     return (

@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import "./styles.scss";
-import Tag from "../../molecules/tag";
+import './styles.scss';
+import Tag from 'src/components/molecules/tag';
 
 function FilterTagGroup({ className, tagValues, tagProps }) {
     return (
@@ -13,7 +13,7 @@ function FilterTagGroup({ className, tagValues, tagProps }) {
                         ...tagProps,
                         aProps: {
                             ...tagProps.aProps,
-                            "data-type": tag.type,
+                            'data-type': tag.type,
                             id: tag.id,
                         },
                         textProps: {
