@@ -24,7 +24,7 @@ function App() {
                 <Route path="/login" component={LoginPage} />
                 <Route path="/home" component={HomePage} />
                 <Route path="/packets" component={PacketsPage} />
-                <Route path="/devices" component={DevicesPage} />
+                <Route exact path="/devices" component={DevicesPage} />
                 <Route
                     path="/devices/details/:id"
                     component={DeviceDetailsPage}

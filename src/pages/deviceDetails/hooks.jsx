@@ -4,16 +4,31 @@ import axios from 'axios';
 import * as Constants from 'src/constants/Constants';
 
 const useDeviceDetails = deviceId => {
-    const [details, setDetails] = useState();
+    const [deviceDetails, setDeviceDetails] = useState({
+        device: [],
+        packets: [],
+    });
 
     useEffect(() => {
         async function getDeviceDetails() {
             try {
-                const { data } = await axios.get(
+                const {
+                    data: { device, packets },
+                } = await axios.get(
                     `${Constants.SERVER_URL}${Constants.DEVICES_DETAILS_PATH}/${deviceId}`
                 );
 
-                setDetails(data);
+                setDeviceDetails({
+                    device: [
+                        device.trap_id,
+                        device.region,
+                        device.location,
+                        device.model_name,
+                        device.is_replacement ? 'O' : 'X',
+                        device.is_error ? 'O' : 'X',
+                    ],
+                    packets,
+                });
             } catch (exception) {
                 throw new Error(exception);
             }
@@ -22,7 +37,7 @@ const useDeviceDetails = deviceId => {
         getDeviceDetails();
     }, []);
 
-    return details;
+    return deviceDetails;
 };
 
 export default useDeviceDetails;

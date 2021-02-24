@@ -14,7 +14,7 @@ export const PACKET = 'Packet';
 
 export const DEVICE = 'Device';
 
-// notice-list
+// packet-list
 export const PACKET_LIST_THEAD = [
     'No.',
     '날짜',
@@ -87,4 +87,14 @@ export const TYPES = [
     { id: 'cycle_data', value: '주기' },
     { id: 'warning_data', value: '경보' },
     { id: 'error_data', value: '에러' },
+];
+
+// device details
+export const DEVICE_DETAILS_FIELDS = [
+    '트랩ID',
+    '지역',
+    '설치 위치',
+    '트랩 종류',
+    '교체 필요 여부',
+    '트랩 에러 여부',
 ];
