@@ -5,31 +5,17 @@ import './styles.scss';
 import Collapse from 'src/components/atoms/collapse';
 import ListItem from 'src/components/atoms/listItem';
 import List from 'src/components/molecules/list';
-
-const extendedReducer = (state, action) => {
-    switch (action.type) {
-        case true: {
-            const index = state.indexOf(action.value);
-            return [...state.slice(0, index), ...state.slice(index + 1)];
-        }
-        case false:
-            return state.concat(action.value);
-        default:
-            throw new Error(`unexpected action type: ${action.type}`);
-    }
-};
+import { expandedReducer, handleExpanded } from 'src/utilities/Expand';
 
 function PacketList({ packetList, notRead, dispatchNotRead }) {
-    const [extended, dispatchExtended] = useReducer(extendedReducer, []);
+    const [expanded, dispatchExtended] = useReducer(expandedReducer, []);
 
     const handleClick = event => {
+        // update expanded for collapse
+        handleExpanded(event, expanded, dispatchExtended);
+
+        // update database for read status
         const clickedId = event.currentTarget.id;
-
-        dispatchExtended({
-            type: extended.includes(clickedId),
-            value: clickedId,
-        });
-
         if (notRead.includes(clickedId)) {
             dispatchNotRead({ type: 'click', value: clickedId });
         }
@@ -57,7 +43,7 @@ function PacketList({ packetList, notRead, dispatchNotRead }) {
 
                 <Collapse
                     className="list__detail"
-                    isOpen={extended.includes(values[6])}
+                    isOpen={expanded.includes(values[6])}
                 >
                     <pre>{values[7]}</pre>
                 </Collapse>

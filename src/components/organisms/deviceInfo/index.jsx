@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import './styles.scss';
@@ -9,12 +9,12 @@ function DeviceInfo({ fields, device }) {
     return (
         <List className="device-details--device">
             {device.map((info, index) => (
-                <>
+                <Fragment key={fields[index]}>
                     <ListItem className="device__field">
                         {fields[index]}
                     </ListItem>
                     <ListItem className="device__contents">{info}</ListItem>
-                </>
+                </Fragment>
             ))}
         </List>
     );

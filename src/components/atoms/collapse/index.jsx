@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './styles.scss';
+
 function Collapse({ className, children, isOpen, ...props }) {
-    const name = className.concat(isOpen ? ' open' : ' closed');
+    const classname = className.concat(isOpen ? ' open' : ' closed');
 
     return (
-        <div className={name} {...props}>
+        <div className={classname} {...props}>
             {children}
         </div>
     );
