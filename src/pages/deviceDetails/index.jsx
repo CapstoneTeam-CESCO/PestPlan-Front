@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import 'src/templates/deviceDetails/styles.scss';
 import DeviceInfo from 'src/components/organisms/deviceInfo';
 import PacketInfo from 'src/components/organisms/packetInfo';
 import * as Constants from 'src/constants/Constants';
@@ -13,28 +14,19 @@ function DeviceDetailsPage({
 }) {
     const { device, packets } = useDeviceDetails(id);
 
+    const packetInfoProps = {
+        packets,
+    };
+
     const deviceInfoProps = {
         fields: Constants.DEVICE_DETAILS_FIELDS,
         device,
     };
 
-    const packetInfoProps = {
-        packets,
-        listProps: {
-            className: 'device-details--packet',
-        },
-        listItemProps: {
-            className: 'packet__list',
-        },
-        collapseProps: {
-            className: 'packet__detail',
-        },
-    };
-
     return (
-        <div>
-            <DeviceInfo {...deviceInfoProps} />
+        <div className="device-details">
             <PacketInfo {...packetInfoProps} />
+            <DeviceInfo {...deviceInfoProps} />
         </div>
     );
 }

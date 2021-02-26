@@ -1,4 +1,23 @@
 .device-details--device {
-    display: grid;
-    grid-template-columns: 150px 200px;
+    display: table;
+    border-collapse: collapse;
+
+    .table-row {
+        display: table-row;
+    }
+
+    .device__field,
+    .device__contents {
+        display: table-cell;
+        border: solid 2px #bbbbbb;
+        padding: 10px;
+    }
+
+    .device__field {
+        width: 150px;
+    }
+
+    .device__contents {
+        width: 200px;
+    }
 }
