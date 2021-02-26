@@ -1,0 +1,20 @@
+.device-details--packet {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .packet__list {
+        background-color: #cccccc;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    .packet__details {
+        background-color: #dddddd;
+    }
+
+    .open {
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+}

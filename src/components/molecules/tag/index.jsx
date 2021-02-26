@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import "./styles.scss";
-import SVG from "../../atoms/svg";
-import Text from "../../atoms/text";
+import './styles.scss';
+import SVG from 'src/components/atoms/svg';
+import Text from 'src/components/atoms/text';
 
 function Tag({ className, aProps, textProps, svgProps }) {
     return (

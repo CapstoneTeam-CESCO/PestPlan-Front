@@ -1,23 +1,23 @@
-import React, { useReducer, useState } from "react";
-import { DateRange } from "react-date-range";
-import { SVGMap } from "react-svg-map";
-import southKorea from "@svg-maps/south-korea";
+import React, { useReducer, useState } from 'react';
+import { DateRange } from 'react-date-range';
+import { SVGMap } from 'react-svg-map';
+import southKorea from '@svg-maps/south-korea';
 
-import "../../../templates/display/styles.scss";
-import FilterList from "../../../components/organisms/filter/FilterList";
-import FilterGroup from "../../../components/organisms/filterGroup";
-import Board from "../../../components/organisms/board";
-import * as Constants from "../../../constants/Constants";
+import 'src/templates/list/styles.scss';
+import FilterList from 'src/components/organisms/filter/FilterList';
+import FilterGroup from 'src/components/organisms/filterGroup';
+import Board from 'src/components/organisms/board';
+import * as Constants from 'src/constants/Constants';
+import { initializeFilters } from 'src/utilities/FilterUtility';
 import {
     filtersReducer,
     notReadReducer,
-    useNoticeCount,
-    useNoticeList,
+    usePacketCount,
+    usePacketList,
     useSelectedFilters,
-} from "../../../hooks/NoticeHook";
-import { initializeFilters } from "../../../utilities/FilterUtility";
+} from './hooks';
 
-function DisplayNoticePage() {
+function PacketsPage() {
     const initialFilters = initializeFilters();
     const [focusEndDate, setFocusEndDate] = useState(false);
     const [page, setPage] = useState(1);
@@ -25,50 +25,50 @@ function DisplayNoticePage() {
         filtersReducer,
         initialFilters
     );
-    const noticeCount = useNoticeCount();
+    const packetCount = usePacketCount();
     const [notRead, dispatchNotRead] = useReducer(notReadReducer, {
         list: [],
     });
-    const noticeList = useNoticeList(page, filters, dispatchNotRead);
+    const packetList = usePacketList(page, filters, dispatchNotRead);
     const selectedFilters = useSelectedFilters(filters);
 
     const handleLocationClassName = (_, index) => {
-        return "SVGMap-filter-region--location".concat(
-            filters.regions[index].selected ? " selected" : ""
+        return 'SVGMap-filter-region--location'.concat(
+            filters.regions[index].selected ? ' selected' : ''
         );
     };
 
     const handleLocationClick = event => {
         dispatchFilters({
-            type: "regions",
+            type: 'regions',
             value: event.currentTarget.attributes.name.value,
         });
     };
 
     const handleChangeDateRange = item => {
-        dispatchFilters({ type: "ranges", value: [item.selection] });
+        dispatchFilters({ type: 'ranges', value: [item.selection] });
         if (focusEndDate)
-            dispatchFilters({ type: "dates", value: [item.selection] });
+            dispatchFilters({ type: 'dates', value: [item.selection] });
         setFocusEndDate(!focusEndDate);
     };
 
     const handleClickFilterTag = event => {
         dispatchFilters({
-            type: event.currentTarget.getAttribute("data-type"),
-            value: event.currentTarget.getAttribute("id"),
+            type: event.currentTarget.getAttribute('data-type'),
+            value: event.currentTarget.getAttribute('id'),
         });
     };
 
     const filterGroupProps = {
         filterProps: [
             {
-                key: "notice-filter--date",
+                key: 'packet-filter--date',
                 tagProps: {
                     aProps: {
-                        href: "#collapseFilterDate",
+                        href: '#collapseFilterDate',
                     },
                     textProps: {
-                        children: "날짜",
+                        children: '날짜',
                     },
                 },
                 filterList: (
@@ -82,13 +82,13 @@ function DisplayNoticePage() {
                 ),
             },
             {
-                key: "notice-filter--region",
+                key: 'packet-filter--region',
                 tagProps: {
                     aProps: {
-                        href: "#collapseFilterRegion",
+                        href: '#collapseFilterRegion',
                     },
                     textProps: {
-                        children: "지역",
+                        children: '지역',
                     },
                 },
                 filterList: (
@@ -102,13 +102,13 @@ function DisplayNoticePage() {
                 ),
             },
             {
-                key: "notice-filter--location",
+                key: 'packet-filter--location',
                 tagProps: {
                     aProps: {
-                        href: "#collapseFilterLocation",
+                        href: '#collapseFilterLocation',
                     },
                     textProps: {
-                        children: "설치 위치",
+                        children: '설치 위치',
                     },
                 },
                 filterList: (
@@ -120,13 +120,13 @@ function DisplayNoticePage() {
                 ),
             },
             {
-                key: "notice-filter--model",
+                key: 'packet-filter--model',
                 tagProps: {
                     aProps: {
-                        href: "#collapseFilterModel",
+                        href: '#collapseFilterModel',
                     },
                     textProps: {
-                        children: "트랩 종류",
+                        children: '트랩 종류',
                     },
                 },
                 filterList: (
@@ -138,13 +138,13 @@ function DisplayNoticePage() {
                 ),
             },
             {
-                key: "notice-filter--type",
+                key: 'packet-filter--type',
                 tagProps: {
                     aProps: {
-                        href: "#collapseFilterType",
+                        href: '#collapseFilterType',
                     },
                     textProps: {
-                        children: "메시지 타입",
+                        children: '메시지 타입',
                     },
                 },
                 filterList: (
@@ -159,68 +159,71 @@ function DisplayNoticePage() {
     };
 
     const boardProps = {
-        className: "display--list board",
+        className: 'display--list board',
         headerProps: {
-            className: "board__header",
+            className: 'board__header',
         },
         titleProps: {
-            className: "header__title",
-            children: Constants.NOTICE,
+            className: 'header__title',
+            children: Constants.PACKET,
         },
         notReadChildrens: [
             {
-                className: "header__not-read",
+                key: 'not-read',
+                className: 'header__not-read',
                 children: notRead.current,
             },
             {
-                className: "bar",
-                children: "/",
+                key: 'bar',
+                className: 'bar',
+                children: '/',
             },
             {
-                className: "header__total-count",
+                key: 'total-count',
+                className: 'header__total-count',
                 children: notRead.total,
             },
         ],
         filterTagGroupProps: {
-            className: "board__filter-tag",
+            className: 'board__filter-tag',
             tagValues: selectedFilters,
             tagProps: {
-                className: "filter-tag",
+                className: 'filter-tag',
                 aProps: {
-                    href: "#closeTag",
+                    href: '#closeTag',
                     onClick: handleClickFilterTag,
                 },
                 textProps: {
-                    className: "filter-tag--label small-size-text",
+                    className: 'filter-tag--label small-size-text',
                 },
                 svgProps: {
-                    type: "close",
-                    width: "10px",
-                    height: "10px",
-                    viewBox: "0 0 520 520",
-                    className: "filter-tag--svg",
+                    type: 'close',
+                    width: '10px',
+                    height: '10px',
+                    viewBox: '0 0 520 520',
+                    className: 'filter-tag--svg',
                 },
             },
         },
         boardProps: {
-            className: "board__list board__list--notice",
+            className: 'board__list board__list--packet',
         },
         boardHeaderProps: {
-            headItems: Constants.NOTICE_THEAD,
+            headItems: Constants.PACKET_LIST_THEAD,
         },
-        type: "notice",
+        type: 'packet',
         boardBodyProps: {
-            noticeList,
+            packetList,
             notRead: notRead.list,
             dispatchNotRead,
         },
         apaginationProps: {
-            className: "board__pagination",
-            count: Math.ceil(noticeCount / Constants.ROW_CNT),
+            className: 'board__pagination',
+            count: Math.ceil(packetCount / Constants.ROW),
             siblingCount: 5,
             page,
             setPage,
-            shape: "rounded",
+            shape: 'rounded',
         },
     };
 
@@ -232,4 +235,4 @@ function DisplayNoticePage() {
     );
 }
 
-export default DisplayNoticePage;
+export default PacketsPage;

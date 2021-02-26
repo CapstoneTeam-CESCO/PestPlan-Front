@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 function ListItem({ button, children, ...props }) {
     return (
-        <li {...(button ? { role: "button" } : {})} {...props}>
+        <li {...(button ? { role: 'button' } : {})} {...props}>
             {children}
         </li>
     );

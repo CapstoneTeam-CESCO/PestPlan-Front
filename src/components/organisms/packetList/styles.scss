@@ -1,4 +1,4 @@
-.board__list--notice {
+.board__list--packet {
     width: 750px;
 
     .list__row {
@@ -32,11 +32,6 @@
         text-align: left;
 
         background-color: #eeeeee;
-    }
-
-    .closed {
-        max-height: 0;
-        overflow: hidden;
     }
 
     .open {

@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import "./styles.scss";
-import Button from "../../atoms/button";
+import './styles.scss';
+import Button from 'src/components/atoms/button';
 
 function FilterList({ filters, dispatch, type }) {
     const handleClick = event => {
@@ -16,8 +16,8 @@ function FilterList({ filters, dispatch, type }) {
                     <li key={filter.id} className="filter__list-element">
                         <Button
                             type="button"
-                            className={"button--root list-element--label".concat(
-                                filter.selected ? " selected" : ""
+                            className={'button--root list-element--label'.concat(
+                                filter.selected ? ' selected' : ''
                             )}
                             id={filter.id}
                             onClick={handleClick}

@@ -1,12 +1,13 @@
-import React from "react";
-import { BrowserRouter, Redirect, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 
-import "./App.css";
-import Header from "./components/organisms/header";
-import LoginPage from "./pages/login";
-import HomePage from "./pages/home";
-import DisplayNoticePage from "./pages/display/notice";
-import DisplayDevicePage from "./pages/display/device";
+import './App.css';
+import Header from './components/organisms/header';
+import LoginPage from './pages/login';
+import HomePage from './pages/home';
+import PacketsPage from './pages/packets';
+import DevicesPage from './pages/devices';
+import DeviceDetailsPage from './pages/deviceDetails';
 
 function App() {
     return (
@@ -14,7 +15,7 @@ function App() {
             <BrowserRouter>
                 <Route
                     render={({ location }) =>
-                        location.pathname !== "/login" ? <Header /> : null
+                        location.pathname !== '/login' ? <Header /> : null
                     }
                 />
                 <Route exact path="/">
@@ -22,8 +23,12 @@ function App() {
                 </Route>
                 <Route path="/login" component={LoginPage} />
                 <Route path="/home" component={HomePage} />
-                <Route path="/display/notice" component={DisplayNoticePage} />
-                <Route path="/display/device" component={DisplayDevicePage} />
+                <Route path="/packets" component={PacketsPage} />
+                <Route exact path="/devices" component={DevicesPage} />
+                <Route
+                    path="/devices/details/:id"
+                    component={DeviceDetailsPage}
+                />
             </BrowserRouter>
         </div>
     );

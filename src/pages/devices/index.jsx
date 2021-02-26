@@ -1,19 +1,19 @@
-import React, { useReducer, useState } from "react";
-import { SVGMap } from "react-svg-map";
-import southKorea from "@svg-maps/south-korea";
+import React, { useReducer, useState } from 'react';
+import { SVGMap } from 'react-svg-map';
+import southKorea from '@svg-maps/south-korea';
 
-import "../../../templates/display/styles.scss";
-import FilterList from "../../../components/organisms/filter/FilterList";
-import FilterGroup from "../../../components/organisms/filterGroup";
-import Board from "../../../components/organisms/board";
-import * as Constants from "../../../constants/Constants";
+import 'src/templates/list/styles.scss';
+import FilterList from 'src/components/organisms/filter/FilterList';
+import FilterGroup from 'src/components/organisms/filterGroup';
+import Board from 'src/components/organisms/board';
+import * as Constants from 'src/constants/Constants';
+import { createFilterItems } from 'src/utilities/FilterUtility';
 import {
     filtersReducer,
     useDeviceCount,
     useDeviceList,
     useSelectedFilters,
-} from "../../../hooks/DeviceHook";
-import { createFilterItems } from "../../../utilities/FilterUtility";
+} from './hooks';
 
 const initialFilters = {
     regions: createFilterItems(Constants.REGIONS),
@@ -21,29 +21,25 @@ const initialFilters = {
     models: createFilterItems(Constants.MODELS),
 };
 
-const handleClickDetail = () => {
-    console.log("good");
-};
-
-function DisplayDevicePage() {
+function DevicesPage() {
     const [page, setPage] = useState(1);
     const [filters, dispatchFilters] = useReducer(
         filtersReducer,
         initialFilters
     );
     const deviceCount = useDeviceCount();
-    const deviceList = useDeviceList(page, filters, handleClickDetail);
+    const deviceList = useDeviceList(page, filters);
     const selectedFilters = useSelectedFilters(filters);
 
     const handleLocationClassName = (_, index) => {
-        return "SVGMap-filter-region--location".concat(
-            filters.regions[index].selected ? " selected" : ""
+        return 'SVGMap-filter-region--location'.concat(
+            filters.regions[index].selected ? ' selected' : ''
         );
     };
 
     const handleLocationClick = event => {
         dispatchFilters({
-            type: "regions",
+            type: 'regions',
             value: event.currentTarget.attributes.name.value,
         });
         console.log(filters.regions);
@@ -51,21 +47,21 @@ function DisplayDevicePage() {
 
     const handleClickFilterTag = event => {
         dispatchFilters({
-            type: event.currentTarget.getAttribute("data-type"),
-            value: event.currentTarget.getAttribute("id"),
+            type: event.currentTarget.getAttribute('data-type'),
+            value: event.currentTarget.getAttribute('id'),
         });
     };
 
     const filterGroupProps = {
         filterProps: [
             {
-                key: "notice-filter--region",
+                key: 'notice-filter--region',
                 tagProps: {
                     aProps: {
-                        href: "#collapseFilterRegion",
+                        href: '#collapseFilterRegion',
                     },
                     textProps: {
-                        children: "지역",
+                        children: '지역',
                     },
                 },
                 filterList: (
@@ -79,13 +75,13 @@ function DisplayDevicePage() {
                 ),
             },
             {
-                key: "notice-filter--location",
+                key: 'notice-filter--location',
                 tagProps: {
                     aProps: {
-                        href: "#collapseFilterLocation",
+                        href: '#collapseFilterLocation',
                     },
                     textProps: {
-                        children: "설치 위치",
+                        children: '설치 위치',
                     },
                 },
                 filterList: (
@@ -97,13 +93,13 @@ function DisplayDevicePage() {
                 ),
             },
             {
-                key: "notice-filter--model",
+                key: 'notice-filter--model',
                 tagProps: {
                     aProps: {
-                        href: "#collapseFilterModel",
+                        href: '#collapseFilterModel',
                     },
                     textProps: {
-                        children: "트랩 종류",
+                        children: '트랩 종류',
                     },
                 },
                 filterList: (
@@ -118,49 +114,49 @@ function DisplayDevicePage() {
     };
 
     const boardProps = {
-        className: "display--list board",
+        className: 'display--list board',
         titleProps: {
-            className: "board__title",
+            className: 'board__title',
             children: Constants.DEVICE,
         },
         filterTagGroupProps: {
-            className: "board__filter-tag",
+            className: 'board__filter-tag',
             tagValues: selectedFilters,
             tagProps: {
-                className: "filter-tag",
+                className: 'filter-tag',
                 aProps: {
-                    href: "#closeTag",
+                    href: '#closeTag',
                     onClick: handleClickFilterTag,
                 },
                 textProps: {
-                    className: "filter-tag--label small-size-text",
+                    className: 'filter-tag--label small-size-text',
                 },
                 svgProps: {
-                    type: "close",
-                    width: "10px",
-                    height: "10px",
-                    viewBox: "0 0 520 520",
-                    className: "filter-tag--svg",
+                    type: 'close',
+                    width: '10px',
+                    height: '10px',
+                    viewBox: '0 0 520 520',
+                    className: 'filter-tag--svg',
                 },
             },
         },
         boardProps: {
-            className: "board__list board__list--device",
+            className: 'board__list board__list--device',
         },
         boardHeaderProps: {
             headItems: Constants.DEVICE_THEAD,
         },
-        type: "device",
+        type: 'device',
         boardBodyProps: {
             deviceList,
         },
         apaginationProps: {
-            className: "board__pagination",
-            count: Math.ceil(deviceCount / Constants.ROW_CNT),
+            className: 'board__pagination',
+            count: Math.ceil(deviceCount / Constants.ROW),
             siblingCount: 5,
             page,
             setPage,
-            shape: "rounded",
+            shape: 'rounded',
         },
     };
 
@@ -172,4 +168,4 @@ function DisplayDevicePage() {
     );
 }
 
-export default DisplayDevicePage;
+export default DevicesPage;

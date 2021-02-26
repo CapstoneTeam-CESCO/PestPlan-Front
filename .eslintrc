@@ -1,0 +1,24 @@
+{
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+    "plugins": ["prettier"],
+    "extends": ["airbnb", "plugin:prettier/recommended", "prettier/react"],
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "moduleDirectory": ["node_modules", "./"]
+            }
+        }
+    },
+    "rules": {
+        "prettier/prettier": ["error", { "singleQuote": true }],
+        "react/jsx-curly-newline": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/forbid-prop-types": "off",
+        "react/require-default-props": "off",
+        "no-console": "off"
+    }
+}

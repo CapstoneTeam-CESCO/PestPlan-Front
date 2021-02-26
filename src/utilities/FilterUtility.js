@@ -1,4 +1,4 @@
-import * as Constants from "../constants/Constants";
+import * as Constants from '../constants/Constants';
 
 export function createFilterItems(items) {
     return items.map(item => ({
@@ -13,14 +13,14 @@ export function initializeFilters() {
             {
                 startDate: null,
                 endDate: new Date(),
-                key: "selection",
+                key: 'selection',
             },
         ],
         dates: [
             {
                 startDate: null,
                 endDate: new Date(),
-                key: "selection",
+                key: 'selection',
             },
         ],
         regions: createFilterItems(Constants.REGIONS),
@@ -36,16 +36,16 @@ export function getItemValues(items) {
 
 export function getFilterLabel(category) {
     switch (category) {
-        case "dates":
-            return "날짜";
-        case "regions":
-            return "지역";
-        case "locations":
-            return "설치 위치";
-        case "models":
-            return "트랩 종류";
-        case "types":
-            return "메시지 타입";
+        case 'dates':
+            return '날짜';
+        case 'regions':
+            return '지역';
+        case 'locations':
+            return '설치 위치';
+        case 'models':
+            return '트랩 종류';
+        case 'types':
+            return '메시지 타입';
         default:
             throw new Error(`Unexpected category with ${category}`);
     }

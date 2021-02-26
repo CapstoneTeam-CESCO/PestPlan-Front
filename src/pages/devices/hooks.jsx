@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
-import { Search } from "@material-ui/icons";
+import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
-import * as Constants from "../constants/Constants";
-import { getItemValues, getFilterLabel } from "../utilities/FilterUtility";
+import * as Constants from 'src/constants/Constants';
+import { getItemValues, getFilterLabel } from 'src/utilities/FilterUtility';
 
 export const useDeviceCount = () => {
     const [deviceCount, setDeviceCount] = useState(0);
@@ -12,30 +11,33 @@ export const useDeviceCount = () => {
 
     useEffect(() => {
         async function getDeviceCount() {
-            const accessToken = window.sessionStorage.getItem("access_token");
+            const accessToken = window.sessionStorage.getItem('access_token');
 
             if (!accessToken) {
                 console.log(
-                    "There has no access_token. Go back to the login page."
+                    'There has no access_token. Go back to the login page.'
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_PATH);
             }
 
             try {
-                const response = await axios.get(
-                    `${Constants.HOME_URL}/user?access_token=${accessToken}`
+                const { data } = await axios.get(
+                    `${Constants.SERVER_URL}${Constants.USER_PATH}`,
+                    {
+                        params: {
+                            access_token: accessToken,
+                        },
+                    }
                 );
-
-                const { data } = response;
 
                 setDeviceCount(data.device_cnt);
             } catch (exception) {
                 console.log(
-                    "Token has an exception while get informations. Re-login please."
+                    'Token has an exception while get informations. Re-login please.'
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_PATH);
             }
         }
 
@@ -45,32 +47,32 @@ export const useDeviceCount = () => {
     return deviceCount;
 };
 
-export const useDeviceList = (page, filters, handleClickDetail) => {
+export const useDeviceList = (page, filters) => {
     const [deviceList, setDeviceList] = useState([]);
     const history = useHistory();
 
     useEffect(() => {
         async function getDeviceList() {
-            const accessToken = window.sessionStorage.getItem("access_token");
+            const accessToken = window.sessionStorage.getItem('access_token');
 
             if (!accessToken) {
                 console.log(
-                    "There has no access_token. Go back to the login page."
+                    'There has no access_token. Go back to the login page.'
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_PATH);
             }
 
             try {
                 const { regions, locations, models } = filters;
 
-                const response = await axios.get(
-                    `${Constants.HOME_URL}/devices`,
+                const { data } = await axios.get(
+                    `${Constants.SERVER_URL}${Constants.DEVICES_PATH}`,
                     {
                         params: {
                             access_token: accessToken,
                             page,
-                            row: Constants.ROW_CNT,
+                            row: Constants.ROW,
                             regions: getItemValues(regions),
                             locations: getItemValues(locations),
                             models: getItemValues(models),
@@ -78,31 +80,21 @@ export const useDeviceList = (page, filters, handleClickDetail) => {
                     }
                 );
 
-                const newDeviceList = response.data.map((data, index) => ({
+                const newDeviceList = data.map((device, index) => ({
                     no: index + 1,
-                    deviceId: data.trap_id,
-                    modelName: data.model_name,
-                    region: data.region,
-                    location: data.location,
-                    detail: (
-                        <Search
-                            style={{
-                                fontSize: 20,
-                                verticalAlign: "middle",
-                                cursor: "pointer",
-                            }}
-                            onClick={handleClickDetail}
-                        />
-                    ),
+                    deviceId: device.trap_id,
+                    modelName: device.model_name,
+                    region: device.region,
+                    location: device.location,
                 }));
 
                 setDeviceList(newDeviceList);
             } catch (exception) {
                 console.log(
-                    "Token has an exception while get informations. Re-login please."
+                    'Token has an exception while get informations. Re-login please.'
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_PATH);
             }
         }
 
@@ -141,9 +133,9 @@ export function useSelectedFilters(filters) {
 
 export const filtersReducer = (state, action) => {
     switch (action.type) {
-        case "regions":
-        case "locations":
-        case "models": {
+        case 'regions':
+        case 'locations':
+        case 'models': {
             const newState = state[action.type].map(iterator =>
                 iterator.id === action.value
                     ? { ...iterator, selected: !iterator.selected }

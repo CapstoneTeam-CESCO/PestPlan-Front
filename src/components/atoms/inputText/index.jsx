@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { TextField } from "@material-ui/core";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { TextField } from '@material-ui/core';
 
 function InputText({ className, label, name, inputRef, variant }) {
     return (

@@ -1,75 +1,78 @@
-import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
+import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
-import * as Constants from "../constants/Constants";
-import { getItemValues, getFilterLabel } from "../utilities/FilterUtility";
+import * as Constants from 'src/constants/Constants';
+import { getItemValues, getFilterLabel } from 'src/utilities/FilterUtility';
 
-export const useNoticeCount = () => {
-    const [noticeCount, setNoticeCount] = useState(0);
+export const usePacketCount = () => {
+    const [packetCount, setPacketCount] = useState(0);
     const history = useHistory();
 
     useEffect(() => {
-        async function getNoticeCount() {
-            const accessToken = window.sessionStorage.getItem("access_token");
+        async function getPacketCount() {
+            const accessToken = window.sessionStorage.getItem('access_token');
 
             if (!accessToken) {
                 console.log(
-                    "There has no access_token. Go back to the login page."
+                    'There has no access_token. Go back to the login page.'
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_PATH);
             }
 
             try {
-                const response = await axios.get(
-                    `${Constants.HOME_URL}/user?access_token=${accessToken}`
+                const { data } = await axios.get(
+                    `${Constants.SERVER_URL}${Constants.USER_PATH}`,
+                    {
+                        params: {
+                            access_token: accessToken,
+                        },
+                    }
                 );
 
-                const { data } = response;
-
-                setNoticeCount(data.notice_cnt);
+                setPacketCount(data.packet_cnt);
             } catch (exception) {
                 console.log(
-                    "Token has an exception while get informations. Re-login please."
+                    'Token has an exception while get informations. Re-login please.'
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_PATH);
             }
         }
 
-        getNoticeCount();
+        getPacketCount();
     }, []);
 
-    return noticeCount;
+    return packetCount;
 };
 
-export const useNoticeList = (page, filters, dispatchNotRead) => {
-    const [noticeList, setNoticeList] = useState([]);
+export const usePacketList = (page, filters, dispatchNotRead) => {
+    const [packetList, setPacketList] = useState([]);
     const history = useHistory();
 
     useEffect(() => {
-        async function getNoticeList() {
-            const accessToken = window.sessionStorage.getItem("access_token");
+        async function getPacketList() {
+            const accessToken = window.sessionStorage.getItem('access_token');
 
             if (!accessToken) {
                 console.log(
-                    "There has no access_token. Go back to the login page."
+                    'There has no access_token. Go back to the login page.'
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_PATH);
             }
 
             try {
                 const { dates, regions, locations, models, types } = filters;
 
-                const response = await axios.get(
-                    `${Constants.HOME_URL}/notices`,
+                const { data } = await axios.get(
+                    `${Constants.SERVER_URL}${Constants.PACKETS_PATH}`,
                     {
                         params: {
                             access_token: accessToken,
                             page,
-                            row: Constants.ROW_CNT,
+                            row: Constants.ROW,
                             start: dates[0].startDate,
                             end: dates[0].endDate,
                             regions: getItemValues(regions),
@@ -80,42 +83,41 @@ export const useNoticeList = (page, filters, dispatchNotRead) => {
                     }
                 );
 
-                const { data } = response;
-                const newNoticeList = data.notice_list.map((notice, index) => ({
+                const newPacketList = data.packet_list.map((packet, index) => ({
                     no: index + 1,
-                    createdAt: notice.created_at,
-                    region: notice.region,
-                    location: notice.location,
-                    modelName: notice.model_name,
-                    type: notice.type,
-                    noticeId: notice.notice_id,
-                    packet: JSON.stringify(notice.packet, null, 4),
+                    createdAt: packet.created_at,
+                    region: packet.region,
+                    location: packet.location,
+                    modelName: packet.model_name,
+                    type: packet.type,
+                    packetId: packet.packet_id,
+                    packet: JSON.stringify(packet.packet, null, 4),
                 }));
 
-                setNoticeList(newNoticeList);
+                setPacketList(newPacketList);
                 dispatchNotRead({
-                    type: "initialize",
+                    type: 'initialize',
                     value: {
-                        list: data.notice_list
-                            .filter(notice => notice.is_read === false)
-                            .map(notice => notice.notice_id),
+                        list: data.packet_list
+                            .filter(packet => !packet.is_read)
+                            .map(packet => packet.packet_id),
                         total: data.total_filtered_count,
                         current: data.total_not_read_count,
                     },
                 });
             } catch (exception) {
                 console.log(
-                    "Token has an exception while get informations. Re-login please."
+                    'Token has an exception while get informations. Re-login please.'
                 );
 
-                history.push("/login");
+                history.push(Constants.LOGIN_PATH);
             }
         }
 
-        getNoticeList();
+        getPacketList();
     }, [page, filters]);
 
-    return noticeList;
+    return packetList;
 };
 
 export function useSelectedFilters(filters) {
@@ -125,7 +127,7 @@ export function useSelectedFilters(filters) {
         const selected = [];
 
         Object.entries(filters)
-            .filter(entry => entry[0] !== "dates" && entry[0] !== "ranges")
+            .filter(entry => entry[0] !== 'dates' && entry[0] !== 'ranges')
             .forEach(entry =>
                 entry[1]
                     .filter(filter => filter.selected)
@@ -149,14 +151,14 @@ export function useSelectedFilters(filters) {
 
 export const filtersReducer = (state, action) => {
     switch (action.type) {
-        case "ranges":
-        case "dates":
+        case 'ranges':
+        case 'dates':
             return { ...state, [action.type]: action.value };
 
-        case "regions":
-        case "locations":
-        case "models":
-        case "types": {
+        case 'regions':
+        case 'locations':
+        case 'models':
+        case 'types': {
             const newState = state[action.type].map(iterator =>
                 iterator.id === action.value
                     ? { ...iterator, selected: !iterator.selected }
@@ -171,18 +173,13 @@ export const filtersReducer = (state, action) => {
 
 export const notReadReducer = (state, action) => {
     switch (action.type) {
-        case "initialize":
+        case 'initialize':
             return action.value;
-        case "click_notice": {
+        case 'click': {
             const updateReadStatus = async () => {
                 try {
                     await axios.patch(
-                        `${Constants.HOME_URL}/notices/${action.value}`,
-                        {
-                            data: {
-                                is_read: true,
-                            },
-                        }
+                        `${Constants.SERVER_URL}${Constants.PACKETS_PATH}/${action.value}`
                     );
                 } catch (exception) {
                     throw new Error(exception);

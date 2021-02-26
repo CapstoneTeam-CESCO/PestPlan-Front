@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import "./styles.scss";
-import Image from "../../atoms/image";
-import Text from "../../atoms/text";
+import './styles.scss';
+import Image from 'src/components/atoms/image';
+import Text from 'src/components/atoms/text';
 
 function ImageText({ className, imageProps, textProps }) {
     return (
