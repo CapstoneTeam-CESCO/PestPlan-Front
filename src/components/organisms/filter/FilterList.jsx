@@ -16,7 +16,7 @@ function FilterList({ filters, dispatch, type }) {
                     <li key={filter.id} className="filter__list-element">
                         <Button
                             type="button"
-                            className={'button--root list-element--label'.concat(
+                            className={'button--default list-element--label'.concat(
                                 filter.selected ? ' selected' : ''
                             )}
                             id={filter.id}
