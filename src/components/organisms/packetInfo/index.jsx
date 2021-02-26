@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 import Collapse from 'src/components/atoms/collapse';
 import ListItem from 'src/components/atoms/listItem';
+import Title from 'src/components/atoms/title';
 import List from 'src/components/molecules/list';
+import * as Constants from 'src/constants/Constants';
 import { expandedReducer, handleExpanded } from 'src/utilities/Expand';
 
 /* eslint-disable no-underscore-dangle */
@@ -13,6 +15,9 @@ function PacketInfo({ packets }) {
 
     return (
         <List className="device-details--packet">
+            <Title className="device-details__header">
+                {Constants.PACKET_CAPITAL}
+            </Title>
             {packets.map(packet => (
                 <Fragment key={packet._id}>
                     <ListItem

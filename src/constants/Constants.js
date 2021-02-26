@@ -9,10 +9,10 @@ export const DEVICES_DETAILS_PATH = `${DEVICES_PATH}/details`;
 
 // header
 export const TEAM_NAME = 'Pest Plan';
-
 export const PACKET = 'Packet';
-
+export const PACKET_CAPITAL = 'PACKET';
 export const DEVICE = 'Device';
+export const DEVICE_CAPITAL = 'DEVICE';
 
 // packet-list
 export const PACKET_LIST_THEAD = [
