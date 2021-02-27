@@ -9,6 +9,7 @@ export const DEVICES_DETAILS_PATH = `${DEVICES_PATH}/details`;
 
 // header
 export const TEAM_NAME = 'Pest Plan';
+export const TEAM_NAME_CAPITAL = 'PEST PLAN';
 export const PACKET = 'Packet';
 export const PACKET_CAPITAL = 'PACKET';
 export const DEVICE = 'Device';

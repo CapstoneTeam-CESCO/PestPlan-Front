@@ -1,15 +1,40 @@
-.header {
+.App-header {
     // 상단에 고정
-    position: sticky;
+    position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-
-    padding: 7px 20px 7px 10px;
+    height: 60px;
+    width: 100%;
+    z-index: 1000;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: aqua;
+    background-color: #040a43;
+
+    .header__team-name,
+    .header__user {
+        color: #ffffff;
+    }
+
+    .header__team-name {
+        font-size: 30px;
+        font-weight: 750;
+        margin-left: 30px;
+    }
+
+    .header__user {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        margin-right: 70px;
+
+        .header__profile-image {
+            height: 30px;
+            margin-right: 12px;
+        }
+
+        .header__user-name {
+            font-size: 15px;
+        }
+    }
 }

@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.App {
+    background-color: #f1f4f6;
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+}
+
+.App-main {
+    display: flex;
+    flex-direction: row;
+    padding-top: 60px;
+
+    .display-page,
+    .device-details {
+        padding-left: 200px;
+    }
+}
