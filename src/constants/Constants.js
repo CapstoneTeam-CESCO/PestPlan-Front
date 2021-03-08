@@ -29,9 +29,9 @@ export const PACKET_LIST_THEAD = [
 export const DEVICE_THEAD = [
     'No.',
     'Device ID',
-    '트랩 종류',
     '지역',
     '설치 위치',
+    '트랩 종류',
     '상세보기',
 ];
 

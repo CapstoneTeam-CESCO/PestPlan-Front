@@ -1,0 +1,38 @@
+.display-page {
+    .info-card-group {
+        grid-column: 1 / 3;
+        grid-row: 1;
+    }
+
+    .display--list {
+        grid-column: 1 / 2;
+        grid-row: 2;
+    }
+
+    .display--filter {
+        grid-column: 2 / 3;
+        grid-row: 2;
+    }
+
+    .info-card-group {
+        display: flex;
+        flex-direction: row;
+        gap: 25px;
+
+        .info-card {
+            flex: 1 1;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+
+            .info-card__header {
+                display: inline-block;
+                margin-bottom: 10px;
+            }
+
+            .info-card__count {
+                font-weight: 500;
+            }
+        }
+    }
+}

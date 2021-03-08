@@ -1,20 +1,28 @@
 .device-details--packet {
     display: flex;
     flex-direction: column;
-    gap: 2px;
 
     .packet__list {
-        background-color: #cccccc;
-        padding: 5px 10px;
+        border-top: solid 1px #dddddd;
+        padding: 7px 0 7px 15px;
         cursor: pointer;
+
+        &:hover {
+            background-color: #cbd3ea;
+            color: #040a43;
+        }
     }
 
     .packet__details {
-        background-color: #dddddd;
+        background-color: #eeeeee;
+
+        pre {
+            font-size: 15px;
+            text-align: left;
+        }
     }
 
     .open {
         padding: 15px;
-        margin-bottom: 10px;
     }
 }

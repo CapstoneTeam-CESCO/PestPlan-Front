@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import 'src/templates/deviceDetails/styles.scss';
@@ -12,10 +12,17 @@ function DeviceDetailsPage({
         params: { id },
     },
 }) {
-    const { device, packets } = useDeviceDetails(id);
+    const [page, setPage] = useState(1);
+    const { device, packets, packetCount } = useDeviceDetails(id, page);
 
     const packetInfoProps = {
         packets,
+        paginationProps: {
+            className: 'card__footer board__pagination',
+            count: packetCount,
+            page,
+            setPage,
+        },
     };
 
     const deviceInfoProps = {
@@ -24,7 +31,7 @@ function DeviceDetailsPage({
     };
 
     return (
-        <div className="device-details">
+        <div className="device-details-page">
             <PacketInfo {...packetInfoProps} />
             <DeviceInfo {...deviceInfoProps} />
         </div>

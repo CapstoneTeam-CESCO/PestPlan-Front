@@ -84,7 +84,7 @@ export const usePacketList = (page, filters, dispatchNotRead) => {
                 );
 
                 const newPacketList = data.packet_list.map((packet, index) => ({
-                    no: index + 1,
+                    no: (page - 1) * Constants.ROW + index + 1,
                     createdAt: packet.created_at,
                     region: packet.region,
                     location: packet.location,

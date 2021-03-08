@@ -1,6 +1,4 @@
 .board__list--packet {
-    width: 750px;
-
     .list__row {
         li:nth-child(1) {
             width: 70px;
@@ -18,20 +16,25 @@
             width: 150px;
         }
         li:nth-child(6) {
-            width: 100px;
+            width: 150px;
         }
     }
 
-    .list--body {
-        .notRead {
-            background-color: #bbbbbb;
+    .notRead {
+        background-color: #f5f7f7;
+        
+        * {
+            font-weight: 500;
         }
     }
 
     .list__detail {
-        text-align: left;
-
         background-color: #eeeeee;
+
+        pre {
+            font-size: 15px;
+            text-align: left;
+        }
     }
 
     .open {

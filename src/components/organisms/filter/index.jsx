@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Collapse } from 'react-collapse';
 
 import './styles.scss';
+import Collapse from 'src/components/atoms/collapse';
 import Tag from 'src/components/molecules/tag';
 
-function Filter({ tagProps, filterList }) {
+function Filter({ className, tagProps, filterList }) {
     const [isOpen, setIsOpen] = useState(true);
 
     const handleClickCollapse = () => {
@@ -30,14 +30,17 @@ function Filter({ tagProps, filterList }) {
     };
 
     return (
-        <div className="filter">
+        <div className={`card filter-card ${className}`}>
             <Tag {...reTagProps} />
-            <Collapse isOpened={isOpen}>{filterList}</Collapse>
+            <Collapse className="filter-card__collapse" isOpen={isOpen}>
+                {filterList}
+            </Collapse>
         </div>
     );
 }
 
 Filter.propTypes = {
+    className: PropTypes.string,
     tagProps: PropTypes.object,
     filterList: PropTypes.node,
 };

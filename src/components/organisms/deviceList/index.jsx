@@ -24,7 +24,7 @@ function DeviceList({ deviceList }) {
             <Search
                 id={values[1]}
                 style={{
-                    fontSize: 20,
+                    fontSize: 17,
                     verticalAlign: 'middle',
                     cursor: 'pointer',
                 }}

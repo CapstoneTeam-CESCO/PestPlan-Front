@@ -3,6 +3,7 @@ import { DateRange } from 'react-date-range';
 import { SVGMap } from 'react-svg-map';
 import southKorea from '@svg-maps/south-korea';
 
+import './styles.scss';
 import 'src/templates/list/styles.scss';
 import FilterList from 'src/components/organisms/filter/FilterList';
 import FilterGroup from 'src/components/organisms/filterGroup';
@@ -28,6 +29,8 @@ function PacketsPage() {
     const packetCount = usePacketCount();
     const [notRead, dispatchNotRead] = useReducer(notReadReducer, {
         list: [],
+        total: 0,
+        current: 0,
     });
     const packetList = usePacketList(page, filters, dispatchNotRead);
     const selectedFilters = useSelectedFilters(filters);
@@ -60,9 +63,11 @@ function PacketsPage() {
     };
 
     const filterGroupProps = {
-        filterProps: [
+        className: 'packet-filter',
+        leftFilterProps: [
             {
                 key: 'packet-filter--date',
+                className: 'filter--date',
                 tagProps: {
                     aProps: {
                         href: '#collapseFilterDate',
@@ -83,6 +88,7 @@ function PacketsPage() {
             },
             {
                 key: 'packet-filter--region',
+                className: 'filter--region',
                 tagProps: {
                     aProps: {
                         href: '#collapseFilterRegion',
@@ -101,8 +107,11 @@ function PacketsPage() {
                     />
                 ),
             },
+        ],
+        rightFilterProps: [
             {
                 key: 'packet-filter--location',
+                className: 'filter--location',
                 tagProps: {
                     aProps: {
                         href: '#collapseFilterLocation',
@@ -121,6 +130,7 @@ function PacketsPage() {
             },
             {
                 key: 'packet-filter--model',
+                className: 'filter--model',
                 tagProps: {
                     aProps: {
                         href: '#collapseFilterModel',
@@ -139,6 +149,7 @@ function PacketsPage() {
             },
             {
                 key: 'packet-filter--type',
+                className: 'filter--type',
                 tagProps: {
                     aProps: {
                         href: '#collapseFilterType',
@@ -159,31 +170,11 @@ function PacketsPage() {
     };
 
     const boardProps = {
-        className: 'display--list board',
-        headerProps: {
-            className: 'board__header',
-        },
+        className: 'card',
         titleProps: {
-            className: 'header__title',
+            className: 'card__header',
             children: Constants.PACKET,
         },
-        notReadChildrens: [
-            {
-                key: 'not-read',
-                className: 'header__not-read',
-                children: notRead.current,
-            },
-            {
-                key: 'bar',
-                className: 'bar',
-                children: '/',
-            },
-            {
-                key: 'total-count',
-                className: 'header__total-count',
-                children: notRead.total,
-            },
-        ],
         filterTagGroupProps: {
             className: 'board__filter-tag',
             tagValues: selectedFilters,
@@ -218,19 +209,35 @@ function PacketsPage() {
             dispatchNotRead,
         },
         apaginationProps: {
-            className: 'board__pagination',
-            count: Math.ceil(packetCount / Constants.ROW),
-            siblingCount: 5,
+            className: 'card__footer board__pagination',
+            count: packetCount,
             page,
             setPage,
-            shape: 'rounded',
         },
     };
 
     return (
         <div className="display-page">
-            <FilterGroup {...filterGroupProps} />
+            <div className="info-card-group">
+                <div className="card info-card">
+                    <span className="info-card__header">Total</span>
+                    <span className="info-card__count">{packetCount}</span>
+                </div>
+                <div className="card info-card">
+                    <span className="info-card__header">Unread</span>
+                    <span className="info-card__count">{notRead.current}</span>
+                </div>
+                <div className="card info-card">
+                    <span className="info-card__header">Error</span>
+                    <span className="info-card__count">0</span>
+                </div>
+                <div className="card info-card">
+                    <span className="info-card__header">Today</span>
+                    <span className="info-card__count">0</span>
+                </div>
+            </div>
             <Board {...boardProps} />
+            <FilterGroup {...filterGroupProps} />
         </div>
     );
 }

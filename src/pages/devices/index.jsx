@@ -53,9 +53,11 @@ function DevicesPage() {
     };
 
     const filterGroupProps = {
-        filterProps: [
+        className: 'device-filter',
+        leftFilterProps: [
             {
                 key: 'notice-filter--region',
+                className: 'filter--region',
                 tagProps: {
                     aProps: {
                         href: '#collapseFilterRegion',
@@ -74,8 +76,11 @@ function DevicesPage() {
                     />
                 ),
             },
+        ],
+        rightFilterProps: [
             {
                 key: 'notice-filter--location',
+                className: 'filter--location',
                 tagProps: {
                     aProps: {
                         href: '#collapseFilterLocation',
@@ -94,6 +99,7 @@ function DevicesPage() {
             },
             {
                 key: 'notice-filter--model',
+                className: 'filter--model',
                 tagProps: {
                     aProps: {
                         href: '#collapseFilterModel',
@@ -114,9 +120,9 @@ function DevicesPage() {
     };
 
     const boardProps = {
-        className: 'display--list board',
+        className: 'card',
         titleProps: {
-            className: 'board__title',
+            className: 'card__header',
             children: Constants.DEVICE,
         },
         filterTagGroupProps: {
@@ -151,19 +157,35 @@ function DevicesPage() {
             deviceList,
         },
         apaginationProps: {
-            className: 'board__pagination',
-            count: Math.ceil(deviceCount / Constants.ROW),
-            siblingCount: 5,
+            className: 'card__footer board__pagination',
+            count: deviceCount,
             page,
             setPage,
-            shape: 'rounded',
         },
     };
 
     return (
         <div className="display-page">
-            <FilterGroup {...filterGroupProps} />
+            <div className="info-card-group">
+                <div className="card info-card">
+                    <span className="info-card__header">Total</span>
+                    <span className="info-card__count">{deviceCount}</span>
+                </div>
+                <div className="card info-card">
+                    <span className="info-card__header">Error</span>
+                    <span className="info-card__count">0</span>
+                </div>
+                <div className="card info-card">
+                    <span className="info-card__header">Replacement</span>
+                    <span className="info-card__count">0</span>
+                </div>
+                <div className="card info-card">
+                    <span className="info-card__header">보류</span>
+                    <span className="info-card__count">0</span>
+                </div>
+            </div>
             <Board {...boardProps} />
+            <FilterGroup {...filterGroupProps} />
         </div>
     );
 }

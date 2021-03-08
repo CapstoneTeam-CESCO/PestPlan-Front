@@ -1,19 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './styles.scss';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import Filter from '../filter';
 
-function FilterGroup({ filterProps }) {
+function FilterGroup({ className, leftFilterProps, rightFilterProps }) {
     return (
-        <div className="display--filter">
-            {filterProps.map(props => (
-                <Filter {...props} />
-            ))}
+        <div className={`${className} display--filter`}>
+            <div className="filter-col-1">
+                {leftFilterProps.map(props => (
+                    <Filter {...props} />
+                ))}
+            </div>
+            <div className="filter-col-2">
+                {rightFilterProps.map(props => (
+                    <Filter {...props} />
+                ))}
+            </div>
 
-            <div>
+            {/* <div>
                 {'Icons made by '}
                 <a href="https://www.freepik.com" title="Freepik">
                     Freepik
@@ -22,13 +28,15 @@ function FilterGroup({ filterProps }) {
                 <a href="https://www.flaticon.com/" title="Flaticon">
                     www.flaticon.com
                 </a>
-            </div>
+            </div> */}
         </div>
     );
 }
 
 FilterGroup.propTypes = {
-    filterProps: PropTypes.array,
+    className: PropTypes.string,
+    leftFilterProps: PropTypes.array,
+    rightFilterProps: PropTypes.array,
 };
 
 export default FilterGroup;

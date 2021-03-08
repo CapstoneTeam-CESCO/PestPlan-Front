@@ -2,22 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Pagination } from '@material-ui/lab';
 
+import './styles.scss';
+import * as Constants from 'src/constants/Constants';
+
 function APagination({ className, count, siblingCount, page, setPage, shape }) {
-    const handleChage = (_, value) => {
+    const handleChange = (_, value) => {
         setPage(value);
     };
 
     return (
         <Pagination
             className={className}
-            count={count}
+            count={Math.ceil(count / Constants.ROW)}
             siblingCount={siblingCount}
             page={page}
-            onChange={handleChage}
+            onChange={handleChange}
             shape={shape}
         />
     );
 }
+
+APagination.defaultProps = {
+    siblingCount: 5,
+    shape: 'rounded',
+};
 
 APagination.propTypes = {
     className: PropTypes.string,
