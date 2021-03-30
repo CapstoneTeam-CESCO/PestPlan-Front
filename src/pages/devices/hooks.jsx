@@ -83,9 +83,9 @@ export const useDeviceList = (page, filters) => {
                 const newDeviceList = data.map((device, index) => ({
                     no: index + 1,
                     deviceId: device.trap_id,
-                    modelName: device.model_name,
                     region: device.region,
                     location: device.location,
+                    modelName: device.model_name,
                 }));
 
                 setDeviceList(newDeviceList);

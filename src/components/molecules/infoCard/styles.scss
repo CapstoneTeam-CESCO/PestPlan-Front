@@ -1,0 +1,31 @@
+.info-card {
+    // flex: 1 1;
+    // display: flex;
+    // flex-direction: column;
+    display: grid;
+    grid-template-columns: 55px 95px;
+    align-items: center;
+    padding: 10px 15px;
+
+    .info-card__image {
+        grid-column: 1 / 2;
+        grid-row: 1 / span 2;
+
+        height: 40px;
+        width: 40px;
+    }
+
+    .info-card__header {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+
+        display: inline-block;
+    }
+
+    .info-card__count {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+
+        font-weight: 500;
+    }
+}

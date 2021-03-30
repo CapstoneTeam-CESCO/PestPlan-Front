@@ -1,20 +1,53 @@
 .device-details--packet {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+    display: table;
+    text-align: center;
+    min-height: 690px;
+
+    .row__item {
+        display: table-cell;
+    }
+
+    .list--header {
+        border-top: solid 1px #dddddd;
+        border-bottom: solid 2px #dddddd;
+    }
+
+    .list--body {
+        border-bottom: solid 1px #dddddd;
+    }
 
     .packet__list {
-        background-color: #cccccc;
-        padding: 5px 10px;
+        padding: 10px 0;
         cursor: pointer;
+
+        .row__item:nth-child(1) {
+            width: 70px;
+        }
+
+        .row__item:nth-child(2) {
+            width: 200px;
+        }
+
+        .row__item:nth-child(3) {
+            width: 700px;
+        }
+
+        &:hover {
+            background-color: #cbd3ea;
+            color: #040a43;
+        }
     }
 
     .packet__details {
-        background-color: #dddddd;
+        background-color: #eeeeee;
+
+        pre {
+            font-size: 15px;
+            text-align: left;
+        }
     }
 
     .open {
         padding: 15px;
-        margin-bottom: 10px;
     }
 }

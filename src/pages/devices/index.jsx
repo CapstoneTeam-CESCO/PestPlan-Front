@@ -3,10 +3,12 @@ import { SVGMap } from 'react-svg-map';
 import southKorea from '@svg-maps/south-korea';
 
 import 'src/templates/list/styles.scss';
+import InfoCard from 'src/components/molecules/infoCard';
 import FilterList from 'src/components/organisms/filter/FilterList';
 import FilterGroup from 'src/components/organisms/filterGroup';
 import Board from 'src/components/organisms/board';
 import * as Constants from 'src/constants/Constants';
+import TotalInfoImage from 'src/images/total.png';
 import { createFilterItems } from 'src/utilities/FilterUtility';
 import {
     filtersReducer,
@@ -52,10 +54,19 @@ function DevicesPage() {
         });
     };
 
+    const infoImages = [
+        TotalInfoImage,
+        TotalInfoImage,
+        TotalInfoImage,
+        TotalInfoImage,
+    ];
+
     const filterGroupProps = {
+        className: 'device-filter',
         filterProps: [
             {
                 key: 'notice-filter--region',
+                className: 'filter--region',
                 tagProps: {
                     aProps: {
                         href: '#collapseFilterRegion',
@@ -76,6 +87,7 @@ function DevicesPage() {
             },
             {
                 key: 'notice-filter--location',
+                className: 'filter--location',
                 tagProps: {
                     aProps: {
                         href: '#collapseFilterLocation',
@@ -94,6 +106,7 @@ function DevicesPage() {
             },
             {
                 key: 'notice-filter--model',
+                className: 'filter--model last',
                 tagProps: {
                     aProps: {
                         href: '#collapseFilterModel',
@@ -114,9 +127,9 @@ function DevicesPage() {
     };
 
     const boardProps = {
-        className: 'display--list board',
+        className: 'card',
         titleProps: {
-            className: 'board__title',
+            className: 'card__header',
             children: Constants.DEVICE,
         },
         filterTagGroupProps: {
@@ -151,19 +164,29 @@ function DevicesPage() {
             deviceList,
         },
         apaginationProps: {
-            className: 'board__pagination',
-            count: Math.ceil(deviceCount / Constants.ROW),
-            siblingCount: 5,
+            className: 'card__footer board__pagination',
+            count: deviceCount,
             page,
             setPage,
-            shape: 'rounded',
         },
     };
 
     return (
-        <div className="display-page">
+        <div className="App-main__contents display-page">
+            <div className="contents--info">
+                <div className="info-card-group">
+                    {Constants.INFO_CARD_HEADERS.device.map((header, index) => (
+                        <InfoCard
+                            key={header}
+                            src={infoImages[index]}
+                            header={header}
+                            count={0}
+                        />
+                    ))}
+                </div>
+                <Board {...boardProps} />
+            </div>
             <FilterGroup {...filterGroupProps} />
-            <Board {...boardProps} />
         </div>
     );
 }

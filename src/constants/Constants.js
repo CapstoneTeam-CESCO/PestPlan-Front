@@ -9,6 +9,7 @@ export const DEVICES_DETAILS_PATH = `${DEVICES_PATH}/details`;
 
 // header
 export const TEAM_NAME = 'Pest Plan';
+export const TEAM_NAME_CAPITAL = 'PEST PLAN';
 export const PACKET = 'Packet';
 export const PACKET_CAPITAL = 'PACKET';
 export const DEVICE = 'Device';
@@ -24,13 +25,18 @@ export const PACKET_LIST_THEAD = [
     '메시지 타입',
 ];
 
+export const INFO_CARD_HEADERS = {
+    packet: ['Today', 'Cycle', 'Warning', 'Device Error'],
+    device: ['Total', 'Pest', 'Mouse', 'Device Error'],
+};
+
 // device-list
 export const DEVICE_THEAD = [
     'No.',
     'Device ID',
-    '트랩 종류',
     '지역',
     '설치 위치',
+    '트랩 종류',
     '상세보기',
 ];
 
@@ -69,20 +75,17 @@ export const LOCATIONS = [
     { id: 'lawn_1', value: '잔디밭-1' },
 ];
 export const MODELS = [
-    { id: 'A1', value: 'DAM' },
-    { id: 'A2', value: 'AG DAM' },
-    { id: 'A3', value: 'FG DAM' },
-    { id: 'B1', value: 'SM' },
-    { id: 'B2', value: '환경 모니터링 SM' },
+    { id: '90', value: '비래 해충군' },
     { id: '01', value: '피닉스' },
     { id: '02', value: '썬더블루' },
-    { id: '03', value: '블루스톰(전극)' },
-    { id: '04', value: '블루스톰(흡입)' },
+    { id: '03', value: '블루스톰' },
+    { id: '91', value: '구서 장비' },
     { id: '11', value: '바이퍼' },
     { id: '12', value: '블루치즈' },
     { id: '13', value: '쥐모니터링' },
-    { id: '21', value: '큐브' },
+    { id: '14', value: '큐브' },
 ];
+
 export const TYPES = [
     { id: 'cycle_data', value: '주기' },
     { id: 'warning_data', value: '경보' },
@@ -98,3 +101,5 @@ export const DEVICE_DETAILS_FIELDS = [
     '교체 필요 여부',
     '트랩 에러 여부',
 ];
+
+export const DEVICE_DETAILS_PACKET_HEADERS = ['No.', 'time', 'packet'];

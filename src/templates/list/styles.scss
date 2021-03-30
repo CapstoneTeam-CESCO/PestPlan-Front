@@ -1,18 +1,12 @@
-.display-page {
-    width: 1200px;
-    margin: auto;
-    margin-top: 50px;
-
+.contents--info {
     display: flex;
+    flex-direction: column;
+    gap: 30px;
 
-    .display--filter {
-        // total width 450px
-        width: 350px;
-        padding: 10px 50px;
-    }
-
-    .display--list {
-        // total width 750px
-        width: 750px;
+    .info-card-group {
+        display: flex;
+        flex-direction: row;
+        gap: 25px;
+        justify-content: space-between;
     }
 }

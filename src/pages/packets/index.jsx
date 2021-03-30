@@ -4,10 +4,15 @@ import { SVGMap } from 'react-svg-map';
 import southKorea from '@svg-maps/south-korea';
 
 import 'src/templates/list/styles.scss';
+import Button from 'src/components/atoms/button';
+import InfoCard from 'src/components/molecules/infoCard';
 import FilterList from 'src/components/organisms/filter/FilterList';
 import FilterGroup from 'src/components/organisms/filterGroup';
 import Board from 'src/components/organisms/board';
 import * as Constants from 'src/constants/Constants';
+import TotalInfoImage from 'src/images/total.png';
+import ErrorInfoImage from 'src/images/error.png';
+import TodayInfoImage from 'src/images/today.png';
 import { initializeFilters } from 'src/utilities/FilterUtility';
 import {
     filtersReducer,
@@ -28,8 +33,14 @@ function PacketsPage() {
     const packetCount = usePacketCount();
     const [notRead, dispatchNotRead] = useReducer(notReadReducer, {
         list: [],
+        total: 0,
+        current: 0,
     });
-    const packetList = usePacketList(page, filters, dispatchNotRead);
+    const { packetInfo, packetList } = usePacketList(
+        page,
+        filters,
+        dispatchNotRead
+    );
     const selectedFilters = useSelectedFilters(filters);
 
     const handleLocationClassName = (_, index) => {
@@ -59,10 +70,19 @@ function PacketsPage() {
         });
     };
 
+    const infoImages = [
+        TotalInfoImage,
+        ErrorInfoImage,
+        ErrorInfoImage,
+        TodayInfoImage,
+    ];
+
     const filterGroupProps = {
+        className: 'packet-filter',
         filterProps: [
             {
                 key: 'packet-filter--date',
+                className: 'filter--date',
                 tagProps: {
                     aProps: {
                         href: '#collapseFilterDate',
@@ -73,7 +93,7 @@ function PacketsPage() {
                 },
                 filterList: (
                     <DateRange
-                        className="filter__list daterange-filter-date"
+                        className="daterange-filter-date"
                         editableDateInputs={false}
                         onChange={item => handleChangeDateRange(item)}
                         moveRangeOnFirstSelection={false}
@@ -83,6 +103,7 @@ function PacketsPage() {
             },
             {
                 key: 'packet-filter--region',
+                className: 'filter--region',
                 tagProps: {
                     aProps: {
                         href: '#collapseFilterRegion',
@@ -94,7 +115,7 @@ function PacketsPage() {
                 filterList: (
                     <SVGMap
                         map={southKorea}
-                        className="filter__list SVGMap-filter-region"
+                        className="SVGMap-filter-region"
                         locationClassName={handleLocationClassName}
                         locationRole="checkbox"
                         onLocationClick={handleLocationClick}
@@ -103,6 +124,7 @@ function PacketsPage() {
             },
             {
                 key: 'packet-filter--location',
+                className: 'filter--location',
                 tagProps: {
                     aProps: {
                         href: '#collapseFilterLocation',
@@ -121,6 +143,7 @@ function PacketsPage() {
             },
             {
                 key: 'packet-filter--model',
+                className: 'filter--model',
                 tagProps: {
                     aProps: {
                         href: '#collapseFilterModel',
@@ -129,16 +152,40 @@ function PacketsPage() {
                         children: '트랩 종류',
                     },
                 },
-                filterList: (
-                    <FilterList
-                        filters={filters.models}
-                        dispatch={dispatchFilters}
-                        type="models"
-                    />
-                ),
+                filterList: filters.models
+                    .filter(model => model.id.charAt(0) === '9')
+                    .map(category => (
+                        <div key={category.id}>
+                            <Button
+                                type="button"
+                                className={'filter__list-element list-element--label'.concat(
+                                    category.selected ? ' selected' : ''
+                                )}
+                                id={category.id}
+                                onClick={event =>
+                                    dispatchFilters({
+                                        type: 'model-category',
+                                        value: event.currentTarget.id,
+                                    })
+                                }
+                            >
+                                {category.value}
+                            </Button>
+                            <FilterList
+                                filters={filters.models.filter(
+                                    model =>
+                                        model.id.charAt(0) ===
+                                        category.id.charAt(1)
+                                )}
+                                dispatch={dispatchFilters}
+                                type="models"
+                            />
+                        </div>
+                    )),
             },
             {
                 key: 'packet-filter--type',
+                className: 'filter--type last',
                 tagProps: {
                     aProps: {
                         href: '#collapseFilterType',
@@ -159,31 +206,11 @@ function PacketsPage() {
     };
 
     const boardProps = {
-        className: 'display--list board',
-        headerProps: {
-            className: 'board__header',
-        },
+        className: 'card',
         titleProps: {
-            className: 'header__title',
+            className: 'card__header',
             children: Constants.PACKET,
         },
-        notReadChildrens: [
-            {
-                key: 'not-read',
-                className: 'header__not-read',
-                children: notRead.current,
-            },
-            {
-                key: 'bar',
-                className: 'bar',
-                children: '/',
-            },
-            {
-                key: 'total-count',
-                className: 'header__total-count',
-                children: notRead.total,
-            },
-        ],
         filterTagGroupProps: {
             className: 'board__filter-tag',
             tagValues: selectedFilters,
@@ -218,19 +245,29 @@ function PacketsPage() {
             dispatchNotRead,
         },
         apaginationProps: {
-            className: 'board__pagination',
-            count: Math.ceil(packetCount / Constants.ROW),
-            siblingCount: 5,
+            className: 'card__footer board__pagination',
+            count: packetCount,
             page,
             setPage,
-            shape: 'rounded',
         },
     };
 
     return (
-        <div className="display-page">
+        <div className="App-main__contents display-page">
+            <div className="contents--info">
+                <div className="info-card-group">
+                    {Constants.INFO_CARD_HEADERS.packet.map((header, index) => (
+                        <InfoCard
+                            key={header}
+                            src={infoImages[index]}
+                            header={header}
+                            count={packetInfo[index]}
+                        />
+                    ))}
+                </div>
+                <Board {...boardProps} />
+            </div>
             <FilterGroup {...filterGroupProps} />
-            <Board {...boardProps} />
         </div>
     );
 }

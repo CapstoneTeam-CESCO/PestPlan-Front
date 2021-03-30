@@ -32,7 +32,7 @@ function PacketList({ packetList, notRead, dispatchNotRead }) {
                 button
                 key={values[6]}
                 id={values[6]}
-                className="list--body button--root"
+                className="list--body button--default"
                 onClick={handleClick}
             >
                 <List

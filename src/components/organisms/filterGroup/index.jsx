@@ -1,19 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './styles.scss';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import Filter from '../filter';
 
-function FilterGroup({ filterProps }) {
+function FilterGroup({ className, filterProps }) {
     return (
-        <div className="display--filter">
+        <div className={`${className} card filter-card`}>
             {filterProps.map(props => (
                 <Filter {...props} />
             ))}
 
-            <div>
+            {/* <div>
                 {'Icons made by '}
                 <a href="https://www.freepik.com" title="Freepik">
                     Freepik
@@ -22,12 +21,13 @@ function FilterGroup({ filterProps }) {
                 <a href="https://www.flaticon.com/" title="Flaticon">
                     www.flaticon.com
                 </a>
-            </div>
+            </div> */}
         </div>
     );
 }
 
 FilterGroup.propTypes = {
+    className: PropTypes.string,
     filterProps: PropTypes.array,
 };
 

@@ -1,4 +1,4 @@
-.button--root {
+.button--default {
     background-color: transparent;
     border: none;
     outline: none;
@@ -7,12 +7,6 @@
 
 .active-scale-button:active {
     transform: scale(0.98);
-}
-
-.login-button {
-    background-color: #888888;
-    border-radius: 5px;
-    height: 35px;
 }
 
 .logout-button {
@@ -43,10 +37,4 @@
 
 .reset-button {
     margin-right: 10px;
-}
-
-.header__team-name {
-    display: inline-block;
-    font-size: 30px;
-    color: #004e66;
 }

@@ -1,23 +1,26 @@
-.device-details--device {
-    display: table;
-    border-collapse: collapse;
+.card {
+    .device-details--device {
+        display: table;
+        border-collapse: collapse;
 
-    .table-row {
-        display: table-row;
-    }
+        .table-row {
+            display: table-row;
+            border-top: solid 1px #dddddd;
+        }
 
-    .device__field,
-    .device__contents {
-        display: table-cell;
-        border: solid 2px #bbbbbb;
-        padding: 10px;
-    }
+        .device__field,
+        .device__contents {
+            display: table-cell;
+            padding: 10px;
+        }
 
-    .device__field {
-        width: 150px;
-    }
+        .device__field {
+            border-right: solid 2px #dddddd;
+            width: 120px;
+        }
 
-    .device__contents {
-        width: 200px;
+        .device__contents {
+            width: 200px;
+        }
     }
 }

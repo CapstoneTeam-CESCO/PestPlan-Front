@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import 'src/templates/login/styles.scss';
@@ -10,17 +9,9 @@ import LoginForm from 'src/components/organisms/loginForm';
 import ASnackbar from 'src/components/atoms/snackbar';
 import * as Constants from 'src/constants/Constants';
 
-const useStyles = makeStyles(() => ({
-    input: {
-        backgroundColor: '#ffffff',
-        marginBottom: '15px',
-    },
-}));
-
 function LoginPage() {
     const [open, setOpen] = useState(false);
     const { register, handleSubmit, setValue, getValues } = useForm();
-    const classes = useStyles();
     const history = useHistory();
 
     const onSubmit = async () => {
@@ -38,7 +29,7 @@ function LoginPage() {
                     'access_token',
                     data.access_token
                 );
-                history.push('/home');
+                history.push(Constants.HOME_PATH);
             })
             .catch(exception => {
                 console.log('There was an exception while login.');
@@ -52,29 +43,27 @@ function LoginPage() {
 
     const titleProps = {
         className: 'login__team-name',
-        children: 'Pest Plan',
+        children: Constants.TEAM_NAME,
     };
 
     const loginFormProps = {
         className: 'login-form',
         firstInputTextProps: {
-            className: classes.input,
+            className: 'login-form__username',
             label: 'username',
             name: 'username',
             inputRef: register,
-            variant: 'outlined',
         },
         secondInputTextProps: {
-            className: classes.input,
+            className: 'login-form__password',
             label: 'password',
             name: 'password',
             inputRef: register,
-            variant: 'outlined',
         },
         buttonProps: {
             type: 'submit',
             children: 'LOGIN',
-            className: 'button--root login-button',
+            className: 'button--default login-button',
             onClick: () => handleSubmit(onSubmit()),
         },
     };
