@@ -5,19 +5,12 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import Filter from '../filter';
 
-function FilterGroup({ className, leftFilterProps, rightFilterProps }) {
+function FilterGroup({ className, filterProps }) {
     return (
-        <div className={`${className} display--filter`}>
-            <div className="filter-col-1">
-                {leftFilterProps.map(props => (
-                    <Filter {...props} />
-                ))}
-            </div>
-            <div className="filter-col-2">
-                {rightFilterProps.map(props => (
-                    <Filter {...props} />
-                ))}
-            </div>
+        <div className={`${className} card filter-card`}>
+            {filterProps.map(props => (
+                <Filter {...props} />
+            ))}
 
             {/* <div>
                 {'Icons made by '}
@@ -35,8 +28,7 @@ function FilterGroup({ className, leftFilterProps, rightFilterProps }) {
 
 FilterGroup.propTypes = {
     className: PropTypes.string,
-    leftFilterProps: PropTypes.array,
-    rightFilterProps: PropTypes.array,
+    filterProps: PropTypes.array,
 };
 
 export default FilterGroup;

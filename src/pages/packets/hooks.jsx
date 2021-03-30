@@ -49,6 +49,7 @@ export const usePacketCount = () => {
 
 export const usePacketList = (page, filters, dispatchNotRead) => {
     const [packetList, setPacketList] = useState([]);
+    const [packetInfo, setPacketInfo] = useState([]);
     const history = useHistory();
 
     useEffect(() => {
@@ -66,7 +67,12 @@ export const usePacketList = (page, filters, dispatchNotRead) => {
             try {
                 const { dates, regions, locations, models, types } = filters;
 
-                const { data } = await axios.get(
+                const {
+                    data: {
+                        info: { total, unread, error, today },
+                        list,
+                    },
+                } = await axios.get(
                     `${Constants.SERVER_URL}${Constants.PACKETS_PATH}`,
                     {
                         params: {
@@ -83,7 +89,7 @@ export const usePacketList = (page, filters, dispatchNotRead) => {
                     }
                 );
 
-                const newPacketList = data.packet_list.map((packet, index) => ({
+                const newPacketList = list.map((packet, index) => ({
                     no: (page - 1) * Constants.ROW + index + 1,
                     createdAt: packet.created_at,
                     region: packet.region,
@@ -93,18 +99,20 @@ export const usePacketList = (page, filters, dispatchNotRead) => {
                     packetId: packet.packet_id,
                     packet: JSON.stringify(packet.packet, null, 4),
                 }));
-
                 setPacketList(newPacketList);
+
                 dispatchNotRead({
                     type: 'initialize',
                     value: {
-                        list: data.packet_list
+                        list: list
                             .filter(packet => !packet.is_read)
                             .map(packet => packet.packet_id),
-                        total: data.total_filtered_count,
-                        current: data.total_not_read_count,
+                        total,
+                        current: unread,
                     },
                 });
+
+                setPacketInfo([total, unread, error, today]);
             } catch (exception) {
                 console.log(
                     'Token has an exception while get informations. Re-login please.'
@@ -117,7 +125,7 @@ export const usePacketList = (page, filters, dispatchNotRead) => {
         getPacketList();
     }, [page, filters]);
 
-    return packetList;
+    return { packetInfo, packetList };
 };
 
 export function useSelectedFilters(filters) {
@@ -166,6 +174,20 @@ export const filtersReducer = (state, action) => {
             );
             return { ...state, [action.type]: newState };
         }
+
+        case 'model-category': {
+            const newSelected = state.models
+                .filter(iterator => iterator.id === action.value)
+                .map(iterator => !iterator.selected)[0];
+            const newState = state.models.map(iterator =>
+                iterator.id === action.value ||
+                iterator.id.charAt(0) === action.value.charAt(1)
+                    ? { ...iterator, selected: newSelected }
+                    : iterator
+            );
+            return { ...state, models: newState };
+        }
+
         default:
             throw new Error(`unexpected action type: ${action.type}`);
     }

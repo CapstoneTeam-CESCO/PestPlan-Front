@@ -1,19 +1,12 @@
-.display-page {
-    display: grid;
-    grid-template-columns: 800px 685px;
-    grid-gap: 25px;
-    align-items: flex-start;
+.contents--info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 
-    .display--filter {
+    .info-card-group {
         display: flex;
         flex-direction: row;
-        gap: 5px;
-
-        .filter-col-1,
-        .filter-col-2 {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
+        gap: 25px;
+        justify-content: space-between;
     }
 }

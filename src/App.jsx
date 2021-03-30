@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 
 import './App.scss';
-import Header from './components/organisms/header';
 import Sidebar from './components/organisms/sidebar';
 import LoginPage from './pages/login';
 import HomePage from './pages/home';
@@ -18,12 +17,6 @@ function App() {
                     <Redirect to="/login" />
                 </Route>
                 <Route path="/login" component={LoginPage} />
-
-                <Route
-                    render={({ location }) =>
-                        location.pathname !== '/login' ? <Header /> : null
-                    }
-                />
 
                 <div className="App-main">
                     <Route

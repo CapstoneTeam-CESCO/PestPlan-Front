@@ -3,10 +3,12 @@ import { SVGMap } from 'react-svg-map';
 import southKorea from '@svg-maps/south-korea';
 
 import 'src/templates/list/styles.scss';
+import InfoCard from 'src/components/molecules/infoCard';
 import FilterList from 'src/components/organisms/filter/FilterList';
 import FilterGroup from 'src/components/organisms/filterGroup';
 import Board from 'src/components/organisms/board';
 import * as Constants from 'src/constants/Constants';
+import TotalInfoImage from 'src/images/total.png';
 import { createFilterItems } from 'src/utilities/FilterUtility';
 import {
     filtersReducer,
@@ -52,9 +54,16 @@ function DevicesPage() {
         });
     };
 
+    const infoImages = [
+        TotalInfoImage,
+        TotalInfoImage,
+        TotalInfoImage,
+        TotalInfoImage,
+    ];
+
     const filterGroupProps = {
         className: 'device-filter',
-        leftFilterProps: [
+        filterProps: [
             {
                 key: 'notice-filter--region',
                 className: 'filter--region',
@@ -76,8 +85,6 @@ function DevicesPage() {
                     />
                 ),
             },
-        ],
-        rightFilterProps: [
             {
                 key: 'notice-filter--location',
                 className: 'filter--location',
@@ -99,7 +106,7 @@ function DevicesPage() {
             },
             {
                 key: 'notice-filter--model',
-                className: 'filter--model',
+                className: 'filter--model last',
                 tagProps: {
                     aProps: {
                         href: '#collapseFilterModel',
@@ -165,26 +172,20 @@ function DevicesPage() {
     };
 
     return (
-        <div className="display-page">
-            <div className="info-card-group">
-                <div className="card info-card">
-                    <span className="info-card__header">Total</span>
-                    <span className="info-card__count">{deviceCount}</span>
+        <div className="App-main__contents display-page">
+            <div className="contents--info">
+                <div className="info-card-group">
+                    {Constants.INFO_CARD_HEADERS.device.map((header, index) => (
+                        <InfoCard
+                            key={header}
+                            src={infoImages[index]}
+                            header={header}
+                            count={0}
+                        />
+                    ))}
                 </div>
-                <div className="card info-card">
-                    <span className="info-card__header">Error</span>
-                    <span className="info-card__count">0</span>
-                </div>
-                <div className="card info-card">
-                    <span className="info-card__header">Replacement</span>
-                    <span className="info-card__count">0</span>
-                </div>
-                <div className="card info-card">
-                    <span className="info-card__header">보류</span>
-                    <span className="info-card__count">0</span>
-                </div>
+                <Board {...boardProps} />
             </div>
-            <Board {...boardProps} />
             <FilterGroup {...filterGroupProps} />
         </div>
     );

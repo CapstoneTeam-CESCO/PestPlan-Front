@@ -30,7 +30,7 @@ function Filter({ className, tagProps, filterList }) {
     };
 
     return (
-        <div className={`card filter-card ${className}`}>
+        <div className={`filter ${className}`}>
             <Tag {...reTagProps} />
             <Collapse className="filter-card__collapse" isOpen={isOpen}>
                 {filterList}
