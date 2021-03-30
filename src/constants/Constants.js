@@ -7,6 +7,10 @@ export const PACKETS_PATH = '/packets';
 export const DEVICES_PATH = '/devices';
 export const DEVICES_DETAILS_PATH = `${DEVICES_PATH}/details`;
 
+// login
+export const SIGN_IN = 'SIGN IN';
+export const SIGN_UP = 'SIGN UP';
+
 // header
 export const TEAM_NAME = 'Pest Plan';
 export const TEAM_NAME_CAPITAL = 'PEST PLAN';
