@@ -19,54 +19,37 @@
         flex-direction: column;
         align-items: center;
         gap: 3px;
-        // justify-content: flex-end;
         margin-top: 20px;
         width: 200px;
 
-        .menu__packet {
+        .menu {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: left;
 
             width: 90%;
             border-radius: 12px;
+            padding-left: 13px;
 
-            .image--packet {
-                height: 27px;
-            }
-
-            .image--device {
+            .menu__image {
                 height: 27px;
             }
 
             &:hover {
                 background-color: #035ae1;
-                // // background-color: #ffffff;
-                // background-color: #f1f4f6;
-                // color: #035ae1;
                 transition: all 0.5s;
             }
         }
 
-        // .image--device:hover {
-        //     background: url('../../../images/device--blue.png');
-        // }
-
-        .menu__button--nav {
+        .menu__button {
             color: #ffffff;
-
             font-size: 20px;
             font-weight: 500;
             padding: 15px;
             padding-left: 8px;
-
-            // &:hover {
-            //     background-color: #035ae1;
-            //     transition: all 0.5s;
-            // }
         }
 
-        .menu__button--current {
+        .current {
             background-color: #035ae1;
         }
     }

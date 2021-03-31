@@ -3,6 +3,7 @@ export const SERVER_URL = 'http://localhost:4000';
 export const LOGIN_PATH = '/login';
 export const HOME_PATH = '/home';
 export const USER_PATH = '/home/user';
+export const DASHBOARD_PATH = '/dashboard';
 export const PACKETS_PATH = '/packets';
 export const DEVICES_PATH = '/devices';
 export const DEVICES_DETAILS_PATH = `${DEVICES_PATH}/details`;
@@ -11,9 +12,10 @@ export const DEVICES_DETAILS_PATH = `${DEVICES_PATH}/details`;
 export const SIGN_IN = 'SIGN IN';
 export const SIGN_UP = 'SIGN UP';
 
-// header
+// sidebar
 export const TEAM_NAME = 'Pest Plan';
 export const TEAM_NAME_CAPITAL = 'PEST PLAN';
+export const DASHBOARD = 'Dashboard';
 export const PACKET = 'Packet';
 export const PACKET_CAPITAL = 'PACKET';
 export const DEVICE = 'Device';

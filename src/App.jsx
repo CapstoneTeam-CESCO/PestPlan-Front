@@ -4,7 +4,7 @@ import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 import './App.scss';
 import Sidebar from './components/organisms/sidebar';
 import LoginPage from './pages/login';
-import HomePage from './pages/home';
+import DashboardPage from './pages/dashboard';
 import PacketsPage from './pages/packets';
 import DevicesPage from './pages/devices';
 import DeviceDetailsPage from './pages/deviceDetails';
@@ -26,7 +26,10 @@ function App() {
                             ) : null
                         }
                     />
-                    <Route path="/home" component={HomePage} />
+                    <Route path="/home">
+                        <Redirect to="/dashboard" />
+                    </Route>
+                    <Route path="/dashboard" component={DashboardPage} />
                     <Route path="/packets" component={PacketsPage} />
                     <Route exact path="/devices" component={DevicesPage} />
                     <Route
