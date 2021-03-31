@@ -109,3 +109,11 @@ export const DEVICE_DETAILS_FIELDS = [
 ];
 
 export const DEVICE_DETAILS_PACKET_HEADERS = ['No.', 'time', 'packet'];
+
+export const CYCLE_LABEL = '주기';
+export const WARNING_LABEL = '경보';
+export const ERROR_LABEL = '에러';
+
+export const CYCLE_DATA = ['pestData', 'mouseCycleData'];
+export const WARNING_DATA = ['mouseWarningData'];
+export const ERROR_DATA = ['damWarningData'];

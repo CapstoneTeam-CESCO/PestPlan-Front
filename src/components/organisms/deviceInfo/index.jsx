@@ -11,10 +11,8 @@ import * as Constants from 'src/constants/Constants';
 function DeviceInfo({ fields, device }) {
     return (
         <div className="card">
-            <Title className="card__header device-details__header">
-                {Constants.DEVICE_CAPITAL}
-            </Title>
-            <List className="device-details--device">
+            <Title className="card__header">{Constants.DEVICE_CAPITAL}</Title>
+            <List className="details--device">
                 {device.map((info, index) => (
                     <div key={fields[index]} className="table-row">
                         <ListItem className="device__field">

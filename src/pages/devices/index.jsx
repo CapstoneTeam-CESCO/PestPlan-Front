@@ -3,6 +3,7 @@ import { SVGMap } from 'react-svg-map';
 import southKorea from '@svg-maps/south-korea';
 
 import 'src/templates/list/styles.scss';
+import Button from 'src/components/atoms/button';
 import InfoCard from 'src/components/molecules/infoCard';
 import FilterList from 'src/components/organisms/filter/FilterList';
 import FilterGroup from 'src/components/organisms/filterGroup';
@@ -78,7 +79,7 @@ function DevicesPage() {
                 filterList: (
                     <SVGMap
                         map={southKorea}
-                        className="filter__list SVGMap-filter-region"
+                        className="SVGMap-filter-region"
                         locationClassName={handleLocationClassName}
                         locationRole="checkbox"
                         onLocationClick={handleLocationClick}
@@ -115,13 +116,36 @@ function DevicesPage() {
                         children: '트랩 종류',
                     },
                 },
-                filterList: (
-                    <FilterList
-                        filters={filters.models}
-                        dispatch={dispatchFilters}
-                        type="models"
-                    />
-                ),
+                filterList: filters.models
+                    .filter(model => model.id.charAt(0) === '9')
+                    .map(category => (
+                        <div key={category.id}>
+                            <Button
+                                type="button"
+                                className={'filter__list-element list-element--label'.concat(
+                                    category.selected ? ' selected' : ''
+                                )}
+                                id={category.id}
+                                onClick={event =>
+                                    dispatchFilters({
+                                        type: 'model-category',
+                                        value: event.currentTarget.id,
+                                    })
+                                }
+                            >
+                                {category.value}
+                            </Button>
+                            <FilterList
+                                filters={filters.models.filter(
+                                    model =>
+                                        model.id.charAt(0) ===
+                                        category.id.charAt(1)
+                                )}
+                                dispatch={dispatchFilters}
+                                type="models"
+                            />
+                        </div>
+                    )),
             },
         ],
     };

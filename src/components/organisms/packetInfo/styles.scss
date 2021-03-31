@@ -1,4 +1,20 @@
-.device-details--packet {
+.details--packet-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .packet-header__back {
+        height: 28px;
+        margin-bottom: 8px;
+        margin-right: 27px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.details--packet {
     display: table;
     text-align: center;
     min-height: 690px;
