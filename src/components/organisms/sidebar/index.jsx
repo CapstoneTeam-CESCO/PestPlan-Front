@@ -22,7 +22,7 @@ function Sidebar({ currentPath }) {
             <div className="sidebar__menu">
                 <SidebarBtn
                     current={currentPath}
-                    next={Constants.DASHBOARD_PATH}
+                    next={Constants.DASHBOARDS_PATH}
                     src={DashboardImage}
                     btnChildren={Constants.DASHBOARD}
                 />

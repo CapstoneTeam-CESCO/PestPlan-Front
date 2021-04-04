@@ -8,32 +8,43 @@ import DashboardPage from './pages/dashboard';
 import PacketsPage from './pages/packets';
 import DevicesPage from './pages/devices';
 import DeviceDetailsPage from './pages/deviceDetails';
+import * as Constants from './constants/Constants';
 
 function App() {
     return (
         <div className="App">
             <BrowserRouter>
                 <Route exact path="/">
-                    <Redirect to="/login" />
+                    <Redirect to={Constants.LOGIN_PATH} />
                 </Route>
-                <Route path="/login" component={LoginPage} />
+                <Route path={Constants.LOGIN_PATH} component={LoginPage} />
 
                 <div className="App-main">
                     <Route
                         render={({ location: { pathname } }) =>
-                            pathname !== '/login' ? (
+                            pathname !== Constants.LOGIN_PATH ? (
                                 <Sidebar currentPath={pathname} />
                             ) : null
                         }
                     />
-                    <Route path="/home">
-                        <Redirect to="/dashboard" />
+                    <Route path={Constants.HOME_PATH}>
+                        <Redirect to={Constants.DASHBOARDS_PATH} />
                     </Route>
-                    <Route path="/dashboard" component={DashboardPage} />
-                    <Route path="/packets" component={PacketsPage} />
-                    <Route exact path="/devices" component={DevicesPage} />
                     <Route
-                        path="/devices/details/:id"
+                        path={Constants.DASHBOARDS_PATH}
+                        component={DashboardPage}
+                    />
+                    <Route
+                        path={Constants.PACKETS_PATH}
+                        component={PacketsPage}
+                    />
+                    <Route
+                        exact
+                        path={Constants.DEVICES_PATH}
+                        component={DevicesPage}
+                    />
+                    <Route
+                        path={`${Constants.DEVICES_DETAILS_PATH}/:id`}
                         component={DeviceDetailsPage}
                     />
                 </div>
