@@ -69,16 +69,14 @@ export const REGIONS = [
     { id: 'Ulsan', value: '울산' },
 ];
 export const LOCATIONS = [
-    { id: 'inside_factory_1', value: '공장내부-1' },
-    { id: 'inside_factory_2', value: '공장내부-2' },
-    { id: 'inside_factory_3', value: '공장내부-3' },
-    { id: 'inside_factory_4', value: '공장내부-4' },
-    { id: 'outside_factory_1', value: '공장외부-1' },
-    { id: 'outside_factory_2', value: '공장외부-2' },
-    { id: 'outside_factory_3', value: '공장외부-3' },
-    { id: 'outside_factory_4', value: '공장외부-4' },
-    { id: 'outside_factory_5', value: '공장외부-5' },
-    { id: 'lawn_1', value: '잔디밭-1' },
+    { id: 'inside_factory', value: '공장내부' },
+    { id: 'outside_factory', value: '공장외부' },
+    { id: 'restaurant', value: '식당' },
+    { id: 'warehouse', value: '창고' },
+    { id: 'pantry', value: '식료품 저장고' },
+    { id: 'school', value: '학교' },
+    { id: 'house', value: '주택' },
+    { id: 'lawn', value: '잔디밭' },
 ];
 export const MODELS = [
     { id: '90', value: '비래 해충군' },
