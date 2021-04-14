@@ -149,7 +149,7 @@ function RecordsChart() {
     }, []);
 
     return (
-        <div className="chart--last-year">
+        <div className="card chart--last-year">
             <ReactApexChart
                 options={options}
                 series={series}

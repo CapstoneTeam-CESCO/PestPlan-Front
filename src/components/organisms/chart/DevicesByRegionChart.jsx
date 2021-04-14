@@ -127,7 +127,7 @@ function DevicesByRegionChart() {
     }, []);
 
     return (
-        <div className="chart--devices-by-city">
+        <div className="card chart--devices-by-city">
             <ReactApexChart
                 options={options}
                 series={series}
