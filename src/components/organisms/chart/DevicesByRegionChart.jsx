@@ -15,71 +15,11 @@ function DevicesByRegionChart() {
             data: [],
         },
     ]);
-    const options = {
-        plotOptions: {
-            bar: {
-                borderRadius: 10,
-                dataLabels: {
-                    position: 'top',
-                },
-            },
-        },
-        dataLabels: {
-            enabled: true,
-            offsetY: -25,
-            style: {
-                colors: ['#000'],
-            },
-        },
-        xaxis: {
-            categories,
-            position: 'bottom',
-            axisBorder: {
-                show: false,
-            },
-            axisTicks: {
-                show: false,
-            },
-            crosshairs: {
-                fill: {
-                    type: 'gradient',
-                    gradient: {
-                        colorFrom: '#d8e3f0',
-                        colorTo: '#bed1e6',
-                        stops: [0, 100],
-                        opacityFrom: 0.4,
-                        opacityTo: 0.5,
-                    },
-                },
-            },
-            tooltip: {
-                enabled: true,
-            },
-        },
-        yaxis: {
-            min: 0,
-            max: 10,
-            axisBorder: {
-                show: false,
-            },
-            axisTicks: {
-                show: false,
-            },
-            labels: {
-                show: true,
-            },
-        },
-        title: {
-            text: 'Number of Devices by City',
-            align: 'center',
-            style: {
-                color: '#444',
-            },
-        },
+    const [options, setOptions] = useState({
         noData: {
             text: 'Loading...',
         },
-    };
+    });
 
     useEffect(() => {
         async function getDevicesByCity() {
@@ -107,12 +47,77 @@ function DevicesByRegionChart() {
                     response.data[region] ? response.data[region] : 0
                 );
 
+                const yaxisMax = Math.ceil(Math.max.apply(null, data)) + 10;
+
                 setSeries([
                     {
                         ...series,
                         data,
                     },
                 ]);
+
+                setOptions({
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 10,
+                            dataLabels: {
+                                position: 'top',
+                            },
+                        },
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        offsetY: -25,
+                        style: {
+                            colors: ['#000'],
+                        },
+                    },
+                    xaxis: {
+                        categories,
+                        position: 'bottom',
+                        axisBorder: {
+                            show: false,
+                        },
+                        axisTicks: {
+                            show: false,
+                        },
+                        crosshairs: {
+                            fill: {
+                                type: 'gradient',
+                                gradient: {
+                                    colorFrom: '#d8e3f0',
+                                    colorTo: '#bed1e6',
+                                    stops: [0, 100],
+                                    opacityFrom: 0.4,
+                                    opacityTo: 0.5,
+                                },
+                            },
+                        },
+                        tooltip: {
+                            enabled: true,
+                        },
+                    },
+                    yaxis: {
+                        min: 0,
+                        max: yaxisMax,
+                        axisBorder: {
+                            show: false,
+                        },
+                        axisTicks: {
+                            show: false,
+                        },
+                        labels: {
+                            show: true,
+                        },
+                    },
+                    title: {
+                        text: 'Number of Devices by City',
+                        align: 'center',
+                        style: {
+                            color: '#444',
+                        },
+                    },
+                });
             } catch (exception) {
                 console.log(exception);
             }
