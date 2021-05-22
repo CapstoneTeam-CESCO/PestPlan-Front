@@ -8,9 +8,9 @@ import DeviceStatusChart from 'src/components/organisms/chart/DeviceStatusChart'
 function DashboardPage() {
     return (
         <div className="dashboard-page App-main__contents">
+            <DeviceStatusChart />
             <RecordsChart />
             <DevicesByRegionChart />
-            <DeviceStatusChart />
         </div>
     );
 }

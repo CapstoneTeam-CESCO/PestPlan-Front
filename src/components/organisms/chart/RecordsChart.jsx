@@ -103,7 +103,7 @@ function RecordsChart() {
                         borderColor: '#e7e7e7',
                         row: {
                             colors: ['#f3f3f3', '#transparent'],
-                            opacity: 0.5,
+                            opacity: 0.01,
                         },
                     },
                     markers: {
@@ -120,7 +120,7 @@ function RecordsChart() {
                             text: 'Number of capture',
                         },
                         min: 0,
-                        max: 20,
+                        max: 100,
                     },
                     legend: {
                         position: 'top',

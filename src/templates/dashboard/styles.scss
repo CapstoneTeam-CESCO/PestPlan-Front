@@ -1,4 +1,25 @@
 .dashboard-page {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    overflow-y: scroll;
+}
+
+.chart--last-year,
+.chart--device-status,
+.chart--devices-by-city {
+    height: 370px;
+}
+
+.chart--last-year {
+    width: 1100px;
+}
+
+.chart--device-status {
+    width: 500px;
+}
+
+.chart--devices-by-city {
+    width: 1630px;
 }

@@ -70,7 +70,7 @@ function DeviceStatusChart() {
                 options={options}
                 series={series}
                 type="pie"
-                height={300}
+                height={350}
             />
         </div>
     );
