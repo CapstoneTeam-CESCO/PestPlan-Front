@@ -47,6 +47,46 @@ export const useDeviceCount = () => {
     return deviceCount;
 };
 
+export const useDeviceInfos = () => {
+    const [deviceInfos, setDeviceInfos] = useState([]);
+    const history = useHistory();
+
+    useEffect(() => {
+        async function getDeviceInfos() {
+            const accessToken = window.sessionStorage.getItem('access_token');
+
+            if (!accessToken) {
+                console.log(
+                    'There has no access_token. Go back to the login page.'
+                );
+
+                history.push(Constants.LOGIN_PATH);
+            }
+
+            try {
+                const {
+                    data: { total, pest, mouse, error },
+                } = await axios.get(
+                    `${Constants.SERVER_URL}${Constants.DEVICES_PATH}/infos`,
+                    {
+                        params: {
+                            access_token: accessToken,
+                        },
+                    }
+                );
+
+                setDeviceInfos([total, pest, mouse, error]);
+            } catch (exception) {
+                console.log(exception);
+            }
+        }
+
+        getDeviceInfos();
+    }, []);
+
+    return deviceInfos;
+};
+
 export const useDeviceList = (page, filters) => {
     const [deviceList, setDeviceList] = useState([]);
     const history = useHistory();

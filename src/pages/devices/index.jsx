@@ -14,6 +14,7 @@ import { createFilterItems } from 'src/utilities/FilterUtility';
 import {
     filtersReducer,
     useDeviceCount,
+    useDeviceInfos,
     useDeviceList,
     useSelectedFilters,
 } from './hooks';
@@ -31,6 +32,7 @@ function DevicesPage() {
         initialFilters
     );
     const deviceCount = useDeviceCount();
+    const deviceInfos = useDeviceInfos();
     const deviceList = useDeviceList(page, filters);
     const selectedFilters = useSelectedFilters(filters);
 
@@ -204,7 +206,7 @@ function DevicesPage() {
                             key={header}
                             src={infoImages[index]}
                             header={header}
-                            count={0}
+                            count={deviceInfos[index]}
                         />
                     ))}
                 </div>
