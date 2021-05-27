@@ -81,27 +81,6 @@ function PacketsPage() {
         className: 'packet-filter',
         filterProps: [
             {
-                key: 'packet-filter--date',
-                className: 'filter--date',
-                tagProps: {
-                    aProps: {
-                        href: '#collapseFilterDate',
-                    },
-                    textProps: {
-                        children: '날짜',
-                    },
-                },
-                filterList: (
-                    <DateRange
-                        className="daterange-filter-date"
-                        editableDateInputs={false}
-                        onChange={item => handleChangeDateRange(item)}
-                        moveRangeOnFirstSelection={false}
-                        ranges={filters.ranges}
-                    />
-                ),
-            },
-            {
                 key: 'packet-filter--region',
                 className: 'filter--region',
                 tagProps: {
@@ -199,6 +178,27 @@ function PacketsPage() {
                         filters={filters.types}
                         dispatch={dispatchFilters}
                         type="types"
+                    />
+                ),
+            },
+            {
+                key: 'packet-filter--date',
+                className: 'filter--date',
+                tagProps: {
+                    aProps: {
+                        href: '#collapseFilterDate',
+                    },
+                    textProps: {
+                        children: '날짜',
+                    },
+                },
+                filterList: (
+                    <DateRange
+                        className="daterange-filter-date"
+                        editableDateInputs={false}
+                        onChange={item => handleChangeDateRange(item)}
+                        moveRangeOnFirstSelection={false}
+                        ranges={filters.ranges}
                     />
                 ),
             },

@@ -1,25 +1,38 @@
 import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 import './styles.scss';
 import Collapse from 'src/components/atoms/collapse';
+import Image from 'src/components/atoms/image';
 import APagination from 'src/components/atoms/pagination';
 import Title from 'src/components/atoms/title';
 import List from 'src/components/molecules/list';
 import * as Constants from 'src/constants/Constants';
 import { expandedReducer, handleExpanded } from 'src/utilities/Expand';
+import BackImage from 'src/images/back.png';
 
 /* eslint-disable no-underscore-dangle */
 function PacketInfo({ packets, paginationProps }) {
+    const history = useHistory();
     const [expanded, dispatchExpanded] = useReducer(expandedReducer, []);
     const startNo = (paginationProps.page - 1) * Constants.ROW + 1;
 
     return (
         <div className="card">
-            <Title className="card__header device-details__header">
-                {Constants.PACKET_CAPITAL}
-            </Title>
-            <div className="device-details--packet">
+            <div className="details--packet-header">
+                <Title className="card__header">
+                    {Constants.PACKET_CAPITAL}
+                </Title>
+                <Image
+                    className="packet-header__back"
+                    src={BackImage}
+                    alt="<-"
+                    onClick={() => history.goBack()}
+                />
+            </div>
+
+            <div className="details--packet">
                 <div className="table-row">
                     <List
                         className="packet__list list--header"

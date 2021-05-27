@@ -1,12 +1,19 @@
-.contents--info {
+.display-page {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: flex-start;
     gap: 30px;
 
-    .info-card-group {
+    .contents--info {
         display: flex;
-        flex-direction: row;
-        gap: 25px;
-        justify-content: space-between;
+        flex-direction: column;
+        gap: 30px;
+
+        .info-card-group {
+            display: flex;
+            flex-direction: row;
+            gap: 25px;
+            justify-content: space-between;
+        }
     }
 }

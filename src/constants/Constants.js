@@ -3,13 +3,19 @@ export const SERVER_URL = 'http://localhost:4000';
 export const LOGIN_PATH = '/login';
 export const HOME_PATH = '/home';
 export const USER_PATH = '/home/user';
+export const DASHBOARDS_PATH = '/dashboards';
 export const PACKETS_PATH = '/packets';
 export const DEVICES_PATH = '/devices';
 export const DEVICES_DETAILS_PATH = `${DEVICES_PATH}/details`;
 
-// header
+// login
+export const SIGN_IN = 'SIGN IN';
+export const SIGN_UP = 'SIGN UP';
+
+// sidebar
 export const TEAM_NAME = 'Pest Plan';
 export const TEAM_NAME_CAPITAL = 'PEST PLAN';
+export const DASHBOARD = 'Dashboard';
 export const PACKET = 'Packet';
 export const PACKET_CAPITAL = 'PACKET';
 export const DEVICE = 'Device';
@@ -63,16 +69,14 @@ export const REGIONS = [
     { id: 'Ulsan', value: '울산' },
 ];
 export const LOCATIONS = [
-    { id: 'inside_factory_1', value: '공장내부-1' },
-    { id: 'inside_factory_2', value: '공장내부-2' },
-    { id: 'inside_factory_3', value: '공장내부-3' },
-    { id: 'inside_factory_4', value: '공장내부-4' },
-    { id: 'outside_factory_1', value: '공장외부-1' },
-    { id: 'outside_factory_2', value: '공장외부-2' },
-    { id: 'outside_factory_3', value: '공장외부-3' },
-    { id: 'outside_factory_4', value: '공장외부-4' },
-    { id: 'outside_factory_5', value: '공장외부-5' },
-    { id: 'lawn_1', value: '잔디밭-1' },
+    { id: 'inside_factory', value: '공장내부' },
+    { id: 'outside_factory', value: '공장외부' },
+    { id: 'restaurant', value: '식당' },
+    { id: 'warehouse', value: '창고' },
+    { id: 'pantry', value: '식료품 저장고' },
+    { id: 'school', value: '학교' },
+    { id: 'house', value: '주택' },
+    { id: 'lawn', value: '잔디밭' },
 ];
 export const MODELS = [
     { id: '90', value: '비래 해충군' },
@@ -103,3 +107,11 @@ export const DEVICE_DETAILS_FIELDS = [
 ];
 
 export const DEVICE_DETAILS_PACKET_HEADERS = ['No.', 'time', 'packet'];
+
+export const CYCLE_LABEL = '주기';
+export const WARNING_LABEL = '경보';
+export const ERROR_LABEL = '에러';
+
+export const CYCLE_DATA = ['pestData', 'mouseCycleData'];
+export const WARNING_DATA = ['mouseWarningData'];
+export const ERROR_DATA = ['damWarningData'];

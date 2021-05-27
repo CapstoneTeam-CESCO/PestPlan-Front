@@ -47,6 +47,12 @@ export const usePacketCount = () => {
     return packetCount;
 };
 
+const labelPacketType = type => {
+    if (Constants.CYCLE_DATA.includes(type)) return Constants.CYCLE_LABEL;
+    if (Constants.WARNING_DATA.includes(type)) return Constants.WARNING_LABEL;
+    return Constants.ERROR_LABEL;
+};
+
 export const usePacketList = (page, filters, dispatchNotRead) => {
     const [packetList, setPacketList] = useState([]);
     const [packetInfo, setPacketInfo] = useState([]);
@@ -95,7 +101,7 @@ export const usePacketList = (page, filters, dispatchNotRead) => {
                     region: packet.region,
                     location: packet.location,
                     modelName: packet.model_name,
-                    type: packet.type,
+                    type: labelPacketType(packet.type),
                     packetId: packet.packet_id,
                     packet: JSON.stringify(packet.packet, null, 4),
                 }));

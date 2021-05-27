@@ -1,9 +1,12 @@
 * {
-    font-size: 15px;
-    font-weight: 300;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+*:default {
+    font-size: 15px;
+    font-weight: 300;
 }
 
 .App-main {
@@ -11,17 +14,12 @@
     flex-direction: row;
 
     .App-main__contents {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 30px;
-
         min-height: 100vh;
         height: 100vh;
         width: 100%;
         background-color: #f1f4f6;
         margin-left: 200px;
-        padding: 30px 30px 0 30px;
+        padding: 30px 30px 30px 30px;
     }
 }
 

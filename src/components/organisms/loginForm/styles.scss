@@ -1,6 +1,7 @@
 .login-form {
     display: flex;
     flex-direction: column;
+    margin: 0 20px;
 
     .MuiFormLabel-root,
     .MuiInputBase-input {
@@ -8,19 +9,18 @@
     }
 
     .login-form__username {
-        margin-bottom: 15px;
+        margin-bottom: 20px;
     }
 
     .login-form__password {
-        margin-bottom: 40px;
+        margin-bottom: 60px;
     }
 
     .login-button {
-        background-color: #191970;
+        background-color: #139ad5;
         color: #ffffff;
-        font-size: 20px;
-        font-weight: 400;
         border-radius: 5px;
-        height: 35px;
+        padding: 15px;
+        margin-bottom: 15px;
     }
 }

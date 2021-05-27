@@ -1,6 +1,9 @@
 .login {
-    width: 300px;
-    margin-top: 150px;
+    width: 400px;
+    margin-top: 60px;
     margin-left: auto;
     margin-right: auto;
+
+    display: flex;
+    flex-direction: column;
 }

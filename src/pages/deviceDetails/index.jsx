@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import 'src/templates/deviceDetails/styles.scss';
 import DeviceInfo from 'src/components/organisms/deviceInfo';
 import PacketInfo from 'src/components/organisms/packetInfo';
 import * as Constants from 'src/constants/Constants';
@@ -30,7 +31,7 @@ function DeviceDetailsPage({
     };
 
     return (
-        <div className="App-main__contents">
+        <div className="App-main__contents device-details-page">
             <PacketInfo {...packetInfoProps} />
             <DeviceInfo {...deviceInfoProps} />
         </div>

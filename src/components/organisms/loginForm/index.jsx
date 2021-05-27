@@ -7,27 +7,27 @@ import Button from 'src/components/atoms/button';
 
 function LoginForm({
     className,
-    firstInputTextProps,
-    secondInputTextProps,
-    buttonProps,
+    usernameProps,
+    passwordProps,
+    signInProps,
+    signUpProps,
 }) {
     return (
         <div className={className}>
-            <InputText {...firstInputTextProps} />
-            <InputText {...secondInputTextProps} />
-            <Button {...buttonProps} />
+            <InputText {...usernameProps} />
+            <InputText {...passwordProps} />
+            <Button {...signInProps} />
+            <Button {...signUpProps} />
         </div>
     );
 }
 
 LoginForm.propTypes = {
     className: PropTypes.string,
-    firstInputTextProps: PropTypes.object,
-    secondInputTextProps: PropTypes.object,
-    buttonProps: PropTypes.shape({
-        type: PropTypes.string.isRequired,
-        children: PropTypes.any.isRequired,
-    }),
+    usernameProps: PropTypes.object,
+    passwordProps: PropTypes.object,
+    signInProps: PropTypes.object,
+    signUpProps: PropTypes.object,
 };
 
 export default LoginForm;
