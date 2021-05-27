@@ -53,6 +53,15 @@ const labelPacketType = type => {
     return Constants.ERROR_LABEL;
 };
 
+const formatCreatedAt = createdAt => {
+    const year = createdAt.slice(0, 2);
+    const month = createdAt.slice(2, 4);
+    const day = createdAt.slice(4, 6);
+    const hour = createdAt.slice(6, 8);
+    const minute = createdAt.slice(8, 10);
+    return `20${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분`;
+};
+
 export const usePacketList = (page, filters, dispatchNotRead) => {
     const [packetList, setPacketList] = useState([]);
     const [packetInfo, setPacketInfo] = useState([]);
@@ -97,7 +106,7 @@ export const usePacketList = (page, filters, dispatchNotRead) => {
 
                 const newPacketList = list.map((packet, index) => ({
                     no: (page - 1) * Constants.ROW + index + 1,
-                    createdAt: packet.created_at,
+                    createdAt: formatCreatedAt(packet.created_at),
                     region: packet.region,
                     location: packet.location,
                     modelName: packet.model_name,
