@@ -42,6 +42,7 @@ function DeviceStatusChart() {
 
                 setOptions({
                     labels: ['normal', 'replacement', 'error'],
+                    colors: ['#034C8C', '#F2B544', '#BF0404'],
                     responsive: [
                         {
                             breakpoint: 480,
@@ -50,11 +51,19 @@ function DeviceStatusChart() {
                                     width: 200,
                                 },
                                 legend: {
-                                    position: 'bottom',
+                                    position: 'right bottom',
                                 },
                             },
                         },
                     ],
+                    title: {
+                        text: 'Device Status',
+                        align: 'center',
+                        margin: 5,
+                        style: {
+                            fontSize: '17px',
+                        },
+                    },
                 });
             } catch (exception) {
                 console.log(exception);

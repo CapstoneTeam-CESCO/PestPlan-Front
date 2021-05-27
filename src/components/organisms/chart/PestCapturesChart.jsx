@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 import * as Constants from 'src/constants/Constants';
 
-function RecordsChart() {
+function PestCapturesChart() {
     const monthNumToStr = {
         '01': 'Jan.',
         '02': 'Feb.',
@@ -25,10 +25,6 @@ function RecordsChart() {
     const [series, setSeries] = useState([
         {
             name: 'pest',
-            data: [],
-        },
-        {
-            name: 'mouse',
             data: [],
         },
     ]);
@@ -53,9 +49,9 @@ function RecordsChart() {
 
             try {
                 const {
-                    data: { pest, mouse },
+                    data: { pest },
                 } = await axios.get(
-                    `${Constants.SERVER_URL}${Constants.DASHBOARDS_PATH}/records`,
+                    `${Constants.SERVER_URL}${Constants.DASHBOARDS_PATH}/captures/pest`,
                     {
                         params: {
                             access_token: accessToken,
@@ -68,10 +64,14 @@ function RecordsChart() {
                     const month = monthNumToStr[time.slice(2)];
 
                     return (
-                        (index === 0 || month === 'Jan.' ? `20${year} ` : '') +
+                        (index === 0 || month === 'Jan.' ? `20${year}` : '') +
                         month
                     );
                 });
+
+                const values = Object.values(pest);
+                const maxValue =
+                    (Math.ceil(Math.max(...values) / 1000) + 1) * 1000;
 
                 setOptions({
                     ...options,
@@ -88,7 +88,7 @@ function RecordsChart() {
                             show: false,
                         },
                     },
-                    colors: ['#77b6ea', '#545454'],
+                    colors: ['#4B5947'],
                     dataLabels: {
                         enabled: true,
                     },
@@ -96,8 +96,12 @@ function RecordsChart() {
                         curve: 'smooth',
                     },
                     title: {
-                        text: 'Records for the last year',
-                        align: 'left',
+                        text: 'Number of Pest Captures for the Last Year',
+                        align: 'center',
+                        margin: 5,
+                        style: {
+                            fontSize: '17px',
+                        },
                     },
                     grid: {
                         borderColor: '#e7e7e7',
@@ -117,10 +121,10 @@ function RecordsChart() {
                     },
                     yaxis: {
                         title: {
-                            text: 'Number of capture',
+                            text: 'Number of captures',
                         },
                         min: 0,
-                        max: 100,
+                        max: maxValue,
                     },
                     legend: {
                         position: 'top',
@@ -133,19 +137,16 @@ function RecordsChart() {
                 setSeries([
                     {
                         name: 'pest',
-                        data: Object.values(pest),
-                    },
-                    {
-                        name: 'mouse',
-                        data: Object.values(mouse),
+                        data: values,
                     },
                 ]);
             } catch (exception) {
                 console.log(exception);
             }
         }
-
-        getLastYearRecords();
+        setInterval(() => {
+            getLastYearRecords();
+        }, 5000);
     }, []);
 
     return (
@@ -160,4 +161,4 @@ function RecordsChart() {
     );
 }
 
-export default RecordsChart;
+export default PestCapturesChart;

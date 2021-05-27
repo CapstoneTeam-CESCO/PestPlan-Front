@@ -65,6 +65,7 @@ function DevicesByRegionChart() {
                             },
                         },
                     },
+                    colors: ['#778C8C'],
                     dataLabels: {
                         enabled: true,
                         offsetY: -25,
@@ -96,6 +97,9 @@ function DevicesByRegionChart() {
                         tooltip: {
                             enabled: true,
                         },
+                        title: {
+                            text: 'Regions',
+                        },
                     },
                     yaxis: {
                         min: 0,
@@ -109,12 +113,16 @@ function DevicesByRegionChart() {
                         labels: {
                             show: true,
                         },
+                        title: {
+                            text: 'Number of devices',
+                        },
                     },
                     title: {
-                        text: 'Number of Devices by City',
+                        text: 'Number of Devices by Regions',
                         align: 'center',
+                        margin: 5,
                         style: {
-                            color: '#444',
+                            fontSize: '17px',
                         },
                     },
                 });
