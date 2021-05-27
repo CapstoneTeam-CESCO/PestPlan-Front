@@ -69,8 +69,9 @@ function DeviceStatusChart() {
                 console.log(exception);
             }
         }
-
-        getDeviceStatus();
+        setInterval(() => {
+            getDeviceStatus();
+        }, 5000);
     }, []);
 
     return (
