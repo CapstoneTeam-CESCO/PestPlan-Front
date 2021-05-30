@@ -65,7 +65,6 @@ function DevicesByRegionChart() {
                             },
                         },
                     },
-                    colors: ['#778C8C'],
                     dataLabels: {
                         enabled: true,
                         offsetY: -25,

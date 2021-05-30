@@ -144,9 +144,11 @@ function MouseCapturesChart() {
                 console.log(exception);
             }
         }
-        setInterval(() => {
+        const tick = setInterval(() => {
             getLastYearRecords();
         }, 5000);
+
+        return () => clearInterval(tick);
     }, []);
 
     return (

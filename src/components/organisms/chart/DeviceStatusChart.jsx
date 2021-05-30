@@ -42,7 +42,7 @@ function DeviceStatusChart() {
 
                 setOptions({
                     labels: ['normal', 'replacement', 'error'],
-                    colors: ['#034C8C', '#F2B544', '#BF0404'],
+                    colors: ['#30CB00', '#F9F117', '#FF0000'],
                     responsive: [
                         {
                             breakpoint: 480,
@@ -69,9 +69,11 @@ function DeviceStatusChart() {
                 console.log(exception);
             }
         }
-        setInterval(() => {
+        const tick = setInterval(() => {
             getDeviceStatus();
         }, 5000);
+
+        return () => clearInterval(tick);
     }, []);
 
     return (
