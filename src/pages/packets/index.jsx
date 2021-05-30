@@ -10,9 +10,10 @@ import FilterList from 'src/components/organisms/filter/FilterList';
 import FilterGroup from 'src/components/organisms/filterGroup';
 import Board from 'src/components/organisms/board';
 import * as Constants from 'src/constants/Constants';
-import TotalInfoImage from 'src/images/total.png';
-import ErrorInfoImage from 'src/images/error.png';
 import TodayInfoImage from 'src/images/today.png';
+import CycleInfoImage from 'src/images/cycle.png';
+import CatchInfoImage from 'src/images/catch.png';
+import ErrorInfoImage from 'src/images/error.png';
 import { initializeFilters } from 'src/utilities/FilterUtility';
 import {
     filtersReducer,
@@ -71,10 +72,10 @@ function PacketsPage() {
     };
 
     const infoImages = [
-        TotalInfoImage,
-        ErrorInfoImage,
-        ErrorInfoImage,
         TodayInfoImage,
+        CycleInfoImage,
+        CatchInfoImage,
+        ErrorInfoImage,
     ];
 
     const filterGroupProps = {
