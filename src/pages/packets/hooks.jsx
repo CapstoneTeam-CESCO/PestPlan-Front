@@ -84,7 +84,7 @@ export const usePacketList = (page, filters, dispatchNotRead) => {
 
                 const {
                     data: {
-                        info: { total, unread, error, today },
+                        info: { today, cycle, capture, error },
                         list,
                     },
                 } = await axios.get(
@@ -122,12 +122,10 @@ export const usePacketList = (page, filters, dispatchNotRead) => {
                         list: list
                             .filter(packet => !packet.is_read)
                             .map(packet => packet.packet_id),
-                        total,
-                        current: unread,
                     },
                 });
 
-                setPacketInfo([total, unread, error, today]);
+                setPacketInfo([today, cycle, capture, error]);
             } catch (exception) {
                 console.log(
                     'Token has an exception while get informations. Re-login please.'
@@ -224,12 +222,10 @@ export const notReadReducer = (state, action) => {
             };
             updateReadStatus();
 
-            const { list, current } = state;
+            const { list } = state;
             const index = list.indexOf(action.value);
             return {
-                ...state,
                 list: [...list.slice(0, index), ...list.slice(index + 1)],
-                current: current - 1,
             };
         }
         default:
