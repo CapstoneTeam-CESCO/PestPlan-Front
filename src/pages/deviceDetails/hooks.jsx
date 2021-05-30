@@ -16,7 +16,7 @@ const useDeviceDetails = (deviceId, page) => {
                 const {
                     data: { device, packets, packetCount },
                 } = await axios.get(
-                    `${Constants.SERVER_URL}${Constants.DEVICES_DETAILS_PATH}/${deviceId}`,
+                    `${process.env.REACT_APP_SERVER_URL}${Constants.DEVICES_DETAILS_PATH}/${deviceId}`,
                     {
                         params: {
                             page,

@@ -30,7 +30,7 @@ function DeviceStatusChart() {
                 const {
                     data: { normal, replacement, error },
                 } = await axios.get(
-                    `${Constants.SERVER_URL}${Constants.DASHBOARDS_PATH}/devices/status`,
+                    `${process.env.REACT_APP_SERVER_URL}${Constants.DASHBOARDS_PATH}/devices/status`,
                     {
                         params: {
                             access_token: accessToken,

@@ -23,7 +23,7 @@ export const usePacketCount = () => {
 
             try {
                 const { data } = await axios.get(
-                    `${Constants.SERVER_URL}${Constants.USER_PATH}`,
+                    `${process.env.REACT_APP_SERVER_URL}${Constants.USER_PATH}`,
                     {
                         params: {
                             access_token: accessToken,
@@ -88,7 +88,7 @@ export const usePacketList = (page, filters, dispatchNotRead) => {
                         list,
                     },
                 } = await axios.get(
-                    `${Constants.SERVER_URL}${Constants.PACKETS_PATH}`,
+                    `${process.env.REACT_APP_SERVER_URL}${Constants.PACKETS_PATH}`,
                     {
                         params: {
                             access_token: accessToken,
@@ -216,7 +216,7 @@ export const notReadReducer = (state, action) => {
             const updateReadStatus = async () => {
                 try {
                     await axios.patch(
-                        `${Constants.SERVER_URL}${Constants.PACKETS_PATH}/${action.value}`
+                        `${process.env.REACT_APP_SERVER_URL}${Constants.PACKETS_PATH}/${action.value}`
                     );
                 } catch (exception) {
                     throw new Error(exception);
