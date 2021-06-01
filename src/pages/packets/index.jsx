@@ -31,7 +31,7 @@ function PacketsPage() {
         filtersReducer,
         initialFilters
     );
-    const packetCount = usePacketCount();
+    const packetCount = usePacketCount(filters, setPage);
     const [notRead, dispatchNotRead] = useReducer(notReadReducer, {
         list: [],
         total: 0,
@@ -207,7 +207,7 @@ function PacketsPage() {
     };
 
     const boardProps = {
-        className: 'card',
+        className: 'card card--list',
         titleProps: {
             className: 'card__header',
             children: Constants.PACKET,

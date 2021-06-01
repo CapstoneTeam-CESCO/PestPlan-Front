@@ -5,7 +5,7 @@ import axios from 'axios';
 import * as Constants from 'src/constants/Constants';
 import { getItemValues, getFilterLabel } from 'src/utilities/FilterUtility';
 
-export const useDeviceCount = () => {
+export const useDeviceCount = (filters, setPage) => {
     const [deviceCount, setDeviceCount] = useState(0);
     const history = useHistory();
 
@@ -22,16 +22,24 @@ export const useDeviceCount = () => {
             }
 
             try {
-                const { data } = await axios.get(
-                    `${process.env.REACT_APP_SERVER_URL}${Constants.USER_PATH}`,
+                const { regions, locations, models } = filters;
+
+                const {
+                    data: { count },
+                } = await axios.get(
+                    `${process.env.REACT_APP_SERVER_URL}${Constants.DEVICES_PATH}/count`,
                     {
                         params: {
                             access_token: accessToken,
+                            regions: getItemValues(regions),
+                            locations: getItemValues(locations),
+                            models: getItemValues(models),
                         },
                     }
                 );
 
-                setDeviceCount(data.device_cnt);
+                setDeviceCount(count);
+                setPage(1);
             } catch (exception) {
                 console.log(
                     'Token has an exception while get informations. Re-login please.'
@@ -42,7 +50,7 @@ export const useDeviceCount = () => {
         }
 
         getDeviceCount();
-    }, []);
+    }, [filters]);
 
     return deviceCount;
 };
@@ -125,7 +133,10 @@ export const useDeviceList = (page, filters) => {
                     deviceId: device.trap_id,
                     region: device.region,
                     location: device.location,
-                    modelName: device.model_name,
+                    modelName:
+                        device.model_name === 'DAM'
+                            ? '기타'
+                            : device.model_name,
                 }));
 
                 setDeviceList(newDeviceList);
@@ -183,6 +194,20 @@ export const filtersReducer = (state, action) => {
             );
             return { ...state, [action.type]: newState };
         }
+
+        case 'model-category': {
+            const newSelected = state.models
+                .filter(iterator => iterator.id === action.value)
+                .map(iterator => !iterator.selected)[0];
+            const newState = state.models.map(iterator =>
+                iterator.id === action.value ||
+                iterator.id.charAt(0) === action.value.charAt(1)
+                    ? { ...iterator, selected: newSelected }
+                    : iterator
+            );
+            return { ...state, models: newState };
+        }
+
         default:
             throw new Error(`unexpected action type: ${action.type}`);
     }

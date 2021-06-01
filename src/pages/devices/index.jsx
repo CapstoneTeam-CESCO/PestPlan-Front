@@ -34,7 +34,7 @@ function DevicesPage() {
         filtersReducer,
         initialFilters
     );
-    const deviceCount = useDeviceCount();
+    const deviceCount = useDeviceCount(filters, setPage);
     const deviceInfos = useDeviceInfos();
     const deviceList = useDeviceList(page, filters);
     const selectedFilters = useSelectedFilters(filters);
@@ -156,7 +156,7 @@ function DevicesPage() {
     };
 
     const boardProps = {
-        className: 'card',
+        className: 'card card--list',
         titleProps: {
             className: 'card__header',
             children: Constants.DEVICE,

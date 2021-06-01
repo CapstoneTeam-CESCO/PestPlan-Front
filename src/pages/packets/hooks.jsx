@@ -5,7 +5,7 @@ import axios from 'axios';
 import * as Constants from 'src/constants/Constants';
 import { getItemValues, getFilterLabel } from 'src/utilities/FilterUtility';
 
-export const usePacketCount = () => {
+export const usePacketCount = (filters, setPage) => {
     const [packetCount, setPacketCount] = useState(0);
     const history = useHistory();
 
@@ -22,16 +22,27 @@ export const usePacketCount = () => {
             }
 
             try {
-                const { data } = await axios.get(
-                    `${process.env.REACT_APP_SERVER_URL}${Constants.USER_PATH}`,
+                const { dates, regions, locations, models, types } = filters;
+
+                const {
+                    data: { count },
+                } = await axios.get(
+                    `${process.env.REACT_APP_SERVER_URL}${Constants.PACKETS_PATH}/count`,
                     {
                         params: {
                             access_token: accessToken,
+                            start: dates[0].startDate,
+                            end: dates[0].endDate,
+                            regions: getItemValues(regions),
+                            locations: getItemValues(locations),
+                            models: getItemValues(models),
+                            types: getItemValues(types),
                         },
                     }
                 );
 
-                setPacketCount(data.packet_cnt);
+                setPacketCount(count);
+                setPage(1);
             } catch (exception) {
                 console.log(
                     'Token has an exception while get informations. Re-login please.'
@@ -42,14 +53,14 @@ export const usePacketCount = () => {
         }
 
         getPacketCount();
-    }, []);
+    }, [filters]);
 
     return packetCount;
 };
 
 const labelPacketType = type => {
-    if (Constants.CYCLE_DATA.includes(type)) return Constants.CYCLE_LABEL;
-    if (Constants.WARNING_DATA.includes(type)) return Constants.WARNING_LABEL;
+    if (type === '5') return Constants.CYCLE_LABEL;
+    if (type === '4') return Constants.WARNING_LABEL;
     return Constants.ERROR_LABEL;
 };
 
