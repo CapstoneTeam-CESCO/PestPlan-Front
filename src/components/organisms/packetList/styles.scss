@@ -1,31 +1,29 @@
 .board__list--packet {
+    width: 800px;
+
     .list__row {
         li:nth-child(1) {
             width: 70px;
         }
         li:nth-child(2) {
-            width: 200px;
+            width: 250px;
         }
         li:nth-child(3) {
-            width: 80px;
+            width: 120px;
         }
         li:nth-child(4) {
-            width: 150px;
+            width: 120px;
         }
         li:nth-child(5) {
-            width: 150px;
+            width: 120px;
         }
         li:nth-child(6) {
-            width: 150px;
+            width: 120px;
         }
     }
 
     .notRead {
         background-color: #edf8fe;
-
-        // * {
-        //     font-weight: 400;
-        // }
     }
 
     .list__detail {

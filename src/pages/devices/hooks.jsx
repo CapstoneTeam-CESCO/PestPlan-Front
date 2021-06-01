@@ -23,7 +23,7 @@ export const useDeviceCount = () => {
 
             try {
                 const { data } = await axios.get(
-                    `${Constants.SERVER_URL}${Constants.USER_PATH}`,
+                    `${process.env.REACT_APP_SERVER_URL}${Constants.USER_PATH}`,
                     {
                         params: {
                             access_token: accessToken,
@@ -67,7 +67,7 @@ export const useDeviceInfos = () => {
                 const {
                     data: { total, pest, mouse, error },
                 } = await axios.get(
-                    `${Constants.SERVER_URL}${Constants.DEVICES_PATH}/infos`,
+                    `${process.env.REACT_APP_SERVER_URL}${Constants.DEVICES_PATH}/infos`,
                     {
                         params: {
                             access_token: accessToken,
@@ -107,7 +107,7 @@ export const useDeviceList = (page, filters) => {
                 const { regions, locations, models } = filters;
 
                 const { data } = await axios.get(
-                    `${Constants.SERVER_URL}${Constants.DEVICES_PATH}`,
+                    `${process.env.REACT_APP_SERVER_URL}${Constants.DEVICES_PATH}`,
                     {
                         params: {
                             access_token: accessToken,

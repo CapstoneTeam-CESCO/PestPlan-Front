@@ -35,7 +35,7 @@ function DevicesByRegionChart() {
 
             try {
                 const response = await axios.get(
-                    `${Constants.SERVER_URL}${Constants.DASHBOARDS_PATH}/devices`,
+                    `${process.env.REACT_APP_SERVER_URL}${Constants.DASHBOARDS_PATH}/devices`,
                     {
                         params: {
                             access_token: accessToken,
@@ -65,7 +65,6 @@ function DevicesByRegionChart() {
                             },
                         },
                     },
-                    colors: ['#778C8C'],
                     dataLabels: {
                         enabled: true,
                         offsetY: -25,

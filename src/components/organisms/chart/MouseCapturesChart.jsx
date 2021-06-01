@@ -51,7 +51,7 @@ function MouseCapturesChart() {
                 const {
                     data: { mouse },
                 } = await axios.get(
-                    `${Constants.SERVER_URL}${Constants.DASHBOARDS_PATH}/captures/mouse`,
+                    `${process.env.REACT_APP_SERVER_URL}${Constants.DASHBOARDS_PATH}/captures/mouse`,
                     {
                         params: {
                             access_token: accessToken,
@@ -144,9 +144,11 @@ function MouseCapturesChart() {
                 console.log(exception);
             }
         }
-        setInterval(() => {
+        const tick = setInterval(() => {
             getLastYearRecords();
         }, 5000);
+
+        return () => clearInterval(tick);
     }, []);
 
     return (

@@ -19,7 +19,7 @@ function LoginPage() {
         const values = getValues();
         await axios
             .post(
-                `${Constants.SERVER_URL}${Constants.LOGIN_PATH}/signin`,
+                `${process.env.REACT_APP_SERVER_URL}${Constants.LOGIN_PATH}/signin`,
                 values
             )
             .then(response => {
@@ -46,7 +46,7 @@ function LoginPage() {
         const values = getValues();
         try {
             await axios.post(
-                `${Constants.SERVER_URL}${Constants.LOGIN_PATH}/signup`,
+                `${process.env.REACT_APP_SERVER_URL}${Constants.LOGIN_PATH}/signup`,
                 values
             );
         } catch (exception) {

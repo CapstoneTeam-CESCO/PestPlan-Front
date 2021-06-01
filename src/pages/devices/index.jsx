@@ -10,6 +10,9 @@ import FilterGroup from 'src/components/organisms/filterGroup';
 import Board from 'src/components/organisms/board';
 import * as Constants from 'src/constants/Constants';
 import TotalInfoImage from 'src/images/total.png';
+import PestInfoImage from 'src/images/pest.png';
+import MouseInfoImage from 'src/images/mouse.png';
+import ErrorInfoImage from 'src/images/error.png';
 import { createFilterItems } from 'src/utilities/FilterUtility';
 import {
     filtersReducer,
@@ -59,9 +62,9 @@ function DevicesPage() {
 
     const infoImages = [
         TotalInfoImage,
-        TotalInfoImage,
-        TotalInfoImage,
-        TotalInfoImage,
+        PestInfoImage,
+        MouseInfoImage,
+        ErrorInfoImage,
     ];
 
     const filterGroupProps = {

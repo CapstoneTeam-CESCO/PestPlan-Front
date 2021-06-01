@@ -51,7 +51,7 @@ function PestCapturesChart() {
                 const {
                     data: { pest },
                 } = await axios.get(
-                    `${Constants.SERVER_URL}${Constants.DASHBOARDS_PATH}/captures/pest`,
+                    `${process.env.REACT_APP_SERVER_URL}${Constants.DASHBOARDS_PATH}/captures/pest`,
                     {
                         params: {
                             access_token: accessToken,
@@ -144,9 +144,11 @@ function PestCapturesChart() {
                 console.log(exception);
             }
         }
-        setInterval(() => {
+        const tick = setInterval(() => {
             getLastYearRecords();
         }, 5000);
+
+        return () => clearInterval(tick);
     }, []);
 
     return (

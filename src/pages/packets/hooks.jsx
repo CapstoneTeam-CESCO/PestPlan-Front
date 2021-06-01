@@ -23,7 +23,7 @@ export const usePacketCount = () => {
 
             try {
                 const { data } = await axios.get(
-                    `${Constants.SERVER_URL}${Constants.USER_PATH}`,
+                    `${process.env.REACT_APP_SERVER_URL}${Constants.USER_PATH}`,
                     {
                         params: {
                             access_token: accessToken,
@@ -53,6 +53,15 @@ const labelPacketType = type => {
     return Constants.ERROR_LABEL;
 };
 
+const formatCreatedAt = createdAt => {
+    const year = createdAt.slice(0, 2);
+    const month = createdAt.slice(2, 4);
+    const day = createdAt.slice(4, 6);
+    const hour = createdAt.slice(6, 8);
+    const minute = createdAt.slice(8, 10);
+    return `20${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분`;
+};
+
 export const usePacketList = (page, filters, dispatchNotRead) => {
     const [packetList, setPacketList] = useState([]);
     const [packetInfo, setPacketInfo] = useState([]);
@@ -75,11 +84,11 @@ export const usePacketList = (page, filters, dispatchNotRead) => {
 
                 const {
                     data: {
-                        info: { total, unread, error, today },
+                        info: { today, cycle, capture, error },
                         list,
                     },
                 } = await axios.get(
-                    `${Constants.SERVER_URL}${Constants.PACKETS_PATH}`,
+                    `${process.env.REACT_APP_SERVER_URL}${Constants.PACKETS_PATH}`,
                     {
                         params: {
                             access_token: accessToken,
@@ -97,7 +106,7 @@ export const usePacketList = (page, filters, dispatchNotRead) => {
 
                 const newPacketList = list.map((packet, index) => ({
                     no: (page - 1) * Constants.ROW + index + 1,
-                    createdAt: packet.created_at,
+                    createdAt: formatCreatedAt(packet.created_at),
                     region: packet.region,
                     location: packet.location,
                     modelName: packet.model_name,
@@ -113,12 +122,10 @@ export const usePacketList = (page, filters, dispatchNotRead) => {
                         list: list
                             .filter(packet => !packet.is_read)
                             .map(packet => packet.packet_id),
-                        total,
-                        current: unread,
                     },
                 });
 
-                setPacketInfo([total, unread, error, today]);
+                setPacketInfo([today, cycle, capture, error]);
             } catch (exception) {
                 console.log(
                     'Token has an exception while get informations. Re-login please.'
@@ -207,7 +214,7 @@ export const notReadReducer = (state, action) => {
             const updateReadStatus = async () => {
                 try {
                     await axios.patch(
-                        `${Constants.SERVER_URL}${Constants.PACKETS_PATH}/${action.value}`
+                        `${process.env.REACT_APP_SERVER_URL}${Constants.PACKETS_PATH}/${action.value}`
                     );
                 } catch (exception) {
                     throw new Error(exception);
@@ -215,12 +222,10 @@ export const notReadReducer = (state, action) => {
             };
             updateReadStatus();
 
-            const { list, current } = state;
+            const { list } = state;
             const index = list.indexOf(action.value);
             return {
-                ...state,
                 list: [...list.slice(0, index), ...list.slice(index + 1)],
-                current: current - 1,
             };
         }
         default:
